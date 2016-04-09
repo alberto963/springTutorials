@@ -1,0 +1,76 @@
+package com.demo;
+
+import java.io.IOException;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
+import com.demo.rootContext.Bean_C0_0;
+import com.demo.rootContext.Bean_C1_0;
+
+/**
+ * Servlet implementation class Servlet_1
+ */
+public class Servlet_1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@Autowired
+	private Bean_C0_0 bean;
+
+	@Autowired
+	private Bean_C1_0 bean2;
+
+	/**
+	 * Default constructor.
+	 */
+	public Servlet_1() {
+		System.out.println("Servlet_1");
+	}
+
+	@Override
+	public void init(ServletConfig config) {
+		System.out.println("Servlet_1 init contextPath=" + config.getServletContext().getContextPath());
+
+		try {
+			super.init(config);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+
+		// SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+
+		String res = bean.api_0();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String res = bean.api_0();
+		String res2 = bean2.api_0();
+
+		response.getWriter().append(res2 + " Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
