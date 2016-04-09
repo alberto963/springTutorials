@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Definition for javaCollection -->
+	<bean id="javaCollection" class="com.tutorialspoint.injectingCollection.JavaCollection">
+
+		<!-- Passing bean reference for java.util.List -->
+		<property name="addressList">
+			<list>
+				<ref bean="address1" />
+				<ref bean="address2" />
+				<value>Pakistan</value>
+			</list>
+		</property>
+
+		<!-- Passing bean reference for java.util.Set -->
+		<property name="addressSet">
+			<set>
+				<ref bean="address1" />
+				<ref bean="address2" />
+				<value>Pakistan</value>
+			</set>
+		</property>
+
+		<!-- Passing bean reference for java.util.Map -->
+		<property name="addressMap">
+			<map>
+				<entry key="one" value="INDIA" />
+				<entry key="two" value-ref="address1" />
+				<entry key="three" value-ref="address2" />
+			</map>
+		</property>
+
+	</bean>
+
+	<bean id="address1" class="com.tutorialspoint.injectingCollection.Address"
+		p:country="Italy" />
+	<bean id="address2" class="com.tutorialspoint.injectingCollection.Address"
+		p:country="France" />
+
+</beans>
