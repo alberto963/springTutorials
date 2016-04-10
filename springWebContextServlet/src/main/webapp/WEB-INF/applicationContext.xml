@@ -9,7 +9,7 @@
 
 	<context:annotation-config />
 
-	<!-- Allows autowire in beans to be filled in -->
+	<!-- Allows autowired in beans to be filled in -->
 	<mvc:annotation-driven />
 
 	<!--  Your base-package for controllers is provided here: -->

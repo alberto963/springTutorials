@@ -3,6 +3,7 @@ package com.demo;
 import java.io.IOException;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +24,8 @@ public class Servlet_1 extends HttpServlet {
 	@Autowired
 	private Bean_C0_0 bean;
 
-	@Autowired
-	private Bean_C1_0 bean2;
+//	@Autowired
+//	private Bean_C1_0 bean2;
 
 	/**
 	 * Default constructor.
@@ -35,7 +36,9 @@ public class Servlet_1 extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) {
-		System.out.println("Servlet_1 init contextPath=" + config.getServletContext().getContextPath());
+		ServletContext servletContext = config.getServletContext();
+		
+		System.out.println("Servlet_1 init contextPath=" + servletContext.getContextPath());
 
 		try {
 			super.init(config);
@@ -43,7 +46,7 @@ public class Servlet_1 extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, servletContext);
 
 		// SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 
@@ -58,9 +61,10 @@ public class Servlet_1 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String res = bean.api_0();
-		String res2 = bean2.api_0();
+//		String res2 = bean2.api_0();
 
-		response.getWriter().append(res2 + " Served at: ").append(request.getContextPath());
+//		response.getWriter().append(res2 + " Served at: ").append(request.getContextPath());
+		response.getWriter().append(" Served at: ").append(request.getContextPath());
 	}
 
 	/**
