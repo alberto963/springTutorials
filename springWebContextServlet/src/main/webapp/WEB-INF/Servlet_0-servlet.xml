@@ -18,7 +18,7 @@
 	<bean class="com.demo.beans.Service_0_Impl">
 	</bean>
 
-	<bean class="com.demo.beans.Bean_C1_0">
+	<bean class="com.demo.beans.Bean_1">
 	</bean>
 
 </beans>

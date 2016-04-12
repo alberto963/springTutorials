@@ -12,32 +12,32 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.demo.beans.Bean_C0_0;
+import com.demo.beans.Bean_0;
 
 /**
- * Servlet implementation class Servlet_1
+ * Servlet implementation class HttpServlet_1
  */
-public class Servlet_1 extends HttpServlet {
+public class HttpServlet_1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private Bean_C0_0 bean;
+	private Bean_0 bean;
 
 //	@Autowired
-//	private Bean_C1_0 bean2;
+//	private Bean_1 bean2;
 
 	/**
 	 * Default constructor.
 	 */
-	public Servlet_1() {
-		System.out.println("Servlet_1");
+	public HttpServlet_1() {
+		System.out.println("HttpServlet_1");
 	}
 
 	@Override
 	public void init(ServletConfig config) {
 		ServletContext servletContext = config.getServletContext();
 		
-		System.out.println("Servlet_1 init contextPath=" + servletContext.getContextPath());
+		System.out.println("HttpServlet_1 init contextPath=" + servletContext.getContextPath());
 
 		try {
 			super.init(config);

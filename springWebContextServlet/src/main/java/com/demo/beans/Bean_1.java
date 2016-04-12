@@ -2,7 +2,7 @@ package com.demo.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class Bean_C0_0 {
+public class Bean_1 {
 	@Autowired
 	private Service_0 service;
 

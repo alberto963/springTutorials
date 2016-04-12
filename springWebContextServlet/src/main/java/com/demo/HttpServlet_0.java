@@ -12,25 +12,25 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.demo.beans.Bean_C0_0;
+import com.demo.beans.Bean_0;
 
 /**
- * Servlet implementation class Servlet_0
+ * Servlet implementation class HttpServlet_0
  */
-public class Servlet_0 extends HttpServlet {
+public class HttpServlet_0 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Default constructor.
 	 */
-	public Servlet_0() {
-		System.out.println("Servlet_0");
+	public HttpServlet_0() {
+		System.out.println("HttpServlet_0");
 	}
 
 	@Override
 	public void init(ServletConfig config) {
 		ServletContext servletContext = config.getServletContext();
-		System.out.println("Servlet_0 init contextPath=" + servletContext.getContextPath());
+		System.out.println("HttpServlet_0 init contextPath=" + servletContext.getContextPath());
 
 		try {
 			super.init(config);
@@ -39,12 +39,12 @@ public class Servlet_0 extends HttpServlet {
 		}
 
 		WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-		System.out.println("Servlet_0 init rootContext=" + rootContext);
+		System.out.println("HttpServlet_0 init rootContext=" + rootContext);
 
 		// SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
 		// config.getServletContext());
 
-		Bean_C0_0 bean = rootContext.getBean(Bean_C0_0.class);
+		Bean_0 bean = rootContext.getBean(Bean_0.class);
 		String res = bean.api_0();
 	}
 
