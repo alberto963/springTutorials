@@ -29,18 +29,17 @@ public class MySpringServlet extends FrameworkServlet {
 
 		WebApplicationContext servletSpecificContext = getWebApplicationContext();
 		ServletContext servletContext = servletSpecificContext.getServletContext();
+		WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+
+		/*
+		 * Servlet context (web.xml).
+		 */
 		System.out.println(
 				"MySpringServlet initFrameworkServlet servletContext=" + servletContext.getServletContextName());
-		System.out.println("MySpringServlet initFrameworkServlet servletSpecificContext contains Bean_0="
-				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C0_0"));
-		System.out.println("MySpringServlet initFrameworkServlet servletSpecificContext contains Bean_1="
-				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C1_0"));
-		System.out.println("MySpringServlet initFrameworkServlet servletSpecificContext contains Bean_2="
-				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C2_0"));
 
-		System.out.println("MySpringServlet initFrameworkServlet servletSpecificContext=" + servletSpecificContext);
-
-		WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+		/*
+		 * Root context.
+		 */
 		System.out.println("MySpringServlet initFrameworkServlet rootContext=" + rootContext.getDisplayName());
 		System.out.println("MySpringServlet initFrameworkServlet rootContext contains Bean_0="
 				+ rootContext.containsBean("com.demo.rootContext.Bean_C0_0"));
@@ -48,6 +47,19 @@ public class MySpringServlet extends FrameworkServlet {
 				+ rootContext.containsBean("com.demo.rootContext.Bean_C1_0"));
 		System.out.println("MySpringServlet initFrameworkServlet rootContext contains Bean_2="
 				+ rootContext.containsBean("com.demo.rootContext.Bean_C2_0"));
+
+		/*
+		 * Servlet specific context.
+		 */
+		System.out.println("MySpringServlet initFrameworkServlet servletSpecificContext="
+				+ servletSpecificContext.getDisplayName());
+
+		System.out.println("MySpringServlet initFrameworkServlet servletSpecificContext contains Bean_0="
+				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C0_0"));
+		System.out.println("MySpringServlet initFrameworkServlet servletSpecificContext contains Bean_1="
+				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C1_0"));
+		System.out.println("MySpringServlet initFrameworkServlet servletSpecificContext contains Bean_2="
+				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C2_0"));
 	}
 
 	@Override
