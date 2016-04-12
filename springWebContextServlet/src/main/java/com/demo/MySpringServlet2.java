@@ -31,6 +31,7 @@ public class MySpringServlet2 extends FrameworkServlet {
 		ServletContext servletContext = servletSpecificContext.getServletContext();
 		System.out.println(
 				"MySpringServlet2 initFrameworkServlet servletContext=" + servletContext.getServletContextName());
+
 		System.out.println("MySpringServlet2 initFrameworkServlet servletSpecificContext contains Bean_0="
 				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C0_0"));
 		System.out.println("MySpringServlet2 initFrameworkServlet servletSpecificContext contains Bean_1="
@@ -38,7 +39,8 @@ public class MySpringServlet2 extends FrameworkServlet {
 		System.out.println("MySpringServlet2 initFrameworkServlet servletSpecificContext contains Bean_2="
 				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C2_0"));
 
-		System.out.println("MySpringServlet2 initFrameworkServlet servletSpecificContext=" + servletSpecificContext);
+		System.out.println("MySpringServlet2 initFrameworkServlet servletSpecificContext="
+				+ servletSpecificContext.getDisplayName());
 
 		WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		System.out.println("MySpringServlet2 initFrameworkServlet rootContext=" + rootContext.getDisplayName());
