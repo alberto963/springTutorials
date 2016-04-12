@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.demo.rootContext.Bean_C0_0;
+import com.demo.beans.Bean_C0_0;
 
 /**
  * Servlet implementation class Servlet_0

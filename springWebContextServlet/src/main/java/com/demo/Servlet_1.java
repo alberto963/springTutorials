@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.demo.rootContext.Bean_C0_0;
-import com.demo.rootContext.Bean_C1_0;
+import com.demo.beans.Bean_C0_0;
 
 /**
  * Servlet implementation class Servlet_1

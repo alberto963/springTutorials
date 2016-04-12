@@ -50,11 +50,11 @@ public class MySpringServlet1 extends FrameworkServlet {
 		System.out.println("MySpringServlet1 initFrameworkServlet rootContext=" + rootContext.getDisplayName());
 		
 		System.out.println("MySpringServlet1 initFrameworkServlet rootContext contains Bean_0="
-				+ rootContext.containsBean("com.demo.rootContext.Bean_C0_0"));
+				+ rootContext.containsBean("com.demo.beans.Bean_C0_0"));
 		System.out.println("MySpringServlet1 initFrameworkServlet rootContext contains Bean_1="
-				+ rootContext.containsBean("com.demo.rootContext.Bean_C1_0"));
+				+ rootContext.containsBean("com.demo.beans.Bean_C1_0"));
 		System.out.println("MySpringServlet1 initFrameworkServlet rootContext contains Bean_2="
-				+ rootContext.containsBean("com.demo.rootContext.Bean_C2_0"));
+				+ rootContext.containsBean("com.demo.beans.Bean_C2_0"));
 
 		/*
 		 * Servlet specific context.
@@ -63,11 +63,11 @@ public class MySpringServlet1 extends FrameworkServlet {
 				+ servletSpecificContext.getDisplayName());
 
 		System.out.println("MySpringServlet1 initFrameworkServlet servletSpecificContext contains Bean_0="
-				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C0_0"));
+				+ servletSpecificContext.containsBean("com.demo.beans.Bean_C0_0"));
 		System.out.println("MySpringServlet1 initFrameworkServlet servletSpecificContext contains Bean_1="
-				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C1_0"));
+				+ servletSpecificContext.containsBean("com.demo.beans.Bean_C1_0"));
 		System.out.println("MySpringServlet1 initFrameworkServlet servletSpecificContext contains Bean_2="
-				+ servletSpecificContext.containsBean("com.demo.rootContext.Bean_C2_0"));
+				+ servletSpecificContext.containsBean("com.demo.beans.Bean_C2_0"));
 	}
 
 	@Override

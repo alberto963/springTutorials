@@ -1,4 +1,4 @@
-package com.demo.rootContext;
+package com.demo.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

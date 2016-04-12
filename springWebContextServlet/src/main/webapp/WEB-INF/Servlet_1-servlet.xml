@@ -13,12 +13,12 @@
 	<mvc:annotation-driven />
 
 	<!--  Your base-package for controllers is provided here: -->
-	<context:component-scan base-package="com.demo.rootContext" />
+	<context:component-scan base-package="com.demo.beans" />
 
-	<bean class="com.demo.rootContext.Service_0_Impl">
+	<bean class="com.demo.beans.Service_0_Impl">
 	</bean>
 
-	<bean class="com.demo.rootContext.Bean_C2_0">
+	<bean class="com.demo.beans.Bean_C2_0">
 	</bean>
 
 </beans>
