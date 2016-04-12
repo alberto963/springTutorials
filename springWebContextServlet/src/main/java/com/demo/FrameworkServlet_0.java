@@ -8,9 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.FrameworkServlet;
+
+import com.demo.beans.Bean_0;
+import com.demo.beans.Bean_1;
 
 public class FrameworkServlet_0 extends FrameworkServlet {
 
@@ -31,7 +36,7 @@ public class FrameworkServlet_0 extends FrameworkServlet {
 		 * We can get directly servlet specific context.
 		 */
 		WebApplicationContext servletSpecificContext = getWebApplicationContext();
-		
+
 		/*
 		 * We can get root context from servlet context.
 		 */
@@ -48,7 +53,7 @@ public class FrameworkServlet_0 extends FrameworkServlet {
 		 * Root context.
 		 */
 		System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext=" + rootContext.getDisplayName());
-		
+
 		System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_0="
 				+ rootContext.containsBean("com.demo.beans.Bean_0"));
 		System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_1="
@@ -68,6 +73,22 @@ public class FrameworkServlet_0 extends FrameworkServlet {
 				+ servletSpecificContext.containsBean("com.demo.beans.Bean_1"));
 		System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_2="
 				+ servletSpecificContext.containsBean("com.demo.beans.Bean_2"));
+		
+		Bean_0 bean = rootContext.getBean(Bean_0.class);
+		String res = bean.api_0();
+		
+		System.out.println("FrameworkServlet_0 api_0=" + res);
+		
+		Bean_1 bean1 = servletSpecificContext.getBean(Bean_1.class);
+		String res1 = bean1.api_0();
+		
+		System.out.println("FrameworkServlet_0 api_0=" + res1);
+		
+		/*
+		 * Bean_0 can be created on servletSpecificContext (as it inherits root context).
+		 */
+		Bean_0 bean0 = servletSpecificContext.getBean(Bean_0.class);
+		
 	}
 
 	@Override

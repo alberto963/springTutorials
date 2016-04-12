@@ -8,14 +8,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.FrameworkServlet;
+
+import com.demo.beans.Bean_0;
+import com.demo.beans.Bean_1;
+import com.demo.beans.Bean_2;
 
 public class FrameworkServlet_1 extends FrameworkServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	@Autowired
+	private Bean_0 bean;
+
+//	@Autowired
+//	private Bean_2 bean2;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -68,6 +80,20 @@ public class FrameworkServlet_1 extends FrameworkServlet {
 				+ servletSpecificContext.containsBean("com.demo.beans.Bean_1"));
 		System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_2="
 				+ servletSpecificContext.containsBean("com.demo.beans.Bean_2"));
+		
+		/*
+		 * Beans
+		 */
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, servletContext);
+
+		String res = bean.api_0();
+		System.out.println("FrameworkServlet_0 api_0=" + res);
+		
+		/*
+		 * TODO how to inject bean2?
+		 */
+//		String res2 = bean2.api_0();
+//		System.out.println("FrameworkServlet_0 bean2 api_0=" + res2);
 	}
 
 	@Override

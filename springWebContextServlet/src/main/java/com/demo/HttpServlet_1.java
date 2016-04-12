@@ -23,9 +23,6 @@ public class HttpServlet_1 extends HttpServlet {
 	@Autowired
 	private Bean_0 bean;
 
-//	@Autowired
-//	private Bean_1 bean2;
-
 	/**
 	 * Default constructor.
 	 */
@@ -47,9 +44,8 @@ public class HttpServlet_1 extends HttpServlet {
 
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, servletContext);
 
-		// SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-
 		String res = bean.api_0();
+		System.out.println("HttpServlet_1 bean api_0=" + res);
 	}
 
 	/**
@@ -60,10 +56,7 @@ public class HttpServlet_1 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String res = bean.api_0();
-//		String res2 = bean2.api_0();
-
-//		response.getWriter().append(res2 + " Served at: ").append(request.getContextPath());
-		response.getWriter().append(" Served at: ").append(request.getContextPath());
+		response.getWriter().append(res + " Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -7,6 +7,6 @@ public class Bean_0 {
 	private Service_0 service;
 
 	public String api_0() {
-		return service.api_0();
+		return "Bean_0 " + service.api_0();
 	}
 }

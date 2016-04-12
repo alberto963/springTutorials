@@ -30,6 +30,7 @@ public class HttpServlet_0 extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) {
 		ServletContext servletContext = config.getServletContext();
+		
 		System.out.println("HttpServlet_0 init contextPath=" + servletContext.getContextPath());
 
 		try {
@@ -41,11 +42,10 @@ public class HttpServlet_0 extends HttpServlet {
 		WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		System.out.println("HttpServlet_0 init rootContext=" + rootContext);
 
-		// SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
-		// config.getServletContext());
-
 		Bean_0 bean = rootContext.getBean(Bean_0.class);
 		String res = bean.api_0();
+		
+		System.out.println("HttpServlet_0 bean api_0=" + res);
 	}
 
 	/**
