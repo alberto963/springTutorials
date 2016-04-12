@@ -7,11 +7,14 @@
 
 	<context-param>
 	<param-name>contextClass</param-name>
-	<param-value>
-		org.springframework.web.context.support.XmlWebApplicationContext
-	</param-value>
+	<param-value>org.springframework.web.context.support.XmlWebApplicationContext</param-value>
 	</context-param>
 	
+	<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring/application-config.xml</param-value>
+  	</context-param>
+  
 	<listener>
 	<listener-class>
 		org.springframework.web.context.ContextLoaderListener
