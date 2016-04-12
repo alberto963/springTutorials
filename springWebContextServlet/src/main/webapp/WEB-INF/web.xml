@@ -38,21 +38,21 @@
   </servlet>
   
    <servlet>
-   <servlet-name>MySpringServlet0</servlet-name>
+   <servlet-name>SpringServlet_0</servlet-name>
    <servlet-class>com.demo.FrameworkServlet_0</servlet-class>
    <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>Servlet_0-servlet.xml</param-value>
+      <param-value>classpath:spring/Servlet_0-servlet.xml</param-value>
    </init-param>
    <load-on-startup>1</load-on-startup>
 </servlet>
  
    <servlet>
-   <servlet-name>MySpringServlet1</servlet-name>
+   <servlet-name>SpringServlet_1</servlet-name>
    <servlet-class>com.demo.FrameworkServlet_1</servlet-class>
    <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>Servlet_1-servlet.xml</param-value>
+      <param-value>classpath:spring/Servlet_1-servlet.xml</param-value>
    </init-param>
    <load-on-startup>1</load-on-startup>
 </servlet>
