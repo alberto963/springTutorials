@@ -23,11 +23,11 @@ public class FrameworkServlet_1 extends FrameworkServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private Bean_0 bean;
+	private Bean_0 bean0;
 
 //	@Autowired
 //	private Bean_2 bean2;
-	
+
 	/**
 	 * Default constructor.
 	 */
@@ -43,7 +43,7 @@ public class FrameworkServlet_1 extends FrameworkServlet {
 		 * We can get directly servlet specific context.
 		 */
 		WebApplicationContext servletSpecificContext = getWebApplicationContext();
-		
+
 		/*
 		 * We can get root context from servlet context.
 		 */
@@ -60,7 +60,7 @@ public class FrameworkServlet_1 extends FrameworkServlet {
 		 * Root context.
 		 */
 		System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext=" + rootContext.getDisplayName());
-		
+
 		System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext contains Bean_0="
 				+ rootContext.containsBean("com.demo.beans.Bean_0"));
 		System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext contains Bean_1="
@@ -80,20 +80,29 @@ public class FrameworkServlet_1 extends FrameworkServlet {
 				+ servletSpecificContext.containsBean("com.demo.beans.Bean_1"));
 		System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_2="
 				+ servletSpecificContext.containsBean("com.demo.beans.Bean_2"));
-		
-		/*
-		 * Beans
-		 */
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, servletContext);
 
-		String res = bean.api_0();
+		/*
+		 * --- Beans
+		 */
+		/*
+		 * Process @Autowired injection for the given target object, based on
+		 * the current root web application context as stored in the
+		 * ServletContext.
+		 */
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+
+		String res = bean0.api_0();
 		System.out.println("FrameworkServlet_0 api_0=" + res);
-		
+
+
 		/*
 		 * TODO how to inject bean2?
 		 */
+		//SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, (ServletContext) servletSpecificContext);
+
 //		String res2 = bean2.api_0();
 //		System.out.println("FrameworkServlet_0 bean2 api_0=" + res2);
+
 	}
 
 	@Override

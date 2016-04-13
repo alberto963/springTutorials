@@ -74,8 +74,8 @@ public class FrameworkServlet_0 extends FrameworkServlet {
 		System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_2="
 				+ servletSpecificContext.containsBean("com.demo.beans.Bean_2"));
 		
-		Bean_0 bean = rootContext.getBean(Bean_0.class);
-		String res = bean.api_0();
+		Bean_0 bean0 = rootContext.getBean(Bean_0.class);
+		String res = bean0.api_0();
 		
 		System.out.println("FrameworkServlet_0 api_0=" + res);
 		
@@ -87,8 +87,7 @@ public class FrameworkServlet_0 extends FrameworkServlet {
 		/*
 		 * Bean_0 can be created on servletSpecificContext (as it inherits root context).
 		 */
-		Bean_0 bean0 = servletSpecificContext.getBean(Bean_0.class);
-		
+		Bean_0 bean0_2 = servletSpecificContext.getBean(Bean_0.class);
 	}
 
 	@Override

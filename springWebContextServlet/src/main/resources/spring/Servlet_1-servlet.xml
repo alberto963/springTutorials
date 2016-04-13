@@ -12,9 +12,6 @@
 	<!-- Allows autowired in beans to be filled in -->
 	<mvc:annotation-driven />
 
-	<!--  Your base-package for controllers is provided here: -->
-	<context:component-scan base-package="com.demo.beans" />
-
 	<bean class="com.demo.beans.Service_0_Impl">
 	</bean>
 
