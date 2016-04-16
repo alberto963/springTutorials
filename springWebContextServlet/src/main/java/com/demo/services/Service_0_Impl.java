@@ -1,4 +1,4 @@
-package com.demo.beans;
+package com.demo.services;
 
 public class Service_0_Impl implements Service_0 {
 

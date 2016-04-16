@@ -25,8 +25,8 @@ public class FrameworkServlet_1 extends FrameworkServlet {
 	@Autowired
 	private Bean_0 bean0;
 
-//	@Autowired
-//	private Bean_2 bean2;
+	// @Autowired
+	// private Bean_2 bean2;
 
 	/**
 	 * Default constructor.
@@ -86,22 +86,22 @@ public class FrameworkServlet_1 extends FrameworkServlet {
 		 */
 		/*
 		 * Process @Autowired injection for the given target object, based on
-		 * the current root web application context as stored in the
-		 * ServletContext.
+		 * the current web application context.
 		 */
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 
 		String res = bean0.api_0();
 		System.out.println("FrameworkServlet_0 api_0=" + res);
 
-
 		/*
 		 * TODO how to inject bean2?
 		 */
-		//SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, (ServletContext) servletSpecificContext);
+		// SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+		// (ServletContext) servletSpecificContext);
 
-//		String res2 = bean2.api_0();
-//		System.out.println("FrameworkServlet_0 bean2 api_0=" + res2);
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, servletContext);
+		// String res2 = bean2.api_0();
+		// System.out.println("FrameworkServlet_0 bean2 api_0=" + res2);
 
 	}
 

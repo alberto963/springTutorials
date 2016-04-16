@@ -12,7 +12,7 @@
 	<!-- Allows autowired in beans to be filled in -->
 	<mvc:annotation-driven />
 
-	<bean class="com.demo.beans.Service_0_Impl">
+	<bean class="com.demo.services.Service_0_Impl">
 	</bean>
 
 	<bean class="com.demo.beans.Bean_1">
