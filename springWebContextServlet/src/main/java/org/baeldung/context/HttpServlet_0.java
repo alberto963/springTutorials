@@ -1,4 +1,4 @@
-package com.demo;
+package org.baeldung.context;
 
 import java.io.IOException;
 
@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.baeldung.context.beans.Bean_0;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import com.demo.beans.Bean_0;
 
 /**
  * Servlet implementation class HttpServlet_0

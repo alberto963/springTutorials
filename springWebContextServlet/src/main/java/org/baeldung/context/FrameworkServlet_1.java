@@ -1,4 +1,4 @@
-package com.demo;
+package org.baeldung.context;
 
 import java.io.IOException;
 
@@ -7,14 +7,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.baeldung.context.beans.Bean_0;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.FrameworkServlet;
-
-import com.demo.beans.Bean_0;
 
 public class FrameworkServlet_1 extends FrameworkServlet {
 
@@ -58,18 +57,18 @@ public class FrameworkServlet_1 extends FrameworkServlet {
          */
         System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext=" + rootContext.getDisplayName());
 
-        System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext contains Bean_0=" + rootContext.containsBean("com.demo.beans.Bean_0"));
-        System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext contains Bean_1=" + rootContext.containsBean("com.demo.beans.Bean_1"));
-        System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext contains Bean_2=" + rootContext.containsBean("com.demo.beans.Bean_2"));
+        System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext contains Bean_0=" + rootContext.containsBean("org.baeldung.context.beans.Bean_0"));
+        System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext contains Bean_1=" + rootContext.containsBean("org.baeldung.context.beans.Bean_1"));
+        System.out.println("FrameworkServlet_1 initFrameworkServlet rootContext contains Bean_2=" + rootContext.containsBean("org.baeldung.context.beans.Bean_2"));
 
         /*
          * Servlet specific context.
          */
         System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext=" + servletSpecificContext.getDisplayName());
 
-        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_0=" + servletSpecificContext.containsBean("com.demo.beans.Bean_0"));
-        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_1=" + servletSpecificContext.containsBean("com.demo.beans.Bean_1"));
-        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_2=" + servletSpecificContext.containsBean("com.demo.beans.Bean_2"));
+        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_0=" + servletSpecificContext.containsBean("org.baeldung.context.beans.Bean_0"));
+        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_1=" + servletSpecificContext.containsBean("org.baeldung.context.beans.Bean_1"));
+        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_2=" + servletSpecificContext.containsBean("org.baeldung.context.beans.Bean_2"));
 
         /*
          * --- Beans

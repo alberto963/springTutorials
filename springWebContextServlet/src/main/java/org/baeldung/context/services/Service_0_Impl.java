@@ -1,4 +1,4 @@
-package com.demo.services;
+package org.baeldung.context.services;
 
 public class Service_0_Impl implements Service_0 {
 

@@ -12,10 +12,10 @@
 	<!-- Allows autowired in beans to be filled in -->
 	<mvc:annotation-driven />
 
-	<bean class="com.demo.services.Service_0_Impl">
+	<bean class="org.baeldung.context.services.Service_0_Impl">
 	</bean>
 
-	<bean class="com.demo.beans.Bean_2">
+	<bean class="org.baeldung.context.beans.Bean_2">
 	</bean>
 
 </beans>
