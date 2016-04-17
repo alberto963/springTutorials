@@ -7,10 +7,9 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- Activates various annotations to be detected in bean classes: Spring's 
+		@Required and @Autowired, etc. It is needed to activate @Autowired in Bean_0 -->
 	<context:annotation-config />
-
-	<!-- Allows autowired in beans to be filled in -->
-	<mvc:annotation-driven />
 
 	<bean class="org.baeldung.context.services.Service_0_Impl">
 	</bean>

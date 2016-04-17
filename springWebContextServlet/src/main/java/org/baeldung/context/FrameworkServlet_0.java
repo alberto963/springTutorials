@@ -71,6 +71,10 @@ public class FrameworkServlet_0 extends FrameworkServlet {
         System.out.println("FrameworkServlet_0 constructor api_0=" + res1);
     }
 
+    /*
+     * This method will be invoked after any bean properties have been set and the WebApplicationContext has been loaded. 
+     * The default implementation is empty; subclasses may override this method to perform any initialization they require.
+     */
     @Override
     protected void initFrameworkServlet() throws ServletException, BeansException {
         super.initFrameworkServlet();

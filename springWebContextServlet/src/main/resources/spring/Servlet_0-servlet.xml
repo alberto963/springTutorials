@@ -9,9 +9,6 @@
 
 	<context:annotation-config />
 
-	<!-- Allows autowired in beans to be filled in -->
-	<mvc:annotation-driven />
-
 	<bean class="org.baeldung.context.services.Service_0_Impl">
 	</bean>
 
