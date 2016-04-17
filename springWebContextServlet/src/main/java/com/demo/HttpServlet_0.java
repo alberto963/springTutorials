@@ -18,54 +18,52 @@ import com.demo.beans.Bean_0;
  * Servlet implementation class HttpServlet_0
  */
 public class HttpServlet_0 extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Default constructor.
-	 */
-	public HttpServlet_0() {
-		System.out.println("HttpServlet_0");
-	}
+    /**
+     * Default constructor.
+     */
+    public HttpServlet_0() {
+        System.out.println("HttpServlet_0");
+    }
 
-	@Override
-	public void init(ServletConfig config) {
-		ServletContext servletContext = config.getServletContext();
-		
-		System.out.println("HttpServlet_0 init contextPath=" + servletContext.getContextPath());
+    @Override
+    public void init(ServletConfig config) {
+        ServletContext servletContext = config.getServletContext();
 
-		try {
-			super.init(config);
-		} catch (ServletException e) {
-			e.printStackTrace();
-		}
+        System.out.println("HttpServlet_0 init contextPath=" + servletContext.getContextPath());
 
-		WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-		System.out.println("HttpServlet_0 init rootContext=" + rootContext);
+        try {
+            super.init(config);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
 
-		Bean_0 bean = rootContext.getBean(Bean_0.class);
-		String res = bean.api_0();
-		
-		System.out.println("HttpServlet_0 bean api_0=" + res);
-	}
+        WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+        System.out.println("HttpServlet_0 init rootContext=" + rootContext);
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+        Bean_0 bean = rootContext.getBean(Bean_0.class);
+        String res = bean.api_0();
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
+        System.out.println("HttpServlet_0 bean api_0=" + res);
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 
 }

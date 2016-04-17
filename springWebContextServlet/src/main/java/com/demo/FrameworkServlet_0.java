@@ -8,11 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.FrameworkServlet;
 
@@ -51,121 +49,112 @@ import com.demo.services.Service_0_Impl;
  */
 public class FrameworkServlet_0 extends FrameworkServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Default constructor.
-	 */
-	public FrameworkServlet_0() {
-		System.out.println("FrameworkServlet_0 constructor called");
+    /**
+     * Default constructor.
+     */
+    public FrameworkServlet_0() {
+        System.out.println("FrameworkServlet_0 constructor called");
 
-		/*
-		 * A WebApplicationContext variant of AnnotationConfigApplicationContext
-		 * is available with AnnotationConfigWebApplicationContext. This
-		 * implementation may be used when configuring the Spring
-		 * ContextLoaderListener servlet listener, Spring MVC DispatcherServlet,
-		 * etc.
-		 */
-		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-		Service_0 service_0 = applicationContext.getBean(Service_0_Impl.class);
+        /*
+         * A WebApplicationContext variant of AnnotationConfigApplicationContext
+         * is available with AnnotationConfigWebApplicationContext. This
+         * implementation may be used when configuring the Spring
+         * ContextLoaderListener servlet listener, Spring MVC DispatcherServlet,
+         * etc.
+         */
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        Service_0 service_0 = applicationContext.getBean(Service_0_Impl.class);
 
-		String res1 = service_0.api_0();
+        String res1 = service_0.api_0();
 
-		System.out.println("FrameworkServlet_0 constructor api_0=" + res1);
-	}
+        System.out.println("FrameworkServlet_0 constructor api_0=" + res1);
+    }
 
-	@Override
-	protected void initFrameworkServlet() throws ServletException, BeansException {
-		super.initFrameworkServlet();
+    @Override
+    protected void initFrameworkServlet() throws ServletException, BeansException {
+        super.initFrameworkServlet();
 
-		/*
-		 * WebApplicationContext: Interface to provide configuration for a web
-		 * application. This is read-only while the application is running, but
-		 * may be reloaded if the implementation supports this. This interface
-		 * adds a getServletContext() method to the generic ApplicationContext
-		 * interface, and defines a well-known application attribute name that
-		 * the root context must be bound to in the bootstrap process.
-		 * 
-		 * Like generic application contexts, web application contexts are
-		 * hierarchical. There is a single root context per application, while
-		 * each servlet in the application (including a dispatcher servlet in
-		 * the MVC framework) has its own child context.
-		 * 
-		 * In addition to standard application context lifecycle capabilities,
-		 * WebApplicationContext implementations need to detect
-		 * ServletContextAware beans and invoke the setServletContext method
-		 * accordingly.
-		 * 
-		 */
-		/*
-		 * We can get directly servlet specific context.
-		 * 
-		 * getWebApplicationContext: Return this servlet's
-		 * WebApplicationContext.
-		 */
-		WebApplicationContext servletSpecificContext = getWebApplicationContext();
+        /*
+         * WebApplicationContext: Interface to provide configuration for a web
+         * application. This is read-only while the application is running, but
+         * may be reloaded if the implementation supports this. This interface
+         * adds a getServletContext() method to the generic ApplicationContext
+         * interface, and defines a well-known application attribute name that
+         * the root context must be bound to in the bootstrap process.
+         * 
+         * Like generic application contexts, web application contexts are
+         * hierarchical. There is a single root context per application, while
+         * each servlet in the application (including a dispatcher servlet in
+         * the MVC framework) has its own child context.
+         * 
+         * In addition to standard application context lifecycle capabilities,
+         * WebApplicationContext implementations need to detect
+         * ServletContextAware beans and invoke the setServletContext method
+         * accordingly.
+         * 
+         */
+        /*
+         * We can get directly servlet specific context.
+         * 
+         * getWebApplicationContext: Return this servlet's
+         * WebApplicationContext.
+         */
+        WebApplicationContext servletSpecificContext = getWebApplicationContext();
 
-		/*
-		 * We can get root context from servlet context.
-		 * 
-		 * getServletContext: Return the standard Servlet API ServletContext for
-		 * this application. Also available for a Portlet application, in
-		 * addition to the PortletContext.
-		 * 
-		 */
-		ServletContext servletContext = servletSpecificContext.getServletContext();
-		WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+        /*
+         * We can get root context from servlet context.
+         * 
+         * getServletContext: Return the standard Servlet API ServletContext for
+         * this application. Also available for a Portlet application, in
+         * addition to the PortletContext.
+         * 
+         */
+        ServletContext servletContext = servletSpecificContext.getServletContext();
+        WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
-		/*
-		 * Servlet context (web.xml).
-		 */
-		System.out.println(
-				"FrameworkServlet_0 initFrameworkServlet servletContext=" + servletContext.getServletContextName());
+        /*
+         * Servlet context (web.xml).
+         */
+        System.out.println("FrameworkServlet_0 initFrameworkServlet servletContext=" + servletContext.getServletContextName());
 
-		/*
-		 * Root context.
-		 */
-		System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext=" + rootContext.getDisplayName());
+        /*
+         * Root context.
+         */
+        System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext=" + rootContext.getDisplayName());
 
-		System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_0="
-				+ rootContext.containsBean("com.demo.beans.Bean_0"));
-		System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_1="
-				+ rootContext.containsBean("com.demo.beans.Bean_1"));
-		System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_2="
-				+ rootContext.containsBean("com.demo.beans.Bean_2"));
+        System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_0=" + rootContext.containsBean("com.demo.beans.Bean_0"));
+        System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_1=" + rootContext.containsBean("com.demo.beans.Bean_1"));
+        System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_2=" + rootContext.containsBean("com.demo.beans.Bean_2"));
 
-		/*
-		 * Servlet specific context.
-		 */
-		System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext="
-				+ servletSpecificContext.getDisplayName());
+        /*
+         * Servlet specific context.
+         */
+        System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext=" + servletSpecificContext.getDisplayName());
 
-		System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_0="
-				+ servletSpecificContext.containsBean("com.demo.beans.Bean_0"));
-		System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_1="
-				+ servletSpecificContext.containsBean("com.demo.beans.Bean_1"));
-		System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_2="
-				+ servletSpecificContext.containsBean("com.demo.beans.Bean_2"));
+        System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_0=" + servletSpecificContext.containsBean("com.demo.beans.Bean_0"));
+        System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_1=" + servletSpecificContext.containsBean("com.demo.beans.Bean_1"));
+        System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_2=" + servletSpecificContext.containsBean("com.demo.beans.Bean_2"));
 
-		Bean_0 bean0 = rootContext.getBean(Bean_0.class);
-		String res = bean0.api_0();
+        Bean_0 bean0 = rootContext.getBean(Bean_0.class);
+        String res = bean0.api_0();
 
-		System.out.println("FrameworkServlet_0 api_0=" + res);
+        System.out.println("FrameworkServlet_0 api_0=" + res);
 
-		Bean_1 bean1 = servletSpecificContext.getBean(Bean_1.class);
-		String res1 = bean1.api_0();
+        Bean_1 bean1 = servletSpecificContext.getBean(Bean_1.class);
+        String res1 = bean1.api_0();
 
-		System.out.println("FrameworkServlet_0 api_0=" + res1);
+        System.out.println("FrameworkServlet_0 api_0=" + res1);
 
-		/*
-		 * Bean_0 can be created on servletSpecificContext (as it inherits root
-		 * context).
-		 */
-		Bean_0 bean0_2 = servletSpecificContext.getBean(Bean_0.class);
-	}
+        /*
+         * Bean_0 can be created on servletSpecificContext (as it inherits root
+         * context).
+         */
+        Bean_0 bean0_2 = servletSpecificContext.getBean(Bean_0.class);
+    }
 
-	@Override
-	protected void doService(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
+    @Override
+    protected void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
 }
