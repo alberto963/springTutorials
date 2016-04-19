@@ -39,12 +39,12 @@ public class FrameworkServlet_1 extends FrameworkServlet {
         /*
          * We can get directly servlet specific context.
          */
-        WebApplicationContext servletSpecificContext = getWebApplicationContext();
+        WebApplicationContext webApplicationContext = getWebApplicationContext();
 
         /*
          * We can get root context from servlet context.
          */
-        ServletContext servletContext = servletSpecificContext.getServletContext();
+        ServletContext servletContext = webApplicationContext.getServletContext();
         WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
         /*
@@ -64,11 +64,11 @@ public class FrameworkServlet_1 extends FrameworkServlet {
         /*
          * Servlet specific context.
          */
-        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext=" + servletSpecificContext.getDisplayName());
+        System.out.println("FrameworkServlet_1 initFrameworkServlet webApplicationContext=" + webApplicationContext.getDisplayName());
 
-        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_0=" + servletSpecificContext.containsBean("org.baeldung.context.beans.Bean_0"));
-        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_1=" + servletSpecificContext.containsBean("org.baeldung.context.beans.Bean_1"));
-        System.out.println("FrameworkServlet_1 initFrameworkServlet servletSpecificContext contains Bean_2=" + servletSpecificContext.containsBean("org.baeldung.context.beans.Bean_2"));
+        System.out.println("FrameworkServlet_1 initFrameworkServlet webApplicationContext contains Bean_0=" + webApplicationContext.containsBean("org.baeldung.context.beans.Bean_0"));
+        System.out.println("FrameworkServlet_1 initFrameworkServlet webApplicationContext contains Bean_1=" + webApplicationContext.containsBean("org.baeldung.context.beans.Bean_1"));
+        System.out.println("FrameworkServlet_1 initFrameworkServlet webApplicationContext contains Bean_2=" + webApplicationContext.containsBean("org.baeldung.context.beans.Bean_2"));
 
         /*
          * --- Beans
@@ -86,7 +86,7 @@ public class FrameworkServlet_1 extends FrameworkServlet {
          * TODO how to inject bean2?
          */
         // SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
-        // (ServletContext) servletSpecificContext);
+        // (ServletContext) webApplicationContext);
 
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, servletContext);
         // String res2 = bean2.api_0();

@@ -9,10 +9,10 @@
 
 	<context:annotation-config />
 
-	<bean class="org.baeldung.context.services.Service_0_Impl">
+	<bean class="org.baeldung.context.beans.Bean_1">
 	</bean>
 
-	<bean class="org.baeldung.context.beans.Bean_1">
+	<bean class="org.baeldung.context.services.Service_0_Impl">
 	</bean>
 
 </beans>

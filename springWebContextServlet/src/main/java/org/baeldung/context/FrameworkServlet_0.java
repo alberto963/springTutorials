@@ -57,6 +57,10 @@ public class FrameworkServlet_0 extends FrameworkServlet {
         System.out.println("FrameworkServlet_0 constructor called");
 
         /*
+         * AnnotationConfigApplicationContext:
+         * Create a new AnnotationConfigApplicationContext, deriving bean definitions from the given annotated classes and
+         * automatically refreshing the context.
+         * 
          * A WebApplicationContext variant of AnnotationConfigApplicationContext
          * is available with AnnotationConfigWebApplicationContext. This
          * implementation may be used when configuring the Spring
@@ -104,7 +108,27 @@ public class FrameworkServlet_0 extends FrameworkServlet {
          * getWebApplicationContext: Return this servlet's
          * WebApplicationContext.
          */
-        WebApplicationContext servletSpecificContext = getWebApplicationContext();
+        WebApplicationContext webApplicationContext = getWebApplicationContext();
+
+        /*
+         * Servlet specific context.
+         */
+        System.out.println("FrameworkServlet_0 initFrameworkServlet webApplicationContext=" + webApplicationContext.getDisplayName());
+
+        System.out.println("FrameworkServlet_0 initFrameworkServlet webApplicationContext contains Bean_0=" + webApplicationContext.containsBean("org.baeldung.context.beans.Bean_0"));
+        System.out.println("FrameworkServlet_0 initFrameworkServlet webApplicationContext contains Bean_1=" + webApplicationContext.containsBean("org.baeldung.context.beans.Bean_1"));
+        System.out.println("FrameworkServlet_0 initFrameworkServlet webApplicationContext contains Bean_2=" + webApplicationContext.containsBean("org.baeldung.context.beans.Bean_2"));
+
+        Bean_1 bean1 = webApplicationContext.getBean(Bean_1.class);
+        String res1 = bean1.api_0();
+
+        System.out.println("FrameworkServlet_0 api_0=" + res1);
+
+        /*
+         * Bean_0 can be created on webApplicationContext (as it inherits root
+         * context).
+         */
+        Bean_0 bean0_2 = webApplicationContext.getBean(Bean_0.class);
 
         /*
          * We can get root context from servlet context.
@@ -114,13 +138,17 @@ public class FrameworkServlet_0 extends FrameworkServlet {
          * addition to the PortletContext.
          * 
          */
-        ServletContext servletContext = servletSpecificContext.getServletContext();
-        WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+        ServletContext servletContext = webApplicationContext.getServletContext();
 
         /*
          * Servlet context (web.xml).
          */
         System.out.println("FrameworkServlet_0 initFrameworkServlet servletContext=" + servletContext.getServletContextName());
+
+        /*
+         * Find the root WebApplicationContext for this web app, typically loaded via org.springframework.web.context.ContextLoaderListener. 
+         */
+        WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
         /*
          * Root context.
@@ -131,30 +159,10 @@ public class FrameworkServlet_0 extends FrameworkServlet {
         System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_1=" + rootContext.containsBean("org.baeldung.context.beans.Bean_1"));
         System.out.println("FrameworkServlet_0 initFrameworkServlet rootContext contains Bean_2=" + rootContext.containsBean("org.baeldung.context.beans.Bean_2"));
 
-        /*
-         * Servlet specific context.
-         */
-        System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext=" + servletSpecificContext.getDisplayName());
-
-        System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_0=" + servletSpecificContext.containsBean("org.baeldung.context.beans.Bean_0"));
-        System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_1=" + servletSpecificContext.containsBean("org.baeldung.context.beans.Bean_1"));
-        System.out.println("FrameworkServlet_0 initFrameworkServlet servletSpecificContext contains Bean_2=" + servletSpecificContext.containsBean("org.baeldung.context.beans.Bean_2"));
-
         Bean_0 bean0 = rootContext.getBean(Bean_0.class);
         String res = bean0.api_0();
 
         System.out.println("FrameworkServlet_0 api_0=" + res);
-
-        Bean_1 bean1 = servletSpecificContext.getBean(Bean_1.class);
-        String res1 = bean1.api_0();
-
-        System.out.println("FrameworkServlet_0 api_0=" + res1);
-
-        /*
-         * Bean_0 can be created on servletSpecificContext (as it inherits root
-         * context).
-         */
-        Bean_0 bean0_2 = servletSpecificContext.getBean(Bean_0.class);
     }
 
     @Override
