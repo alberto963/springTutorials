@@ -96,5 +96,6 @@ public class FrameworkServlet_1 extends FrameworkServlet {
 
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+   }
 }

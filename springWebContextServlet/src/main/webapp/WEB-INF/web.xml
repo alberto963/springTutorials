@@ -57,6 +57,15 @@
    <load-on-startup>1</load-on-startup>
 </servlet>
 
+ <servlet-mapping>
+  	<servlet-name>SpringServlet_0</servlet-name>
+  	<url-pattern>/SpringServlet_0</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SpringServlet_1</servlet-name>
+  	<url-pattern>/SpringServlet_1</url-pattern>
+  </servlet-mapping>
+  
   <servlet-mapping>
   	<servlet-name>Servlet_0</servlet-name>
   	<url-pattern>/Servlet_0</url-pattern>
