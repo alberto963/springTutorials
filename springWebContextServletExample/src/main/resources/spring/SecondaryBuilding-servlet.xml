@@ -9,10 +9,6 @@
 
 	<context:annotation-config />
 
-	<bean class="org.baeldung.context.beans.LogAccessService">
-	</bean>
-
-	<bean class="org.baeldung.context.services.FileLogService">
-	</bean>
-
+	<bean class="org.baeldung.context.beans.LogAccessService" />
+	<bean class="org.baeldung.context.services.FileLogService" />
 </beans>
