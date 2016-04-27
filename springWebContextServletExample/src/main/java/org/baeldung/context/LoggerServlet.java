@@ -13,9 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.web.servlet.FrameworkServlet;
 
+@SuppressWarnings("serial")
 public class LoggerServlet extends FrameworkServlet {
-
-    private static final long serialVersionUID = 1L;
 
     @Autowired
     private LogConfiguration environment;
@@ -28,9 +27,9 @@ public class LoggerServlet extends FrameworkServlet {
 
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = environment.getCompanyName();
-        LogAccessService logAccessService = getWebApplicationContext().getBean(LogAccessService.class);
-        String ret = logAccessService.logAccess(request.getRequestURL() + "@" + name);
+        String companyName = environment.getCompanyName();
+        LogAccessService service = getWebApplicationContext().getBean(LogAccessService.class);
+        String ret = service.logAccess(request.getRequestURL() + "@" + companyName);
         response.getWriter().append(ret + " Served at: ").append(request.getContextPath());
     }
 }
