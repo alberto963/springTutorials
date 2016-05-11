@@ -13,46 +13,43 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ShowMessageController {
 
-	@RequestMapping("/showMessageJson")
-	public @ResponseBody
-	List<Simple> actionJsonRest(HttpServletRequest request) {
+    @RequestMapping("/showMessageJson")
+    public @ResponseBody List<Simple> actionJsonRest(HttpServletRequest request) {
 
-		System.out.println("ShowMessageController showMessageJson");
+        System.out.println("ShowMessageController showMessageJson");
 
-		List<Simple> r = new LinkedList<Simple>();
-		r.add(new Simple());
+        List<Simple> r = new LinkedList<Simple>();
+        r.add(new Simple());
 
-		return r;
-	}
+        return r;
+    }
 
-	@RequestMapping("/showMessage")
-	public ModelAndView actionMvc(HttpServletRequest request) {
-		System.out.println("ShowMessageController showMessage request="
-				+ request);
+    @RequestMapping("/showMessage")
+    public ModelAndView actionMvc(HttpServletRequest request) {
+        System.out.println("ShowMessageController showMessage request=" + request);
 
-		// Prepare the result view (showMessage.jsp):
-		return new ModelAndView("showMessage", "message",
-				"Hello Spring MVC Framework + Maven!");
-	}
+        // Prepare the result view (showMessage.jsp):
+        return new ModelAndView("showMessage", "message", "Hello Spring MVC Framework + Maven!");
+    }
 
-	static class Simple {
-		private String name = "";
-		private int age = 0;
+    static class Simple {
+        private String name = "";
+        private int age = 0;
 
-		public String getName() {
-			return name;
-		}
+        public String getName() {
+            return name;
+        }
 
-		public void setName(String name) {
-			this.name = name;
-		}
+        public void setName(String name) {
+            this.name = name;
+        }
 
-		public int getAge() {
-			return age;
-		}
+        public int getAge() {
+            return age;
+        }
 
-		public void setAge(int age) {
-			this.age = age;
-		}
-	}
+        public void setAge(int age) {
+            this.age = age;
+        }
+    }
 }
