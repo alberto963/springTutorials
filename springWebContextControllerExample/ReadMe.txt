@@ -10,8 +10,10 @@ It demostrates how to have:
 1) a minimal web app with a controller (spring) and autowiring, usage of service annotation
 
 Urls:
-http://localhost:8080/springWebContextControllerExample/MainBuilding/130
-http://localhost:8080/springWebContextControllerExample/SecondaryBuilding/110
+http://localhost:8080/spring_04_WebContextControllerExample/checkin/MainBuilding/130
+http://localhost:8080/spring_04_WebContextControllerExample/checkin/SecondaryBuilding/110
+http://localhost:8080/spring_04_WebContextControllerExample/checkout/SecondaryBuilding/110
+http://localhost:8080/spring_04_WebContextControllerExample/checkout/SecondaryBuilding/110
 
 Note:
 
