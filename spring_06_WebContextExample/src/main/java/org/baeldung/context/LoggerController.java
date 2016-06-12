@@ -4,10 +4,7 @@ import javax.servlet.ServletContext;
 
 import org.baeldung.context.beans.LogAccessService;
 import org.baeldung.context.beans.LogConfiguration;
-import org.baeldung.context.services.LogService;
-import org.baeldung.context.services.SocketLogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
