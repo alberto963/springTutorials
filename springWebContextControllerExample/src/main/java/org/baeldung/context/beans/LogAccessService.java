@@ -14,6 +14,6 @@ public class LogAccessService {
     }
 
     public String logAccess(String logPoint, int id) {
-        return service.logAccess("\"Employee " + id + " entered " + logPoint+"\"");
+        return service.logAccess("\"Employee " + id + " entered/exited " + logPoint+"\"");
     }
 }
