@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="springWebContextServletExample">
+    <wb-module deploy-name="spring_03_WebContextServletExample">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp/WEB-INF"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <property name="context-root" value="springWebContextServletExample"/>
-        <property name="java-output-path" value="/springWebContextServletExample/target/classes"/>
+        <property name="java-output-path" value="/spring_03_WebContextServletExample/target/classes"/>
+        <property name="context-root" value="spring_03_WebContextServletExample"/>
     </wb-module>
 </project-modules>
