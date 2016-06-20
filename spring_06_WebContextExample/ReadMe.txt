@@ -9,8 +9,8 @@ It demostrates how to have:
 1) tba
 
 Urls:
-http://localhost:8080/springWebContextControllerExample/MainBuilding/checkin/130
-http://localhost:8080/springWebContextControllerExample/SecondaryBuilding/checkin/110
+http://localhost:8080/spring-webcontext/MainBuilding/checkin/130
+http://localhost:8080/spring-webcontext/SecondaryBuilding/checkin/110
 
 Note:
 
