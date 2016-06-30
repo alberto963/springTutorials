@@ -8,7 +8,8 @@ It demostrates how to have:
 4) webApplicationContext
 
 Urls:
-http://localhost:8080/springWebContext/http://localhost:8080/springWebContext/Servlet_0
+http://localhost:8080/springWebContext/
+http://localhost:8080/springWebContext/Servlet_0
 
 Note:
 Json result is accomplished because Jackson libs are in the classpath 
