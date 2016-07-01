@@ -3,9 +3,9 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.baeldung</groupId>
-	<artifactId>spring-wecontext-javaconfig</artifactId>
+	<artifactId>spring-webcontext-javaconfig</artifactId>
 	<version>0.1-SNAPSHOT</version>
-	<name>spring-wecontext-javaconfig</name>
+	<name>spring-webcontext-javaconfig</name>
 	<packaging>war</packaging>
 
 	<dependencies>
@@ -152,7 +152,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>spring-wecontext-javaconfig</finalName>
+		<finalName>spring-webcontext-javaconfig</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -220,6 +220,7 @@
 	</build>
 
 	<properties>
+	
 		<!-- Spring -->
 		<org.springframework.version>4.2.5.RELEASE</org.springframework.version>
 		<org.springframework.security.version>4.0.4.RELEASE</org.springframework.security.version>

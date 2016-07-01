@@ -8,8 +8,8 @@ Web site configuration example with java configuration of spring context
 - Controllers configured with java classes instead of web.xml and -servlet.xml conf files.
 
 **Urls:**
-- http://localhost:8080/spring-webcontext-javaconfig/MainBuilding/checkin/130
-- http://localhost:8080/spring-webcontext-javaconfig/SecondaryBuilding/checkin/110
+http://localhost:8080/spring-webcontext-javaconfig/MainBuilding/checkin/130
+http://localhost:8080/spring-webcontext-javaconfig/SecondaryBuilding/checkin/110
 
 **Note:**
 This project was created with eclipse as maven project, using maven-archetype-webapp, 
