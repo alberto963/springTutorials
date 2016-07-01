@@ -1,2 +1,18 @@
-spring-webcontext-controller-webxmlconfig-checkin-example
-=========================================================
+spring-webcontext-webxmlconfig
+==============================
+
+This project was created as a copy of spring_04_WebContextControllerExample, 
+then changing all references (2) to spring_04_WebContextControllerExample into spring_06_WebContextExample
+
+Ref:
+ -
+  
+It demostrates how to have:
+
+1) tba
+
+Urls:
+http://localhost:8080/spring-webcontext-webxmlconf/MainBuilding/checkin/130
+http://localhost:8080/spring-webcontext-webxmlconf/SecondaryBuilding/checkin/110
+
+Note:
