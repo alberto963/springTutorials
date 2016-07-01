@@ -15,23 +15,29 @@ import com.baeldung.spring.web.config.LogConfiguration;
 
 @Controller
 public class LoggerController {
-    @Autowired
-    private ServletContext servletContext;
+	@Autowired
+	private ServletContext servletContext;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    private LogConfiguration environment;
+	@Autowired
+	private LogConfiguration environment;
 
-    @RequestMapping("/checkin/{idCode}")
-    @ResponseBody
-    public String checkIn(@PathVariable int idCode) {
-        System.out.println("checkIn called");
-        String companyName = environment.getCompanyName();
-        WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-        LogAccessService logService = webApplicationContext.getBean(LogAccessService.class);
-        String ret = logService.logAccess(webApplicationContext.getDisplayName().substring(37, webApplicationContext.getDisplayName().lastIndexOf('-')) + "@" + companyName, idCode);
+	// Intentionally commented: tried to wire web context bean, but it does not
+	// work. root context bean (LogConfiguration) is ok.
+	// @Autowired
+	// private LogAccessService logService;
+
+	@RequestMapping("/checkin/{idCode}")
+	@ResponseBody
+	public String checkIn(@PathVariable int idCode) {
+		System.out.println("checkIn called");
+		String companyName = environment.getCompanyName();
+		WebApplicationContext rootContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+		LogAccessService logService = webApplicationContext.getBean(LogAccessService.class);
+		String ret = logService.logAccess(webApplicationContext.getDisplayName().substring(37,
+				webApplicationContext.getDisplayName().lastIndexOf('-')) + "@" + companyName, idCode);
 		return ret;
-    }
+	}
 }
