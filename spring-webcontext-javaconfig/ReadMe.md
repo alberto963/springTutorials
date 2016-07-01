@@ -2,7 +2,7 @@ Web site configuration example with java configuration of spring context
 ========================================================================
 
 **Ref:**
-- http://kielczewski.eu/2013/11/spring-mvc-without-web-xml-using-webapplicationinitializer/
+http://kielczewski.eu/2013/11/spring-mvc-without-web-xml-using-webapplicationinitializer/
   
 **It demostrates how to have:**
 - Controllers configured with java classes instead of web.xml and -servlet.xml conf files.
