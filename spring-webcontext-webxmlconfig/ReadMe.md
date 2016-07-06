@@ -12,7 +12,7 @@ It demostrates how to have:
 1) tba
 
 Urls:
-http://localhost:8080/spring-webcontext-webxmlconf/MainBuilding/checkin/130
-http://localhost:8080/spring-webcontext-webxmlconf/SecondaryBuilding/checkin/110
+http://localhost:8080/springWebContextControllerExample/MainBuilding/checkin/130
+http://localhost:8080/springWebContextControllerExample/SecondaryBuilding/checkin/110
 
 Note:

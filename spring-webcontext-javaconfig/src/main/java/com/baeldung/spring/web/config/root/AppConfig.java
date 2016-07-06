@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import com.baeldung.spring.web.config.LogAccessService;
 import com.baeldung.spring.web.config.LogConfiguration;
 
 @Configuration
@@ -14,5 +15,12 @@ public class AppConfig {
 	public LogConfiguration logConfiguration() {
 		LogConfiguration configuration = new LogConfiguration();
 		return configuration;
+	}
+	
+	@Bean
+	public LogAccessService logAccessService() {
+		LogAccessService service = new LogAccessService();
+		service.setService("console");
+		return service;
 	}
 }

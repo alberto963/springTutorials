@@ -9,8 +9,6 @@
 	
 	<!-- Scans for annotated @Controllers in the classpath -->
 	<context:component-scan base-package="org.baeldung"/>
-	<context:annotation-config />
 	
-	<bean id="logAccess" class="org.baeldung.context.beans.LogAccessService" p:service="socket" />
-	
+	<bean class="org.baeldung.context.beans.LogAccessService" p:service="socket" />	
 </beans>

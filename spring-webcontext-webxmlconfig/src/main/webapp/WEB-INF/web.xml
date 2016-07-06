@@ -50,4 +50,19 @@
 		<url-pattern>/SecondaryBuilding/*</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>MinorBuilding</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/MinorBuilding-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MinorBuilding</servlet-name>
+		<url-pattern>/MinorBuilding/*</url-pattern>
+	</servlet-mapping>
+	
 </web-app>	

@@ -7,7 +7,10 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:annotation-config />
+	<!-- Scans for annotated @Controllers in the classpath -->
+	<context:component-scan base-package="org.baeldung"/>
+		
 	<bean class="org.baeldung.context.beans.LogConfiguration" p:companyName="Baeldung" />
+	<bean class="org.baeldung.context.beans.LogAccessService" p:service="console" />	
 	
 </beans>

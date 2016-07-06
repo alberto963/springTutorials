@@ -10,5 +10,4 @@
 	<!-- Scans for annotated @Controllers in the classpath -->
 	<context:component-scan base-package="org.baeldung"/>
 	
-	<bean class="org.baeldung.context.beans.LogAccessService" p:service="file" />
 </beans>

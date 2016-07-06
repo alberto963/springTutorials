@@ -1,5 +1,6 @@
 package com.baeldung.spring.web.config;
 
+import com.baeldung.spring.web.services.ConsoleLogService;
 import com.baeldung.spring.web.services.FileLogService;
 import com.baeldung.spring.web.services.LogService;
 import com.baeldung.spring.web.services.SocketLogService;
@@ -14,6 +15,9 @@ public class LogAccessService {
     }
 
     public String logAccess(String logPoint, int id) {
+    	if (service.compareTo("console") == 0) {
+            serviceImpl = new ConsoleLogService();
+        }
         if (service.compareTo("socket") == 0) {
             serviceImpl = new SocketLogService();
         }
