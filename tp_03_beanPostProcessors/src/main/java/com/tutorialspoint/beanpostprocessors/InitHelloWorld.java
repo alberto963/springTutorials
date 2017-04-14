@@ -26,21 +26,16 @@ import org.springframework.core.Ordered;
  */
 public class InitHelloWorld implements BeanPostProcessor, Ordered {
 
-	@Override
-	public Object postProcessBeforeInitialization(Object bean, String beanName)
-			throws BeansException {
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 		System.out.println("BeforeInitialization 0 : " + beanName);
 		return bean; // you can return any other object as well
 	}
 
-	@Override
-	public Object postProcessAfterInitialization(Object bean, String beanName)
-			throws BeansException {
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		System.out.println("AfterInitialization 0 : " + beanName);
 		return bean; // you can return any other object as well
 	}
 
-	@Override
 	public int getOrder() {
 		return 0;
 	}
