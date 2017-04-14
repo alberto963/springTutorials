@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.tutorialspoint</groupId>
-	<artifactId>XMLSchemaBasedAOP</artifactId>
+	<artifactId>tp_13_XMLSchemaBasedAOP</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>tp_13_XMLSchemaBasedAOP</name>
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -59,6 +59,7 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-snapshots</id>

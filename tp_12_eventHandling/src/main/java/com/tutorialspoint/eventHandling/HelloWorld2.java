@@ -14,7 +14,6 @@ public class HelloWorld2 implements ApplicationListener<ContextStartedEvent> {
 		System.out.println("Your Message : " + message);
 	}
 
-	@Override
 	public void onApplicationEvent(ContextStartedEvent event) {
 		System.out.println("HelloWorld2 ContextStartedEvent Received event="
 				+ event);
