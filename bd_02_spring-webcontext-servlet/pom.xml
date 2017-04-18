@@ -3,9 +3,9 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.baeldung</groupId>
-	<artifactId>spring-wecontext-servlet</artifactId>
+	<artifactId>bd_02_spring-wecontext-servlet</artifactId>
 	<version>0.1-SNAPSHOT</version>
-	<name>spring-wecontext-servlet</name>
+	<name>bd_02_spring-wecontext-servlet</name>
 	<packaging>war</packaging>
 
 	<dependencies>
@@ -152,7 +152,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>spring-wecontext-servlet</finalName>
+		<finalName>bd_02_spring-wecontext-servlet</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
