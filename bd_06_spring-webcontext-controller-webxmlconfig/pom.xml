@@ -3,10 +3,9 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.baeldung</groupId>
-	<artifactId>spring_06_WebContextExample</artifactId>
+	<artifactId>bd_06_springWebContextExample</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring_06_WebContextExample Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -110,7 +109,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>springWebContextControllerExample</finalName>
+		<finalName>bd_06_springWebContextExample</finalName>
 	</build>
 	
 </project>
