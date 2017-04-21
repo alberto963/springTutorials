@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.baeldung.context</groupId>
-  <artifactId>bd_04_springWebContextServletExample</artifactId>
+  <artifactId>bd_04_spring-webcontext-servlet-checkin-example</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <url>http://maven.apache.org</url>
@@ -107,6 +107,6 @@
 
 	</dependencies>
   <build>
-    <finalName>bd_04_springWebContextServletExample</finalName>
+    <finalName>bd_04_spring-webcontext-servlet-checkin-example</finalName>
   </build>
 </project>

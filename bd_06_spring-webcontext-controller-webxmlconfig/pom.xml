@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.baeldung</groupId>
-	<artifactId>bd_06_springWebContextExample</artifactId>
+	<artifactId>bd_06_spring-webcontext-controller-webxmlconfig</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<url>http://maven.apache.org</url>
@@ -109,7 +109,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>bd_06_springWebContextExample</finalName>
+		<finalName>bd_06_spring-webcontext-controller-webxmlconfig</finalName>
 	</build>
 	
 </project>
