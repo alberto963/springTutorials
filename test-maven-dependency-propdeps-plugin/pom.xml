@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.maven.example</groupId>
+	<artifactId>test-propdeps-plugin</artifactId>
+	<version>0.0.1</version>
+	<name>pluginTest</name>
+
+	<repositories>
+		<repository>
+			<id>spring-plugin-releases</id>
+			<url>http://repo.spring.io/plugins-release/</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.build.gradle</groupId>
+			<artifactId>propdeps-plugin</artifactId>
+			<version>0.0.7</version>
+		</dependency>
+
+	</dependencies>
+
+</project>

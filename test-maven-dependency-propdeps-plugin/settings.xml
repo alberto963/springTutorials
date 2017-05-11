@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<pluginGroups>
+	</pluginGroups>
+
+	<proxies>
+
+		<proxy>
+			<id>P1</id>
+			<active>true</active>
+			<protocol>http</protocol>
+			<username></username>
+			<password></password>
+			<host>proxy-gw.netd.alcatel.de</host>
+			<port>8000</port>
+		</proxy>
+
+		<proxy>
+			<id>P2</id>
+			<active>true</active>
+			<protocol>https</protocol>
+			<username></username>
+			<password></password>
+			<host>proxy.lbs.alcatel-lucent.com</host>
+			<port>8000</port>
+		</proxy>
+
+	</proxies>
+
+	<servers>
+	</servers>
+
+	<mirrors>
+	</mirrors>
+
+	<profiles>
+	</profiles>
+
+	<activeProfiles>
+	</activeProfiles>
+
+</settings>
