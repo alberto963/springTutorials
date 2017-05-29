@@ -7,17 +7,32 @@
 	<name>pluginTest</name>
 
 	<repositories>
+
 		<repository>
 			<id>spring-plugin-releases</id>
 			<url>http://repo.spring.io/plugins-release/</url>
 		</repository>
+
+		<repository>
+			<id>maven-nomavens</id>
+			<url>http://maven.novamens.com//</url>
+		</repository>
+
 	</repositories>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.build.gradle</groupId>
 			<artifactId>propdeps-plugin</artifactId>
 			<version>0.0.7</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/jcifs/jcifs -->
+		<dependency>
+			<groupId>org.samba.jcifs</groupId>
+			<artifactId>jcifs-ext</artifactId>
+			<version>0.9.4</version>
 		</dependency>
 
 	</dependencies>
