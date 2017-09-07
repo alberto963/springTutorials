@@ -28,7 +28,8 @@ public class LoggerController {
 		System.out.println("checkIn called");
 		String companyName = environment.getCompanyName();
 		String displayName = webApplicationContext.getDisplayName();
-		String building = displayName.substring(37, displayName.lastIndexOf('-'));
+		//String building = displayName.substring(37, displayName.lastIndexOf('-'));
+		String building = displayName;
 		return logService.logAccess(building + "@" + companyName, idCode);
 	}
 }
