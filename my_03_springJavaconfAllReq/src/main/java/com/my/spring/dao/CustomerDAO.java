@@ -12,9 +12,9 @@ public class CustomerDAO {
 
 	// Dummy database. Initialize with some dummy values.
 	private static List<Customer> customers;
-	
+
 	{
-		customers = new ArrayList();
+		customers = new ArrayList<Customer>();
 		customers.add(new Customer(101, "John", "Doe", "djohn@gmail.com", "121-232-3435"));
 		customers.add(new Customer(201, "Russ", "Smith", "sruss@gmail.com", "343-545-2345"));
 		customers.add(new Customer(301, "Kate", "Williams", "kwilliams@gmail.com", "876-237-2987"));
@@ -26,7 +26,7 @@ public class CustomerDAO {
 	 * 
 	 * @return list of customers
 	 */
-	public List list() {
+	public List<Customer> list() {
 		return customers;
 	}
 
@@ -42,9 +42,11 @@ public class CustomerDAO {
 
 		for (Customer c : customers) {
 			if (c.getId().equals(id)) {
+				
 				return c;
 			}
 		}
+		
 		return null;
 	}
 
@@ -59,6 +61,7 @@ public class CustomerDAO {
 	public Customer create(Customer customer) {
 		customer.setId(System.currentTimeMillis());
 		customers.add(customer);
+		
 		return customer;
 	}
 
@@ -75,6 +78,7 @@ public class CustomerDAO {
 		for (Customer c : customers) {
 			if (c.getId().equals(id)) {
 				customers.remove(c);
+				
 				return id;
 			}
 		}
@@ -97,7 +101,7 @@ public class CustomerDAO {
 				customer.setId(c.getId());
 				customers.remove(c);
 				customers.add(customer);
-				
+
 				return customer;
 			}
 		}

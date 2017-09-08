@@ -23,12 +23,12 @@ public class CustomerRestController {
 	private CustomerDAO customerDAO;
 
 	@GetMapping("/customers")
-	public List getCustomers() {
+	public List<Customer> getCustomers() {
 		return customerDAO.list();
 	}
 
 	@GetMapping("/customers/{id}")
-	public ResponseEntity getCustomer(@PathVariable("id") Long id) {
+	public ResponseEntity<?> getCustomer(@PathVariable("id") Long id) {
 
 		Customer customer = customerDAO.get(id);
 		if (customer == null) {
@@ -39,15 +39,15 @@ public class CustomerRestController {
 	}
 
 	@PostMapping(value = "/customers")
-	public ResponseEntity createCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
 
 		customerDAO.create(customer);
 
-		return new ResponseEntity(customer, HttpStatus.OK);
+		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/customers/{id}")
-	public ResponseEntity deleteCustomer(@PathVariable Long id) {
+	public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
 
 		if (null == customerDAO.delete(id)) {
 			return new ResponseEntity("No Customer found for ID " + id, HttpStatus.NOT_FOUND);
@@ -58,7 +58,7 @@ public class CustomerRestController {
 	}
 
 	@PutMapping("/customers/{id}")
-	public ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+	public ResponseEntity<?> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
 
 		customer = customerDAO.update(id, customer);
 
