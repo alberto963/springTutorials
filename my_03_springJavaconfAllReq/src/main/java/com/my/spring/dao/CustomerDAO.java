@@ -42,11 +42,11 @@ public class CustomerDAO {
 
 		for (Customer c : customers) {
 			if (c.getId().equals(id)) {
-				
+
 				return c;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -61,7 +61,7 @@ public class CustomerDAO {
 	public Customer create(Customer customer) {
 		customer.setId(System.currentTimeMillis());
 		customers.add(customer);
-		
+
 		return customer;
 	}
 
@@ -78,7 +78,7 @@ public class CustomerDAO {
 		for (Customer c : customers) {
 			if (c.getId().equals(id)) {
 				customers.remove(c);
-				
+
 				return id;
 			}
 		}

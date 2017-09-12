@@ -3,13 +3,17 @@ Web site configuration example with java configuration of spring context
 
 **Ref:**
 http://kielczewski.eu/2013/11/spring-mvc-without-web-xml-using-webapplicationinitializer/
+ http://websystique.com/springmvc/spring-4-mvc-helloworld-tutorial-annotation-javaconfig-full-example/
   
 **It demostrates how to have:**
 - Controllers configured with java classes instead of web.xml and -servlet.xml conf files.
 
 **Urls:**
+http://localhost:8080/my_03_springJavaconfAllReq/
 http://localhost:8080/my_03_springJavaconfAllReq/customers
 http://localhost:8080/my_03_springJavaconfAllReq/customers/101
+http://localhost:8080/my_03_springJavaconfAllReq/helloMVC
+
 
 **Note:**
 This project was created with eclipse as maven project, using maven-archetype-webapp, 
