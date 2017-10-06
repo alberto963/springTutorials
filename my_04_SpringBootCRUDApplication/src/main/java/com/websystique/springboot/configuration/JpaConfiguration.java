@@ -54,13 +54,16 @@ public class JpaConfiguration {
 	 */
 	@Bean
 	public DataSource dataSource() {
+		
 		final DataSourceProperties dataSourceProperties = dataSourceProperties();
+		
 		final HikariDataSource dataSource = (HikariDataSource) DataSourceBuilder
 				.create(dataSourceProperties.getClassLoader())
 				.driverClassName(dataSourceProperties.getDriverClassName()).url(dataSourceProperties.getUrl())
 				.username(dataSourceProperties.getUsername()).password(dataSourceProperties.getPassword())
 				.type(HikariDataSource.class).build();
 		dataSource.setMaximumPoolSize(maxPoolSize);
+
 		return dataSource;
 	}
 
@@ -69,11 +72,14 @@ public class JpaConfiguration {
 	 */
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NamingException {
+		
 		final LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+		
 		factoryBean.setDataSource(dataSource());
 		factoryBean.setPackagesToScan(new String[] { "com.websystique.springboot.model" });
 		factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
 		factoryBean.setJpaProperties(jpaProperties());
+
 		return factoryBean;
 	}
 
@@ -82,7 +88,9 @@ public class JpaConfiguration {
 	 */
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
+		
 		final HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+
 		return hibernateJpaVendorAdapter;
 	}
 
@@ -90,7 +98,9 @@ public class JpaConfiguration {
 	 * Here you can specify any provider specific properties.
 	 */
 	private Properties jpaProperties() {
+		
 		final Properties properties = new Properties();
+		
 		properties.put("hibernate.dialect", environment.getRequiredProperty("datasource.sampleapp.hibernate.dialect"));
 		properties.put("hibernate.hbm2ddl.auto",
 				environment.getRequiredProperty("datasource.sampleapp.hibernate.hbm2ddl.method"));
@@ -102,14 +112,18 @@ public class JpaConfiguration {
 			properties.put("hibernate.default_schema",
 					environment.getRequiredProperty("datasource.sampleapp.defaultSchema"));
 		}
+
 		return properties;
 	}
 
 	@Bean
 	@Autowired
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+		
 		final JpaTransactionManager txManager = new JpaTransactionManager();
+		
 		txManager.setEntityManagerFactory(emf);
+
 		return txManager;
 	}
 
