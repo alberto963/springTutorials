@@ -18,11 +18,12 @@
     
     <body>
 
+    	<static-app></static-app>
+
         <div ui-view></div>
         
         <div id="paper"></div>
 
-    	<static-app></static-app>
 
         <script src="js/lib/angular.min.js" ></script>
         <script src="js/lib/angular-ui-router.min.js" ></script>
