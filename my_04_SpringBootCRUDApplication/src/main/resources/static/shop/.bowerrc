@@ -1,0 +1,6 @@
+{
+  "directory": "bower_components", 
+  "proxy": "http://135.245.192.7:8000",
+  "https-proxy":"http://135.245.192.7:8000",
+  "no-proxy":"myserver.mydomain.com"
+}

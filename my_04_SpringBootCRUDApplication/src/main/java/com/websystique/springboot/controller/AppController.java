@@ -11,11 +11,20 @@ public class AppController {
 	@RequestMapping("/")
 	String home(ModelMap modal) {
 		modal.addAttribute("title", "CRUD Example");
+		
 		return "index";
+	}
+
+	@RequestMapping("/shop")
+	String shop(ModelMap modal) {
+		modal.addAttribute("title", "Polymer 2.0 shop example");
+		
+		return "shop";
 	}
 
 	@RequestMapping("/partials/{page}")
 	String partialHandler(@PathVariable("page") final String page) {
+		
 		return page;
 	}
 
