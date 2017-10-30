@@ -17,7 +17,7 @@ public class AppController {
 
 	@RequestMapping("/shop")
 	String shop(ModelMap modal) {
-		modal.addAttribute("title", "Polymer 2.0 shop example");
+		modal.addAttribute("title", "Alberto Example");
 		
 		return "shop";
 	}

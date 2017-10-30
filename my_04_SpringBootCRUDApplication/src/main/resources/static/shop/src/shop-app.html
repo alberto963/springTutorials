@@ -223,15 +223,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <shop-analytics key="UA-39334307-16"></shop-analytics>
+    
     <!--
       app-location and app-route elements provide the state of the URL for the app.
     -->
+    
     <app-location route="{{route}}"></app-location>
+    
     <app-route
         route="{{route}}"
         pattern="/:page"
         data="{{routeData}}"
-        tail="{{subroute}}"></app-route>
+        tail="{{subroute}}">
+    </app-route>
 
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
 
@@ -248,28 +252,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         id="cart"
         cart="{{cart}}"
         num-items="{{numItems}}"
-        total="{{total}}"></shop-cart-data>
+        total="{{total}}">
+     </shop-cart-data>
 
     <app-header role="navigation" id="header" effects="waterfall" condenses reveals>
+    
       <app-toolbar>
+      
         <div class="left-bar-item">
+        
           <paper-icon-button
               class="menu-btn"
               icon="menu"
               on-click="_toggleDrawer"
               aria-label="Categories">
           </paper-icon-button>
+          
           <a class="back-btn" href="/list/[[categoryName]]" tabindex="-1">
             <paper-icon-button icon="arrow-back" aria-label="Go back"></paper-icon-button>
           </a>
+          
         </div>
-        <div class="logo" main-title><a href="/" aria-label="SHOP Home">SHOP</a></div>
+        
+        <div class="logo" main-title>
+        	<a href="/" aria-label="SHOP Home">[[title]]</a>
+        </div>
+        
         <div class="cart-btn-container">
           <a href="/cart" tabindex="-1">
             <paper-icon-button icon="shopping-cart" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
           </a>
           <div class="cart-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
         </div>
+        
       </app-toolbar>
 
       <!-- Lazy-create the tabs for larger screen sizes. -->
@@ -290,6 +305,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </template>
         </dom-if>
       </div>
+      
     </app-header>
 
     <!-- Lazy-create the drawer for small screen sizes. -->
@@ -347,6 +363,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: String,
           reflectToAttribute: true,
           observer: '_pageChanged'
+        },
+
+        title: {
+          type: String,
+          value: "Shop"
         },
 
         numItems: {
@@ -416,9 +437,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // When a load failed, it triggered a 404 which means we need to
             // eagerly load the 404 page definition
             let cb = this._pageLoaded.bind(this, Boolean(oldPage));
-            Polymer.importHref(
-              this.resolveUrl('shop-' + page + '.html'),
-              cb, cb, true);
+            
+            // TODO: use correct page name in case of 404 error (AP)
+            Polymer.importHref(this.resolveUrl('shop-' + page + '.html'), cb, cb, true);
+            
           }
         }
       }
@@ -441,7 +463,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
               // Register service worker if supported.
               if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('service-worker.js', {scope: '/'});
+            	  // Orig commented out (not working and actually not needed) AP
+                  //navigator.serviceWorker.register('service-worker.js', {scope: '/'});
+                  
+            	  // Tried the following ones, none of them is working, URL is not resolved, 
+            	  // if called directly from browser, we get a 304 and the resulting file (i.e. it responds) AP
+
+                  //navigator.serviceWorker.register('service-worker.js', {scope: '/shop'});
+                  //navigator.serviceWorker.register('shop/service-worker.js', {scope: '/'});
+                  //navigator.serviceWorker.register('/shop/service-worker.js', {scope: '/'});
               }
               this._notifyNetworkStatus();
               this.loadComplete = true;

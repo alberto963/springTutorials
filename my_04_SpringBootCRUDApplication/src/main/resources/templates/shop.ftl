@@ -12,12 +12,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <base href="/">
+  
+  <!-- <base href="/">  -->
+  
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
   <title>${title}</title>
 
-  <link rel="shortcut icon" sizes="32x32" href="images/shop-icon-32.png">
+ <!--  <link rel="shortcut icon" sizes="32x32" href="shop/images/shop-icon-32.png"> -->
+ 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@Polymer">
   <meta property="og:type" content="website">
@@ -54,10 +57,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </head>
 <body>
 
-  <shop-app unresolved>${title}</shop-app>
+  <shop-app unresolved title="${title}"></shop-app>
 
-  <script src="SpringBootCRUDApp/shop/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-  <link rel="import" href="SpringBootCRUDApp/shop/src/shop-app.html">
+  <script src="shop/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="shop/src/shop-app.html">
 
   <script>
     window.performance && performance.mark && performance.mark('shop.html');
