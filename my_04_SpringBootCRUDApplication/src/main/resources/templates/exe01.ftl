@@ -9,9 +9,16 @@
   
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/iron-demo-helpers/demo-snippet.html">
   
+  <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/iron-form/iron-form.html">
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-input/paper-input.html">
+  <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-checkbox/paper-checkbox.html">
+  <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-button/paper-button.html">
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-tabs/paper-tabs.html">
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-tabs/paper-tab.html">
+  <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-menu/paper-menu.html">
+  <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-item/paper-item.html">
+  
+  
   
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/neon-animation/neon-animated-pages.html">
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/neon-animation/neon-animatable.html">
@@ -78,7 +85,7 @@
           <style>
             :host {
               display: block;
-              height: 100px;
+              height: 600px;
             }
           </style>
           
@@ -89,7 +96,9 @@
           <app-route route="{{route}}" pattern="/tabs" tail="{{tabsRoute}}" active="{{tabsActive}}"></app-route>
 
           <div hidden$="{{!homeActive}}">
-            Main page!<br><br><a href="#/tabs/">Tabs page</a>
+            Main page!
+            <br><br>
+            <a href="#/tabs/">Tabs page</a>
           </div>
           
           <div hidden$="{{!tabsActive}}">
@@ -128,6 +137,8 @@
       </dom-module>
     
     <!--
+     Not used!
+     
         	</template>
 
   		</demo-snippet>
@@ -151,7 +162,7 @@
           overflow-x: hidden;
           width: 100%;
           display: block;
-          height: 50px;
+          height: 500px;
         }
         
       </style>
@@ -160,16 +171,75 @@
       
       <paper-tabs selected='{{data.tabName}}' attr-for-selected="name">
       
-        	<paper-tab name='foo'>Foo</paper-tab>
-       		<paper-tab name='bar'>Bar</paper-tab>
+        	<paper-tab name='add'>Add User Page</paper-tab>
+       		<paper-tab name='experiment'>Experiment</paper-tab>
         	<paper-tab name='baz'>Baz!</paper-tab>
         	
       </paper-tabs>
 
       <neon-animated-pages id='animatedPages' selected='{{selectedPage}}' entry-animation='{{entryAnimation}}' exit-animation='{{exitAnimation}}' attr-for-selected="name">
                            
-        	<neon-animatable name='foo'>Foo Page</neon-animatable>
-			<neon-animatable name='bar'>Bar Page Goes Here</neon-animatable>
+        	<neon-animatable name='add'>
+        	
+	        	<iron-form>
+	      			<form method="get" action="/user">
+	      			
+		       	 		<paper-input type="text" name="name" label="Name">
+		        		<paper-checkbox name="reset" value="no" checked></paper-checkbox>
+						<paper-button raised onclick="submitForm()">Submit</paper-button>
+						
+	      			</form>
+
+	   		 	</iron-form>
+	   		 	
+        	</neon-animatable>
+        	
+			<neon-animatable name='experiment'>
+			
+				<form is = "iron-form" method = "get" action = "/" id = "basic">
+				
+		         <paper-input class = "paperinput" name = "name" label = "Enter your name" required>
+		         </paper-input>
+		         
+		         <br>
+		         <input type = "checkbox" name = "vehicle" value = "bike"> I have a bike
+		         <br>
+		         <input type = "checkbox" name = "vehicle" value = "car"> I have a car
+		         <br>
+		     
+		         <paper-dropdown-menu class = "menu" label = "Icecream Flavours" name = "Flavours">
+		            <paper-menu class = "dropdown-content">
+		               <paper-item value = "vanilla">Vanilla</paper-item>
+		               <paper-item value = "strawberry">Strawberry</paper-item>
+		               <paper-item value = "caramel">Caramel</paper-item>
+		            </paper-menu>
+		         </paper-dropdown-menu><br>
+		       
+		         <paper-button class = "paperbtn" raised onclick = "_submit(event)">Submit</paper-button>
+		         <paper-button class = "paperbtn" raised onclick = "_reset(event)">Reset</paper-button>
+		         
+		         <h4>You entered the details:</h4>
+		         
+		         <div class = "output"></div>
+		         
+		      </form>
+		   
+		      <script>
+		         function _submit(event) {
+		            Polymer.dom(event).localTarget.parentElement.submit();
+		         }
+		         function _reset(event) {
+		            var form  =  Polymer.dom(event).localTarget.parentElement
+		            form.reset();
+		            form.querySelector('.output').innerHTML  =  '';
+		         }
+		         basic.addEventListener('iron-form-submit', function(event) {
+		            this.querySelector('.output').innerHTML  =  JSON.stringify(event.detail);
+		         });
+		      </script>
+			
+			</neon-animatable>
+			
         	<neon-animatable name='baz'>Baz Page, the Best One of the Three!</neon-animatable>
         
       </neon-animated-pages>
