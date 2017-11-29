@@ -29,6 +29,13 @@ public class AppController {
 		return "exe01";
 	}
 	
+	@RequestMapping("/exe02")
+	String exe02(ModelMap modal) {
+		modal.addAttribute("title", "Example 02");
+		
+		return "exe02";
+	}
+	
 	@RequestMapping("/partials/{page}")
 	String partialHandler(@PathVariable("page") final String page) {
 		

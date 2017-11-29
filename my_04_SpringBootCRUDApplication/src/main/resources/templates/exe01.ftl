@@ -1,11 +1,62 @@
 <!doctype html>
+<html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   
-  <script src="https://polygit.org/app-route+polymerelements+*/components/web-animations-js/web-animations-next-lite.min.js"></script>
+
+  <base href = "https://polygit.org/app-route+polymerelements+*/components/">
+  
+  <!-- 
+  	   NOTE: Here the following use of base href does not work, 
+             the following error is given:
+             Error parsing path: /app-route+polymerelements+*/components/.
+  -->
+  
+  <script src="webcomponentsjs/webcomponents-lite.js"></script>
+
+  <script src="web-animations-js/web-animations-next-lite.min.js"></script>
+  
+   <!-- Ensure Web Animations polyfill is loaded since neon-animation 2.0 doesn't import it -->
+ 
+   <!--
+   <link rel="import" href="neon-animation/web-animations.html">
+  
+  <link rel="import" href="iron-demo-helpers/demo-snippet.html">
+  
+  <link rel="import" href="iron-form/iron-form.html">
+  <link rel="import" href="paper-input/paper-input.html">
+  <link rel="import" href="paper-checkbox/paper-checkbox.html">
+  <link rel="import" href="paper-button/paper-button.html">
+  <link rel="import" href="paper-tabs/paper-tabs.html">
+  <link rel="import" href="paper-tabs/paper-tab.html">
+  <link rel="import" href="paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="paper-menu/paper-menu.html">
+  <link rel="import" href="paper-item/paper-item.html">
+  
+  <link rel="import" href="neon-animation/neon-animated-pages.html">
+  <link rel="import" href="neon-animation/neon-animatable.html">
+  <link rel="import" href="neon-animation/animations/slide-from-left-animation.html">
+  <link rel="import" href="neon-animation/animations/slide-from-right-animation.html">
+  <link rel="import" href="neon-animation/animations/slide-left-animation.html">
+  <link rel="import" href="neon-animation/animations/slide-right-animation.html">
+  
+  <link rel="import" href="app-route/app-route.html">
+  <link rel="import" href="app-route/app-location.html">
+  
+  <link rel="import" href="iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="iron-demo-helpers/url-bar.html">
+
+  -->
+    
   <script src="https://polygit.org/app-route+polymerelements+*/components/webcomponentsjs/webcomponents-lite.js"></script>
+
+  <script src="https://polygit.org/app-route+polymerelements+*/components/web-animations-js/web-animations-next-lite.min.js"></script>
+  
+  <!-- Ensure Web Animations polyfill is loaded since neon-animation 2.0 doesn't import it -->
+
+  <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/neon-animation/web-animations.html">
   
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/iron-demo-helpers/demo-snippet.html">
   
@@ -15,10 +66,9 @@
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-button/paper-button.html">
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-tabs/paper-tabs.html">
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-tabs/paper-tab.html">
+  <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-dropdown-menu/paper-dropdown-menu.html">
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-menu/paper-menu.html">
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/paper-item/paper-item.html">
-  
-  
   
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/neon-animation/neon-animated-pages.html">
   <link rel="import" href="https://polygit.org/app-route+polymerelements+*/components/neon-animation/neon-animatable.html">
@@ -85,7 +135,7 @@
           <style>
             :host {
               display: block;
-              height: 600px;
+              height: 800px;
             }
           </style>
           
@@ -167,6 +217,19 @@
         
       </style>
       
+       <style>
+         .paperbtn {
+            background: #4682B4;
+            color: white;
+         }
+         .paperinput{
+            width: 25%;
+         }
+         .menu{
+            width:25%;
+         }
+      </style>
+      
       <app-route route="{{route}}" pattern="/:tabName" data="{{data}}"></app-route>
       
       <paper-tabs selected='{{data.tabName}}' attr-for-selected="name">
@@ -202,26 +265,40 @@
 		         </paper-input>
 		         
 		         <br>
+		         
 		         <input type = "checkbox" name = "vehicle" value = "bike"> I have a bike
 		         <br>
+		         
 		         <input type = "checkbox" name = "vehicle" value = "car"> I have a car
 		         <br>
 		     
 		         <paper-dropdown-menu class = "menu" label = "Icecream Flavours" name = "Flavours">
-		            <paper-menu class = "dropdown-content">
-		               <paper-item value = "vanilla">Vanilla</paper-item>
-		               <paper-item value = "strawberry">Strawberry</paper-item>
-		               <paper-item value = "caramel">Caramel</paper-item>
-		            </paper-menu>
-		         </paper-dropdown-menu><br>
-		       
+         			<paper-listbox slot="dropdown-content" class = "dropdown-content" selected = "1">
+	               		<paper-item value = "vanilla">Vanilla</paper-item>
+	               		<paper-item value = "strawberry">Strawberry</paper-item>
+	               		<paper-item value = "caramel">Caramel</paper-item>
+         		 	</paper-listbox>
+         		 </paper-dropdown-menu>
+         		 
+         		  <paper-dropdown-menu label="Dinosaurs">
+			  		<paper-listbox slot="dropdown-content" selected="1">
+					    <paper-item>allosaurus</paper-item>
+					    <paper-item>brontosaurus</paper-item>
+					    <paper-item>carcharodontosaurus</paper-item>
+					    <paper-item>diplodocus</paper-item>
+			  		</paper-listbox>
+			    </paper-dropdown-menu>
+			    
+		         <br>
+		       		       
 		         <paper-button class = "paperbtn" raised onclick = "_submit(event)">Submit</paper-button>
+
 		         <paper-button class = "paperbtn" raised onclick = "_reset(event)">Reset</paper-button>
 		         
 		         <h4>You entered the details:</h4>
 		         
 		         <div class = "output"></div>
-		         
+		        
 		      </form>
 		   
 		      <script>
