@@ -1,6 +1,6 @@
 ---
 server:
-  port: 8080
+  port: 8090
   contextPath: /SpringBootCRUDApp
 ---
 spring:
@@ -34,4 +34,12 @@ datasource:
       show_sql: true
       format_sql: true
       dialect: org.hibernate.dialect.MySQLDialect
-
+---
+logging:
+    level: DEBUG
+---
+logging:
+    level:
+      org:
+        springframework.web: DEBUG
+        hibernate: ERROR
