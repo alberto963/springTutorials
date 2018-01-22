@@ -4,7 +4,7 @@ server:
   contextPath: /SpringBootCRUDApp
 ---
 spring:
-  profiles: local,default
+  profiles: local
 datasource:
   sampleapp:
     url: jdbc:h2:~/test
@@ -20,7 +20,7 @@ datasource:
       dialect: org.hibernate.dialect.H2Dialect
 ---
 spring:
-  profiles: prod
+  profiles: prod,default
 datasource:
   sampleapp:
     url: jdbc:mysql://localhost:3306/websystique

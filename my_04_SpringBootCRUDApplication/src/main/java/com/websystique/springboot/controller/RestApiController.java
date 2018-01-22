@@ -31,6 +31,16 @@ public class RestApiController {
 	// -------------------Retrieve All
 	// Users---------------------------------------------
 
+	@RequestMapping(value = "/user", params = { "_end", "_order", "_sort", "_start" }, method = RequestMethod.GET)
+	public ResponseEntity<List<User>> listAllUsersReact() {
+		final List<User> users = userService.findAllUsers();
+		if (users.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			// You many decide to return HttpStatus.NOT_FOUND
+		}
+		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/user/", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> listAllUsers() {
 		final List<User> users = userService.findAllUsers();

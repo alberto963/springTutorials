@@ -33,7 +33,7 @@ public class JpaConfiguration {
 
 	@Autowired
 	private Environment environment;
-
+	
 	@Value("${datasource.sampleapp.maxPoolSize:10}")
 	private int maxPoolSize;
 
