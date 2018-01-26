@@ -3,6 +3,7 @@ package com.websystique.springboot.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findById(Long id) {
 		return userRepository.findOne(id);
+	}
+
+	@Override
+	public List<User> findAllUsers() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public List<User> findAllUsers(String order, String sort) {
+		return userRepository
+				.findAll(new Sort(order.compareTo("ASC") == 0 ? Sort.Direction.ASC : Sort.Direction.DESC, sort));
 	}
 
 	@Override
@@ -44,11 +56,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteAllUsers() {
 		userRepository.deleteAll();
-	}
-
-	@Override
-	public List<User> findAllUsers() {
-		return userRepository.findAll();
 	}
 
 	@Override
