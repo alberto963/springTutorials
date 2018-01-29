@@ -1,7 +1,7 @@
 ---
 server:
   port: 8090
-  contextPath: /SpringBootCRUDApp
+  contextPath: /SpringBootNMApp
 ---
 spring:
   profiles: local

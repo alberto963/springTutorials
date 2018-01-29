@@ -1,4 +1,4 @@
-package com.websystique.springboot.controller;
+package com.my.springboot.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,11 +11,13 @@ public class AppController {
 	@RequestMapping("/")
 	String home(ModelMap modal) {
 		modal.addAttribute("title", "CRUD Example");
+		
 		return "index";
 	}
 
 	@RequestMapping("/partials/{page}")
 	String partialHandler(@PathVariable("page") final String page) {
+		
 		return page;
 	}
 

@@ -1,8 +1,9 @@
-package com.websystique.springboot.repositories;
+package com.my.springboot.repositories;
 
-import com.websystique.springboot.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.my.springboot.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

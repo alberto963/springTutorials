@@ -1,4 +1,4 @@
-package com.websystique.springboot.configuration;
+package com.my.springboot.configuration;
 
 import java.util.Properties;
 
@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.websystique.springboot.repositories", entityManagerFactoryRef = "entityManagerFactory", transactionManagerRef = "transactionManager")
+@EnableJpaRepositories(basePackages = "com.my.springboot.repositories", entityManagerFactoryRef = "entityManagerFactory", transactionManagerRef = "transactionManager")
 @EnableTransactionManagement
 public class JpaConfiguration {
 
@@ -74,7 +74,7 @@ public class JpaConfiguration {
 		
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 		factoryBean.setDataSource(dataSource());
-		factoryBean.setPackagesToScan(new String[] { "com.websystique.springboot.model" });
+		factoryBean.setPackagesToScan(new String[] { "com.my.springboot.model" });
 		factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
 		factoryBean.setJpaProperties(jpaProperties());
 		

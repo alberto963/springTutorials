@@ -1,4 +1,4 @@
-package com.websystique.springboot.service;
+package com.my.springboot.service;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.websystique.springboot.model.User;
-import com.websystique.springboot.repositories.UserRepository;
+import com.my.springboot.model.User;
+import com.my.springboot.repositories.UserRepository;
 
 @Service("userService")
 @Transactional
