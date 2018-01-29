@@ -1,16 +1,15 @@
 package com.websystique.springboot.util;
 
-
 public class CustomErrorType {
 
-    private String errorMessage;
+	private String errorMessage;
 
-    public CustomErrorType(String errorMessage){
-        this.errorMessage = errorMessage;
-    }
+	public CustomErrorType(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
+	public String getErrorMessage() {
+		return errorMessage;
+	}
 
 }

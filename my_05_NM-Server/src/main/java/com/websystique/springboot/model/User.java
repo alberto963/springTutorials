@@ -6,21 +6,21 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="APP_USER")
-public class User implements Serializable{
+@Table(name = "APP_USER")
+public class User implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotEmpty
-	@Column(name="NAME", nullable=false)
+	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@Column(name="AGE", nullable=false)
+	@Column(name = "AGE", nullable = false)
 	private Integer age;
 
-	@Column(name="SALARY", nullable=false)
+	@Column(name = "SALARY", nullable = false)
 	private double salary;
 
 	public Long getId() {
@@ -57,14 +57,19 @@ public class User implements Serializable{
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
 		User user = (User) o;
 
-		if (Double.compare(user.salary, salary) != 0) return false;
-		if (id != null ? !id.equals(user.id) : user.id != null) return false;
-		if (name != null ? !name.equals(user.name) : user.name != null) return false;
+		if (Double.compare(user.salary, salary) != 0)
+			return false;
+		if (id != null ? !id.equals(user.id) : user.id != null)
+			return false;
+		if (name != null ? !name.equals(user.name) : user.name != null)
+			return false;
 		return age != null ? age.equals(user.age) : user.age == null;
 	}
 
@@ -82,9 +87,7 @@ public class User implements Serializable{
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", age=" + age
-				+ ", salary=" + salary + "]";
+		return "User [id=" + id + ", name=" + name + ", age=" + age + ", salary=" + salary + "]";
 	}
-
 
 }

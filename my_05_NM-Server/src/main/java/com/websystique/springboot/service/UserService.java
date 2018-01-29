@@ -1,13 +1,16 @@
 package com.websystique.springboot.service;
 
+import java.util.List;
 
 import com.websystique.springboot.model.User;
 
-import java.util.List;
-
 public interface UserService {
-	
+
 	User findById(Long id);
+
+	List<User> findAllUsers();
+
+	List<User> findAllUsers(String order, String sort);
 
 	User findByName(String name);
 
@@ -18,8 +21,6 @@ public interface UserService {
 	void deleteUserById(Long id);
 
 	void deleteAllUsers();
-
-	List<User> findAllUsers();
 
 	boolean isUserExist(User user);
 }
