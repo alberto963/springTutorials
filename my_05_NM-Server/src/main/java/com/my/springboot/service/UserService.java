@@ -6,21 +6,21 @@ import com.my.springboot.model.User;
 
 public interface UserService {
 
-	User findById(Long id);
+	public User findById(Long id);
 
-	List<User> findAllUsers();
+	public List<User> findAllUsers();
 
-	List<User> findAllUsers(String order, String sort);
+	public List<User> findAllUsers(String order, String sort);
 
-	User findByName(String name);
+	public User findByName(String name);
 
-	void saveUser(User user);
+	public void saveUser(User user);
 
-	void updateUser(User user);
+	public void updateUser(User user);
 
-	void deleteUserById(Long id);
+	public void deleteUserById(Long id);
 
-	void deleteAllUsers();
+	public void deleteAllUsers();
 
-	boolean isUserExist(User user);
+	public boolean isUserExist(User user);
 }
