@@ -18,6 +18,9 @@ public class User implements Serializable {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
+	@Column(name = "EMAIL", nullable = false)
+	private String email;
+
 	@Column(name = "AGE", nullable = false)
 	private Integer age;
 
@@ -40,6 +43,14 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Integer getAge() {
 		return age;
 	}
@@ -58,8 +69,10 @@ public class User implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
+		
 		if (this == o)
 			return true;
+		
 		if (o == null || getClass() != o.getClass())
 			return false;
 
@@ -67,10 +80,13 @@ public class User implements Serializable {
 
 		if (Double.compare(user.salary, salary) != 0)
 			return false;
+		
 		if (id != null ? !id.equals(user.id) : user.id != null)
 			return false;
+		
 		if (name != null ? !name.equals(user.name) : user.name != null)
 			return false;
+		
 		return age != null ? age.equals(user.age) : user.age == null;
 	}
 
@@ -83,12 +99,13 @@ public class User implements Serializable {
 		result = 31 * result + (age != null ? age.hashCode() : 0);
 		temp = Double.doubleToLongBits(salary);
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", age=" + age + ", salary=" + salary + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", age=" + age + ", salary=" + salary + "]";
 	}
 
 }

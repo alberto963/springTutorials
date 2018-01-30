@@ -44,15 +44,22 @@ public class RestApiController {
 				+ _start);
 
 		final List<User> users = userService.findAllUsers(_order, _sort);
+		/*
+		 * TMP, TODO add it in db.
+		 */
+		// for (User u : users) {
+		// u.setEmail("someone" + u.getId() + "@company.com");
+		// }
+
+		MultiValueMap<String, String> headers = new HttpHeaders();
+		headers.add("X-Total-Count", Integer.toString(users.size()));
 
 		if (users.isEmpty()) {
 			logger.info("User list is empty");
 
-			return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
+			// return new ResponseEntity<List<User>>(users, headers, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<User>>(users, headers, HttpStatus.OK);
 		}
-
-		MultiValueMap<String, String> headers = new HttpHeaders();
-		headers.add("X-Total-Count", Integer.toString(users.size()));
 
 		return new ResponseEntity<List<User>>(users, headers, HttpStatus.OK);
 	}
