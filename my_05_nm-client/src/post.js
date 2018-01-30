@@ -1,4 +1,4 @@
-// in src/posts.js
+// in src/post.js
 import React from 'react';
 import { List, Datagrid, TextField } from 'admin-on-rest';
 
