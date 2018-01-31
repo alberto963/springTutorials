@@ -22,7 +22,6 @@ import com.my.springboot.model.Post;
 import com.my.springboot.service.PostService;
 import com.my.springboot.util.CustomErrorType;
 
-@CrossOrigin(exposedHeaders = { "X-Total-Count" }, maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class RestApiPostController {
@@ -35,6 +34,7 @@ public class RestApiPostController {
 	/*
 	 * Retrieve all posts for a paginated list.
 	 */
+	@CrossOrigin(exposedHeaders = { "X-Total-Count" })
 	@RequestMapping(value = "/post", params = { "_end", "_order", "_sort", "_start" }, method = RequestMethod.GET)
 	public ResponseEntity<List<Post>> listAllPostsReact(@RequestParam(value = "_end") int _end,
 			@RequestParam(value = "_order") String _order, @RequestParam(value = "_sort") String _sort,
@@ -61,7 +61,7 @@ public class RestApiPostController {
 	/*
 	 * Retrieve All Posts
 	 */
-	@RequestMapping(value = "/post/", method = RequestMethod.GET)
+	@RequestMapping(value = "/post", method = RequestMethod.GET)
 	public ResponseEntity<List<Post>> listAllPosts() {
 
 		final List<Post> posts = postService.findAllPosts();
@@ -99,7 +99,8 @@ public class RestApiPostController {
 	/*
 	 * Create a Post
 	 */
-	@RequestMapping(value = "/post/", method = RequestMethod.POST)
+	@CrossOrigin
+	@RequestMapping(value = "/post", method = RequestMethod.POST)
 	public ResponseEntity<?> createPost(@RequestBody Post post, UriComponentsBuilder ucBuilder) {
 
 		logger.info("Creating Post : {}", post);

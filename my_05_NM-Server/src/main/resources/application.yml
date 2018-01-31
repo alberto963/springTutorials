@@ -41,5 +41,5 @@ logging:
 logging:
     level:
       org:
-        springframework.web: DEBUG
+        springframework.web: INFO
         hibernate: ERROR

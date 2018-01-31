@@ -22,9 +22,9 @@ import com.my.springboot.model.User;
 import com.my.springboot.service.UserService;
 import com.my.springboot.util.CustomErrorType;
 
-@CrossOrigin(exposedHeaders = { "X-Total-Count" }, maxAge = 3600)
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class RestApiController {
 
 	public static final Logger logger = LoggerFactory.getLogger(RestApiController.class);
@@ -35,6 +35,7 @@ public class RestApiController {
 	/*
 	 * Retrieve all users for a paginated list.
 	 */
+	@CrossOrigin(exposedHeaders = { "X-Total-Count" })
 	@RequestMapping(value = "/user", params = { "_end", "_order", "_sort", "_start" }, method = RequestMethod.GET)
 	public ResponseEntity<List<User>> listAllUsersReact(@RequestParam(value = "_end") int _end,
 			@RequestParam(value = "_order") String _order, @RequestParam(value = "_sort") String _sort,
@@ -67,8 +68,10 @@ public class RestApiController {
 	/*
 	 * Retrieve All Users
 	 */
-	@RequestMapping(value = "/user/", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> listAllUsers() {
+
+		logger.info("Fetching all users");
 
 		final List<User> users = userService.findAllUsers();
 
@@ -105,7 +108,8 @@ public class RestApiController {
 	/*
 	 * Create a User
 	 */
-	@RequestMapping(value = "/user/", method = RequestMethod.POST)
+	@CrossOrigin
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
 
 		logger.info("Creating User : {}", user);

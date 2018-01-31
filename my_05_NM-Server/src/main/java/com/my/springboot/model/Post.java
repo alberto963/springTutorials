@@ -15,6 +15,10 @@ public class Post implements Serializable {
 	private Long id;
 
 	@NotEmpty
+	@Column(name = "USERID", nullable = false)
+	private Long userId;
+	
+	@NotEmpty
 	@Column(name = "TITLE", nullable = false)
 	private String title;
 
@@ -27,6 +31,14 @@ public class Post implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getTitle() {
@@ -81,7 +93,7 @@ public class Post implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", title=" + title + ", body=" + body + "]";
+		return "Post [id=" + id + ", userId=" + userId + ", title=" + title + ", body=" + body + "]";
 	}
 
 }
