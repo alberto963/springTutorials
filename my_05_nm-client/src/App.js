@@ -1,13 +1,14 @@
 import React from 'react';
 import { jsonServerRestClient, Admin, Resource, Delete } from 'admin-on-rest';
+
+import Dashboard from './Dashboard';
+import authClient from './authClient';
+
 import PostIcon from 'material-ui/svg-icons/action/book';
 import UserIcon from 'material-ui/svg-icons/social/group';
 
 import { UserList, UserEdit, UserCreate } from './user';
 import { PostList, PostEdit, PostCreate } from './post';
-
-import Dashboard from './Dashboard';
-import authClient from './authClient';
 
 const App = () => (
         
