@@ -14,7 +14,7 @@ public class Post implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotEmpty
+//	@NotEmpty DO NOT SET THIS ANNOTATION BECAUSE IT GIVES HV000030: No validator could be found for constraint....
 	@Column(name = "USERID", nullable = false)
 	private Long userId;
 	

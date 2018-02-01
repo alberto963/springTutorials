@@ -24,7 +24,6 @@ import com.my.springboot.util.CustomErrorType;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
 public class RestApiController {
 
 	public static final Logger logger = LoggerFactory.getLogger(RestApiController.class);
@@ -87,6 +86,7 @@ public class RestApiController {
 	/*
 	 * Retrieve Single User
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getUser(@PathVariable("id") long id) {
 
@@ -134,6 +134,7 @@ public class RestApiController {
 	/*
 	 * Update a User
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
 
@@ -161,6 +162,7 @@ public class RestApiController {
 	/*
 	 * Delete a User
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUser(@PathVariable("id") long id) {
 

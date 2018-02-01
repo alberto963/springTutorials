@@ -1,6 +1,6 @@
 // in src/user.js
 import React from 'react';
-import { List, Datagrid, EmailField, TextField, Edit, Create, EditButton, DisabledInput, SimpleForm, TextInput} from 'admin-on-rest';
+import { List, Datagrid, EmailField, TextField, Edit, Create, EditButton, DeleteButton, DisabledInput, SimpleForm, TextInput} from 'admin-on-rest';
 
 export const UserList = (props) => (
     <List title="All nm users" {...props}>
@@ -11,6 +11,7 @@ export const UserList = (props) => (
             <TextField source="salary" />
             <EmailField source="email" />
             	
+            <DeleteButton />
             <EditButton />
 
         </Datagrid>
@@ -36,7 +37,8 @@ export const UserEdit = (props) => (
 export const UserCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-        <TextInput source="name" />
+        	<DisabledInput source="id" />
+        	<TextInput source="name" />
             <TextInput source="age" />
             <TextInput source="salary" />
             <TextInput source="email" />

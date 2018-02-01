@@ -1,10 +1,20 @@
 // in src/post.js
 import React from 'react';
 
-import { List, Edit, Create, Datagrid, ReferenceField, TextField, EditButton, DisabledInput, LongTextInput, ReferenceInput, SelectInput, SimpleForm, TextInput } from 'admin-on-rest';
+import { List, Edit, Create, Datagrid, ReferenceField, TextField, EditButton, DeleteButton, DisabledInput, LongTextInput, ReferenceInput, SelectInput, SimpleForm, TextInput, Filter } from 'admin-on-rest';
+
+const PostFilter = (props) => (
+    <Filter {...props}>
+        <TextInput label="Search" source="q" alwaysOn />
+        <ReferenceInput label="User" source="userId" reference="user" allowEmpty>
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+            
+    </Filter>
+);
 
 export const PostList = (props) => (
-    <List {...props}>
+    <List {...props} filters={<PostFilter />}>
         <Datagrid>
             <TextField source="id" />
             <ReferenceField label="User" source="userId" reference="user">
@@ -12,6 +22,8 @@ export const PostList = (props) => (
             </ReferenceField>
             <TextField source="title" />
             <TextField source="body" />
+            
+            <DeleteButton />
             <EditButton />
         </Datagrid>
     </List>

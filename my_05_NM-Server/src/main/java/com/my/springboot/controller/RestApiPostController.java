@@ -78,6 +78,7 @@ public class RestApiPostController {
 	/*
 	 * Retrieve Single Post
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getPost(@PathVariable("id") long id) {
 
@@ -125,6 +126,7 @@ public class RestApiPostController {
 	/*
 	 * Update a Post
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/post/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updatePost(@PathVariable("id") long id, @RequestBody Post post) {
 
@@ -151,6 +153,7 @@ public class RestApiPostController {
 	/*
 	 * Delete a Post
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/post/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deletePost(@PathVariable("id") long id) {
 
