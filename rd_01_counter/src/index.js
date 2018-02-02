@@ -1,37 +1,35 @@
+// REACT
 import React from 'react'
 import ReactDOM from 'react-dom'
+
+// REDUX
 import { createStore } from 'redux'
+
+// SPECIFIC
 import Counter from './components/Counter'
-//import Simple from './components/Simple'
-import counter from './reducers'
+import Simple from './components/Simple'
+import count from './reducers'
 
+// Begin---
 
-const store = createStore(counter)
-//const store2 = createStore(counter)
+// Create store, quoting count reducer
+const store = createStore(count)
+
+// Get root element from HTML document
 const rootEl = document.getElementById('root')
-//const myrootEl = document.getElementById('myroot')
 
+// Define of render function, giving an HTML artifact and the root element to install it on
 const render = () => ReactDOM.render(
-  <Counter
-    value={store.getState()}
-    onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-    onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-  />,
+		<div><Simple value={"Albert!"} />
+             <Counter value={store.getState()} 
+                      onIncrement={() => store.dispatch({ type: 'INCREMENT' })} 
+                      onDecrement={() => store.dispatch({ type: 'DECREMENT' })}/>
+        </div>,
   rootEl
 )
 
-
-// const render2 = () => ReactDOM.render(
-//   <Simple
-//     value={store2.getState()}
-//     f1={() => { console.log('f1') } }
-//     f2={() => { console.log('f2 --- ') } }
-//   />,
-//   myrootEl
-// )
-
-
+// Call of render
 render()
-//render2()
+
+// Associate render to store (to trigger all event chain updates)
 store.subscribe(render)
-//store2.subscribe(render2)
