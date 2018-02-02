@@ -10,6 +10,11 @@ import reducer from './reducers'
 const store = createStore(reducer)
 
 render(
+		/*
+		 * The option we are using here is a special React Redux component called <Provider>.
+		 * It magically make the store available to all container components in the application without passing it explicitly.
+		 *  You only need to use it once when you render the root component:
+		 */
   <Provider store={store}>
     <App />
   </Provider>,

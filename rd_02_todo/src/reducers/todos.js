@@ -20,7 +20,11 @@ const todo = (state, action) => {
   }
 }
 
-const todos = (state = [], action) => {
+const todos = (state = [{
+    id: 0,
+    text: "to do initial",
+    completed: false
+  }], action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
