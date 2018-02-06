@@ -9,6 +9,9 @@ import reducer from './reducers'
 
 const store = createStore(reducer)
 
+console.log(store)
+console.log(store.getState())
+
 render(
 		/*
 		 * The option we are using here is a special React Redux component called <Provider>.
