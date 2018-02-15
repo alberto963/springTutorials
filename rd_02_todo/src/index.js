@@ -7,10 +7,33 @@ import { Provider } from 'react-redux'
 import App from './components/App'
 import reducer from './reducers'
 
-const store = createStore(reducer)
+//import {
+//    addTodo,
+//    toggleTodo,
+//    setVisibilityFilter,
+//    VisibilityFilters
+//  } from './actions'
+
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 console.log(store)
 console.log(store.getState())
+
+//const unsubscribe = store.subscribe(() => {
+//  console.log('Listener on store - state=')
+//  console.log(store.getState())
+//})
+//
+//// Dispatch some actions
+//store.dispatch(addTodo('Learn about actions'))
+//store.dispatch(addTodo('Learn about reducers'))
+//store.dispatch(addTodo('Learn about store'))
+//store.dispatch(toggleTodo(0))
+//store.dispatch(toggleTodo(1))
+//store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED))
+//
+//// Stop listening to state updates
+//unsubscribe()
 
 render(
 		/*

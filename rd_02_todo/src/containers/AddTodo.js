@@ -2,27 +2,40 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
 
-let AddTodo = ({ dispatch }) => {
+let AddTodo = ({dispatch, myProp}) => {
   let input
+  
+  console.log(myProp)
 
   return (
     <div>
+    
+      <span style={{myProp}}>Things to do... It should be in red background and it isn't!!!!</span>
+    
       <form onSubmit={e => {
         e.preventDefault()
-        if (!input.value.trim()) {
+        
+        const v = input.value
+         
+        if (!v.trim()) {
           return
         }
         
-        dispatch(addTodo(input.value))
+        const action = addTodo(v)
+        
+        dispatch(action)
         
         input.value = ''
       }}>
+      
         <input ref={node => {
           input = node
         }} />
+        		
         <button type="submit">
           Add Todo
         </button>
+          
       </form>
     </div>
   )

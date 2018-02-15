@@ -7,6 +7,23 @@ const todo = (state, action) => {
         completed: false
       }
     case 'TOGGLE_TODO':
+        
+       /* Not using spread operator:
+        * 
+          return Object.assign({}, state, {
+            todos: state.todos.map((todo, index) => {
+            
+              if (index === action.index) {
+                return Object.assign({}, todo, {
+                  completed: !todo.completed
+                })
+              }
+              
+              return todo
+            })
+          })
+         * 
+         */       
       if (state.id !== action.id) {
         return state
       }
@@ -15,6 +32,7 @@ const todo = (state, action) => {
         ...state,
         completed: !state.completed
       }
+      
     default:
       return state
   }
@@ -25,6 +43,7 @@ const todos = (state = [{
     text: "to do initial",
     completed: false
   }], action) => {
+      
   switch (action.type) {
     case 'ADD_TODO':
       return [
@@ -38,6 +57,7 @@ const todos = (state = [{
     default:
       return state
   }
+  
 }
 
 export default todos
