@@ -42,16 +42,22 @@ ol, ul {
 
 .num {
   background: rgb(180, 211, 45);
-  float: left;
+  position: static;
   font-size: 6px;
   font-weight: normal;
   line-height: 6px;
-  height: 6px;
-  margin-right: -1px;
-  margin-top: -1px;
+  height: 8px;
   padding: 0;
   text-align: center;
-  width: 6px;
+  width: 8px;
+  bottom: 0;
+  left: 0;
+}
+
+.square-row:after {
+  clear: both;
+  content: "";
+  display: table;
 }
 
 .game {

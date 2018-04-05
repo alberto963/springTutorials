@@ -4,6 +4,17 @@ import './index.css'
 
 function Square(props) {
   return (
+    <button className="square-row" onClick={props.onClick}>
+      <div>
+          <span className="num">{props.num}</span>      
+          <span className="square">{props.value}</span>      
+        </div>
+    </button>
+  )
+}
+
+function SquareOrig(props) {
+  return (
     <button className="square" onClick={props.onClick}>
       <div>
           <span className="num">{props.num}</span>      
@@ -12,7 +23,6 @@ function Square(props) {
     </button>
   )
 }
-
 class Board extends React.Component {
     renderSquare(i) {
     return <Square num={i} 
