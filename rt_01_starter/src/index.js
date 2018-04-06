@@ -77,7 +77,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{
       squares: squares,
-      i : i,
+      i : i, // Added for improvement #1: Display the location for each move in the format (col, row) in the move history list.
       }]), 
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -92,22 +92,25 @@ class Game extends React.Component {
   }
   render() {
     const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
-
+    const stepNumber = this.state.stepNumber;
+    
     const moves = history.map((step, move) => {
       const desc = move ?
         'Go to move #' + move :
         'Go to game start'
       const location = move ?
-        'Move Location col=' + Math.floor(step.i%3) + ', row=' + Math.floor(step.i/3) + ', player=' + step.squares[step.i] : ''
+        'Move Location col=' + Math.floor(step.i % 3) + ', row=' + Math.floor(step.i/3) + ', player=' + step.squares[step.i] : ''
+      const currentMove = stepNumber === move ? 'true' : 'false'
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button className="game-button" onClick={() => this.jumpTo(move)} currentMove={currentMove}>{desc}</button>
           <div>{location}</div>
         </li>
       );
     });
+
+    const current = history[stepNumber];
+    const winner = calculateWinner(current.squares);
 
     let status;
     if (winner) {
