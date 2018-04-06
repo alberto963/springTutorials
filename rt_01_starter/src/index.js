@@ -13,6 +13,7 @@ function Square(props) {
   )
 }
 
+// eslint-disable-next-line 
 function SquareOrig(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -59,6 +60,7 @@ class Game extends React.Component {
     this.state = {
       history: [{
         squares: Array(9).fill(null),
+        i : null,
       }],
       xIsNext: true,
       stepNumber: 0,
@@ -75,6 +77,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{
       squares: squares,
+      i : i,
       }]), 
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -95,10 +98,13 @@ class Game extends React.Component {
     const moves = history.map((step, move) => {
       const desc = move ?
         'Go to move #' + move :
-        'Go to game start';
+        'Go to game start'
+      const location = move ?
+        'Move Location col=' + Math.floor(step.i%3) + ', row=' + Math.floor(step.i/3) + ', player=' + step.squares[step.i] : ''
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <div>{location}</div>
         </li>
       );
     });
