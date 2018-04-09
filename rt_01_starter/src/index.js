@@ -100,7 +100,8 @@ class Game extends React.Component {
         'Go to game start'
       const location = move ?
         'Move Location col=' + Math.floor(step.i % 3) + ', row=' + Math.floor(step.i/3) + ', player=' + step.squares[step.i] : ''
-      const currentMove = stepNumber === move ? 'true' : 'false'
+      const currentMove = stepNumber === move ? 'true' : 'false' // Added for improvement #2 (Bold the currently selected item in the move list.)
+
       return (
         <li key={move}>
           <button className="game-button" onClick={() => this.jumpTo(move)} currentMove={currentMove}>{desc}</button>

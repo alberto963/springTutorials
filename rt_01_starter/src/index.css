@@ -69,6 +69,7 @@ ol, ul {
   margin-left: 20px;
 }
 
+/* Added for improvement #2 (Bold the currently selected item in the move list.) */
 .game-button[currentMove=true] {
   background-color: green;
 }
