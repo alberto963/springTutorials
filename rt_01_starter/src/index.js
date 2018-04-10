@@ -24,7 +24,7 @@ class Row extends React.Component {
       return (<Square num={ri + i} 
         value={square} 
         onClick={() => this.props.onClick(ri + i)} />)
-    }, this)
+    })
 
     return (
       <div className="board-row">
@@ -41,7 +41,7 @@ class Board extends React.Component {
     const rows = Array(3).fill(null).map((col, r) => {
       const ri =r * 3
       return (<Row r={ri} squares={this.props.squares.slice(ri, ri + 3)} onClick={this.props.onClick} />)
-    }, this)
+    })
 
     return (
       <div>
@@ -59,6 +59,7 @@ class Game extends React.Component {
         squares: Array(9).fill(null),
         i : null,
       }],
+      ascending: true,   // Added for improvement #4 (Add a toggle button that lets you sort the moves in either ascending or descending order.)
       xIsNext: true,
       stepNumber: 0,
     }
@@ -87,13 +88,24 @@ class Game extends React.Component {
       xIsNext: (step % 2) === 0,
     });
   }
+
+  // Added for improvement #4 (Add a toggle button that lets you sort the moves in either ascending or descending order.)
+  reverse() {
+    this.setState({
+      history: this.state.history.reverse(),
+      stepNumber: this.state.history.length - this.state.stepNumber - 1,
+      ascending: !this.state.ascending,
+    });
+  }
   render() {
     const history = this.state.history;
     const stepNumber = this.state.stepNumber;
     
     const moves = history.map((step, move) => {
-      const desc = move ? 'Go to move #' + move :'Go to game start'
-      const location = move ? 'Move Location col=' + (step.i % 3) + ', row=' + Math.floor(step.i/3) + ', player=' + step.squares[step.i] : ''
+      // Added for improvement #4 (Add a toggle button that lets you sort the moves in either ascending or descending order.)
+      const pos = this.state.ascending ? move : history.length - move - 1 
+      const desc = pos ? 'Go to move #' + pos :'Go to game start'
+      const location = pos ? 'Move Location col=' + (step.i % 3) + ', row=' + Math.floor(step.i/3) + ', player=' + step.squares[step.i] : ''
       const currentMove = stepNumber === move ? 'true' : 'false' // Added for improvement #2 (Bold the currently selected item in the move list.)
 
       return (
@@ -123,7 +135,8 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-        <div>{status}</div>
+          <div>{status}</div>
+          <button className="game-button" onClick={() => this.reverse()}>Reverse</button>
           <ol>{moves}</ol>
         </div>
       </div>
