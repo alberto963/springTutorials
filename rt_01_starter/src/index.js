@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom'
 import './index.css'
 
 function Square(props) {
+  let winner = props.winSequence && props.winSequence.includes(props.num)
+  winner = winner ? winner.toString() : 'false'
   return (
-    <button className="square-row" onClick={props.onClick}>
+    <button className="square-row" onClick={props.onClick} >
       <div>
-          <span className="num">{props.num}</span>      
-          <span className="square">{props.value}</span>      
-        </div>
+        <span className="num">{props.num}</span>      
+        <span className="square" winner={winner}>{props.value}</span>
+      </div>
     </button>
   )
 }
@@ -21,9 +23,7 @@ class Row extends React.Component {
     const ri = this.props.r
 
     const squares = this.props.squares.map((square, i) => {
-      return (<Square num={ri + i} 
-        value={square} 
-        onClick={() => this.props.onClick(ri + i)} />)
+      return (<Square num={ri + i} value={square} onClick={() => this.props.onClick(ri + i)} winSequence={this.props.winSequence}/>)
     })
 
     return (
@@ -40,7 +40,7 @@ class Board extends React.Component {
 
     const rows = Array(3).fill(null).map((col, r) => {
       const ri =r * 3
-      return (<Row r={ri} squares={this.props.squares.slice(ri, ri + 3)} onClick={this.props.onClick} />)
+      return (<Row r={ri} squares={this.props.squares.slice(ri, ri + 3)} onClick={this.props.onClick} winSequence={this.props.winSequence} />)
     })
 
     return (
@@ -62,16 +62,19 @@ class Game extends React.Component {
       ascending: true,   // Added for improvement #4 (Add a toggle button that lets you sort the moves in either ascending or descending order.)
       xIsNext: true,
       stepNumber: 0,
+      winSequence: null,
     }
   }
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice()
-    if (calculateWinner(squares) || squares[i]) {
+    if (calculateWinSequence(squares) || squares[i]) {
       return
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O'
+    squares[i] = this.state.xIsNext ? 'X' : 'O'   
+
+    
     this.setState({
       history: history.concat([{
       squares: squares,
@@ -79,13 +82,18 @@ class Game extends React.Component {
       }]), 
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+      winSequence : calculateWinSequence(squares), // Added for improvement #5 (When someone wins, highlight the three squares that caused the win.)
     })
   }
 
   jumpTo(step) {
+    // Changed for improvement #5 (When someone wins, highlight the three squares that caused the win.)
+    const current = this.state.history[step];
+    const squares = current.squares.slice()
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0,
+      winSequence : calculateWinSequence(squares),
     });
   }
 
@@ -116,12 +124,13 @@ class Game extends React.Component {
       );
     });
 
+    // Changed for improvement #5 (When someone wins, highlight the three squares that caused the win.)
     const current = history[stepNumber];
-    const winner = calculateWinner(current.squares);
+    const winSequence = calculateWinSequence(current.squares);
 
     let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
+    if (winSequence) {
+      status = 'Winner: ' + (!this.state.xIsNext ? 'X' : 'O');
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
@@ -129,10 +138,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
+          <Board squares={current.squares} onClick={(i) => this.handleClick(i)} winSequence={this.state.winSequence} />
         </div>
         <div className="game-info">
           <div>{status}</div>
@@ -144,7 +150,8 @@ class Game extends React.Component {
   }
 }
 
-function calculateWinner(squares) {
+// Refactored for improvement #5 (When someone wins, highlight the three squares that caused the win.)
+function calculateWinSequence(squares) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -158,7 +165,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i]
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a]
+      return lines[i]
     }
   }
   return null
