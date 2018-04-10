@@ -14,31 +14,38 @@ function Square(props) {
 }
 
 class Row extends React.Component {
- 
-  renderSquare(i) {
-  return <Square num={i} 
-    value={this.props.squares[i]} 
-    onClick={() => this.props.onClick(i)} />
-  }
+  // Refactored for improvement #3: Rewrite Board to use two loops to make the squares instead of hardcoding them..
+
   render () {
+
+    const ri = this.props.r
+
+    const squares = this.props.squares.map((square, i) => {
+      return (<Square num={ri + i} 
+        value={square} 
+        onClick={() => this.props.onClick(ri + i)} />)
+    }, this)
+
     return (
       <div className="board-row">
-            {this.renderSquare(this.props.r * 3)}
-            {this.renderSquare(this.props.r * 3 + 1)}
-            {this.renderSquare(this.props.r * 3 + 2)}
+        {squares}
       </div>
     )
   }
 }
 
 class Board extends React.Component {
- 
+ // Refactored for improvement #3: Rewrite Board to use two loops to make the squares instead of hardcoding them..
   render() {
+
+    const rows = Array(3).fill(null).map((col, r) => {
+      const ri =r * 3
+      return (<Row r={ri} squares={this.props.squares.slice(ri, ri + 3)} onClick={this.props.onClick} />)
+    }, this)
+
     return (
       <div>
-        <Row r="0" squares={this.props.squares} onClick={this.props.onClick} />
-        <Row r="1" squares={this.props.squares} onClick={this.props.onClick} />
-        <Row r="2" squares={this.props.squares} onClick={this.props.onClick} />
+        {rows}
       </div>
     )
   }
@@ -85,11 +92,8 @@ class Game extends React.Component {
     const stepNumber = this.state.stepNumber;
     
     const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
-        'Go to game start'
-      const location = move ?
-        'Move Location col=' + Math.floor(step.i % 3) + ', row=' + Math.floor(step.i/3) + ', player=' + step.squares[step.i] : ''
+      const desc = move ? 'Go to move #' + move :'Go to game start'
+      const location = move ? 'Move Location col=' + (step.i % 3) + ', row=' + Math.floor(step.i/3) + ', player=' + step.squares[step.i] : ''
       const currentMove = stepNumber === move ? 'true' : 'false' // Added for improvement #2 (Bold the currently selected item in the move list.)
 
       return (
