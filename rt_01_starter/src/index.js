@@ -23,7 +23,7 @@ class Row extends React.Component {
     const ri = this.props.r
 
     const squares = this.props.squares.map((square, i) => {
-      return (<Square num={ri + i} value={square} onClick={() => this.props.onClick(ri + i)} winSequence={this.props.winSequence}/>)
+      return (<Square key={i} num={ri + i} value={square} onClick={() => this.props.onClick(ri + i)} winSequence={this.props.winSequence}/>)
     })
 
     return (
@@ -38,9 +38,9 @@ class Board extends React.Component {
  // Refactored for improvement #3: Rewrite Board to use two loops to make the squares instead of hardcoding them..
   render() {
 
-    const rows = Array(3).fill(null).map((col, r) => {
-      const ri =r * 3
-      return (<Row r={ri} squares={this.props.squares.slice(ri, ri + 3)} onClick={this.props.onClick} winSequence={this.props.winSequence} />)
+    const rows = Array(3).fill(null).map((row, r) => {
+      const ri = r * 3
+      return (<Row key={r} r={ri} squares={this.props.squares.slice(ri, ri + 3)} onClick={this.props.onClick} winSequence={this.props.winSequence} />)
     })
 
     return (
@@ -114,11 +114,11 @@ class Game extends React.Component {
       const pos = this.state.ascending ? move : history.length - move - 1 
       const desc = pos ? 'Go to move #' + pos :'Go to game start'
       const location = pos ? 'Move Location col=' + (step.i % 3) + ', row=' + Math.floor(step.i/3) + ', player=' + step.squares[step.i] : ''
-      const currentMove = stepNumber === move ? 'true' : 'false' // Added for improvement #2 (Bold the currently selected item in the move list.)
+      const currentmove = stepNumber === move ? 'true' : 'false' // Added for improvement #2 (Bold the currently selected item in the move list.)
 
       return (
         <li key={move}>
-          <button className="game-button" onClick={() => this.jumpTo(move)} currentMove={currentMove}>{desc}</button>
+          <button className="game-button" onClick={() => this.jumpTo(move)} currentmove={currentmove}>{desc}</button>
           <div>{location}</div>
         </li>
       );

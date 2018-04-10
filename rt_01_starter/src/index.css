@@ -75,6 +75,6 @@ ol, ul {
 }
 
 /* Added for improvement #2 (Bold the currently selected item in the move list.) */
-.game-button[currentMove=true] {
+.game-button[currentmove=true] {
   background-color: green;
 }
