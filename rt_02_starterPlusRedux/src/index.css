@@ -1,0 +1,80 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+ol, ul {
+  padding-left: 30px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.square {
+  background: rgb(67, 187, 181);
+  border: 1px solid rgb(206, 26, 26);
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+/* Added for improvement #5 (When someone wins, highlight the three squares that caused the win.) */
+.square[winner=true] {
+  background-color: green;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.num {
+  background: rgb(180, 211, 45);
+  position: static;
+  font-size: 6px;
+  font-weight: normal;
+  line-height: 6px;
+  height: 8px;
+  padding: 0;
+  text-align: center;
+  width: 8px;
+  bottom: 0;
+  left: 0;
+}
+
+.square-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+/* Added for improvement #2 (Bold the currently selected item in the move list.) */
+.game-button[currentmove=true] {
+  background-color: green;
+}
