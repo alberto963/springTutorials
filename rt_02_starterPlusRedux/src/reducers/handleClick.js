@@ -1,4 +1,13 @@
-const handleClick = (state, action) => {
+const handleClick = (state = [{
+  history: [{
+    squares: Array(9).fill(null),
+    i : null,
+  }],
+  // ascending: true,   // Added for improvement #4 (Add a toggle button that lets you sort the moves in either ascending or descending order.)
+  xIsNext: true,
+  stepNumber: 0,
+  winSequence: null,
+}], action) => {
       
   switch (action.type) {
     case 'HANDLE_CLICK':
@@ -8,7 +17,7 @@ const handleClick = (state, action) => {
       if (calculateWinSequence(squares) || squares[action.i]) {
         return state
       }
-      squares[i] = state.xIsNext ? 'X' : 'O'   
+      squares[action.i] = state.xIsNext ? 'X' : 'O'   
 
       return {
         ...state,

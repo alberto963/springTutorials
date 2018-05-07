@@ -1,9 +1,16 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { connect } from 'react-redux';
 import './../index.css'
 
 import Board from './../components/Board'
+import { reverse } from "../actions/index";
 
+
+const mapDispatchToProps = dispatch => {
+  return {
+    reverse: dispatch(reverse())
+  };
+};
 class Game extends React.Component {
   constructor(props) {
     super(props)
@@ -17,6 +24,9 @@ class Game extends React.Component {
       stepNumber: 0,
       winSequence: null,
     }
+  }
+  handleReverse() {
+    this.props.reverse() // Relevant Redux part!!
   }
   render() {
     const history = this.state.history;
@@ -57,7 +67,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <button className="game-button" onClick={() => this.reverse()}>Reverse</button>
+          <button className="game-button" onClick={this.handleReverse()}>Reverse</button>
           <ol>{moves}</ol>
         </div>
       </div>
@@ -86,4 +96,5 @@ function calculateWinSequence(squares) {
   return null
 }
 
-export default Game
+// export default Game
+export default connect(null, mapDispatchToProps)(Game)

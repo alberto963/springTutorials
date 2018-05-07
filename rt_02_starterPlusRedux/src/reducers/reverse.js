@@ -1,4 +1,6 @@
-const reverse = (state, action) => {
+const reverse = (state=[{
+  ascending: true,   // Added for improvement #4 (Add a toggle button that lets you sort the moves in either ascending or descending order.)
+ }], action) => {
       
   switch (action.type) {
     case 'REVERSE':
