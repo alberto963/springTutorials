@@ -1,14 +1,16 @@
 import React from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import './../index.css'
 
 import Board from './../components/Board'
-import { reverse } from "../actions/index";
+import { reverse } from "../actions/index"
+import { click } from "../actions/index"
 
 
 const mapDispatchToProps = dispatch => {
   return {
-    reverse: dispatch(reverse())
+    reverse: () => dispatch(reverse()),
+    click: (i) => dispatch(click(i)),
   };
 };
 class Game extends React.Component {
@@ -28,9 +30,13 @@ class Game extends React.Component {
   handleReverse() {
     this.props.reverse() // Relevant Redux part!!
   }
+
+  handleClick(i) {
+    this.props.click(i) // Relevant Redux part!!
+  }
   render() {
     const history = this.state.history;
-    const stepNumber = this.state.stepNumber;
+    const stepNumber = this.state.stepNumber
     
     const moves = history.map((step, move) => {
       // Added for improvement #4 (Add a toggle button that lets you sort the moves in either ascending or descending order.)
@@ -49,11 +55,11 @@ class Game extends React.Component {
 
     // Changed for improvement #5 (When someone wins, highlight the three squares that caused the win.)
     const current = history[stepNumber];
-    const winSequence = calculateWinSequence(current.squares);
+    const winSequence = calculateWinSequence(current.squares)
 
     let status;
     if (winSequence) {
-      status = 'Winner: ' + (!this.state.xIsNext ? 'X' : 'O');
+      status = 'Winner: ' + (!this.state.xIsNext ? 'X' : 'O')
     } else {
       // Changed for improvement #6 (When no one wins, display a message about the result being a draw.)
       const draw = this.state.ascending ? stepNumber === 9 : stepNumber === 0
@@ -67,7 +73,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <button className="game-button" onClick={this.handleReverse()}>Reverse</button>
+          <button className="game-button" onClick={this.handleReverse}>Reverse</button>
           <ol>{moves}</ol>
         </div>
       </div>

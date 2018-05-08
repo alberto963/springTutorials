@@ -7,7 +7,7 @@ export const reverse = () => ({
   type: 'REVERSE',
 })
 
-export const handleClick = (i) => ({
-  type: 'HANDLE_CLICK',
+export const click = (i) => ({
+  type: 'CLICK',
   i,
 })
