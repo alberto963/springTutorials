@@ -1,0 +1,21 @@
+{
+  "name": "rd_03",
+  "version": "1.0.0",
+  "description": "> ---",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "keywords": [],
+  "author": "AP",
+  "license": "MIT",
+  "devDependencies": {
+    "react-scripts": "^0.9.3"
+  },
+  "dependencies": {
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2"
+  }
+}
