@@ -11,6 +11,9 @@ const UList = ({ list }) => (
     {list.map(elem => (
       <li className="list-group-item" key={elem.id}>
         {elem.title}
+        <button className="del-button" title="del" onClick={() => {
+          }
+        } />
       </li>
     ))}
   </ol>

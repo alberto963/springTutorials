@@ -3,11 +3,11 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import uuidv1 from "uuid"
 
-import { addElem } from "../actions/index"
+import { addElem2 } from "../actions/index"
 
 const mapDispatchToProps = dispatch => {
   return {
-    addElem: elem => dispatch(addElem(elem))
+    addElem: elem => dispatch(addElem2(elem))
   }
 }
 
