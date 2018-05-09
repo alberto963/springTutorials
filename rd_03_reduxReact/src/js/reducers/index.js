@@ -11,7 +11,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_ELEM':
-    const l = state.list.length + 1
+    action.payload.title += (state.list.length + 1)
     return { ...state, list: [...state.list, action.payload] }
     default:
       return state

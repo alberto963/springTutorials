@@ -16,7 +16,7 @@ const UnconnectedForm = (props) => (
       <button className="my-button" onClick={() => {
             // console.log('my button clicked!!!')
             const id = uuidv1();
-            props.addElem({ title: ('new ' + id), id })
+            props.addElem({ title: 'new ', id })
           }
         } />
     )
