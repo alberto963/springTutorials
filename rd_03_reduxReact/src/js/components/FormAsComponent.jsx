@@ -10,6 +10,7 @@ const mapDispatchToProps = dispatch => {
     addElem: elem => dispatch(addElem(elem))
   }
 }
+
 class UnconnectedForm extends Component {
 
   render() {
@@ -18,7 +19,6 @@ class UnconnectedForm extends Component {
             // console.log('my button clicked!!!')
             const id = uuidv1();
             this.props.addElem({ title: ('new ' + id), id })
-            props.addElem({ title: ('new ' + id), id })
           }
         } />
     )

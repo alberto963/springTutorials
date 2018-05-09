@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => {
 
 const UnconnectedForm = (props) => (
 
-      <button className="my-button" onClick={() => {
+      <button className="my-button" title="new" onClick={() => {
             // console.log('my button clicked!!!')
             const id = uuidv1();
             props.addElem({ title: 'new ', id })
