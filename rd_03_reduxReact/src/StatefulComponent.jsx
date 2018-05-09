@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import uuidv1 from "uuid"
 
 /**
  * Stateful React component example:
@@ -14,19 +15,23 @@ export default class StatefulComponent extends Component {
     super();
     this.state = {
       list: [
-        { title: "React Redux Tutorial for Beginners", id: 1 },
-        { title: "Redux e React: cos'è Redux e come usarlo con React", id: 2 }
+        { title: "React Redux Tutorial for Beginners", id: uuidv1() },
+        { title: "How to use Redux with React", id: uuidv1() }
       ]
     };
   }
   render() {
+
     const { list } = this.state
+
     return (
       <div>
+        <h2>Stateful React Component (no redux)</h2>
         <button className="my-button" onClick={() => {
           console.log('my button clicked!!!')
           this.setState(() => {
-              return { list: list.concat({title: 'new ' + (list.length + 1), id: list.length + 1})}
+              const id = uuidv1()
+              return { list: list.concat({title: 'new ' + (list.length + 1), id: id})}
               }
             )
           }

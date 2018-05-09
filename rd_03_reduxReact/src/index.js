@@ -1,8 +1,22 @@
 import React from 'react'
 import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
 
-import "./main.css"
-import  App  from "./App.jsx"
+
+
+import  SimplestApp  from "./SimplestApp.jsx"
 import  StatefulComponent  from "./StatefulComponent.jsx"
 
-ReactDOM.render(<div><App /><StatefulComponent /></div>, document.getElementById('app'))
+import store from "./js/store/index"
+import App from "./js/components/App"
+
+import "./main.css"
+
+ReactDOM.render(
+  <div>
+    <SimplestApp />
+    <StatefulComponent />
+    <Provider store={store}><App /></Provider>
+  </div>,
+   document.getElementById('app')
+  )

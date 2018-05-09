@@ -1,16 +1,21 @@
 // src/js/reducers/index.js
+import uuidv1 from "uuid"
 
 const initialState = {
-  list: []
+  list:  [
+    { title: "React Redux Tutorial for Beginners", id: uuidv1() },
+    { title: "How to use Redux with React", id: uuidv1() }
+  ]
 }
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_ELEM':
+    const l = state.list.length + 1
     return { ...state, list: [...state.list, action.payload] }
     default:
-      return state;
+      return state
   }
 }
 
-export default rootReducer;
+export default rootReducer
