@@ -11,16 +11,15 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const UnconnectedForm = (props) => (
+const UForm = (props) => (
 
       <button className="my-button" title="new" onClick={() => {
-            // console.log('my button clicked!!!')
             const id = uuidv1();
             props.addElem({ title: 'new ', id })
           }
         } />
     )
 
-const Form = connect(null, mapDispatchToProps)(UnconnectedForm);
+const Form = connect(null, mapDispatchToProps)(UForm);
 
 export default Form;

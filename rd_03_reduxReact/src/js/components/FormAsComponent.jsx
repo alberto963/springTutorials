@@ -11,20 +11,19 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class UnconnectedForm extends Component {
+class UForm extends Component {
 
   render() {
     return (
-      <button className="my-button" onClick={() => {
-            // console.log('my button clicked!!!')
+      <button className="my-button" title="new" onClick={() => {
             const id = uuidv1();
-            this.props.addElem({ title: ('new ' + id), id })
+            this.props.addElem({ title: 'new ', id })
           }
         } />
     )
   }
 }
 
-const Form = connect(null, mapDispatchToProps)(UnconnectedForm);
+const FormAsComponent = connect(null, mapDispatchToProps)(UForm);
 
 export default FormAsComponent;

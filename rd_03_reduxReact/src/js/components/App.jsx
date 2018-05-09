@@ -6,7 +6,7 @@ import Form from "./Form.jsx"
 const App = () => (
   <div className="row mt-5">
     <div className="col-md-4 offset-md-1">
-      <h2>Stateless React Component (redux is used)</h2>
+      <h2>Stateless React Functions Components (redux is used)</h2>
       <Form />
       <List />
     </div>

@@ -6,7 +6,7 @@ const mapStateToProps = state => {
   return { list: state.list }
 }
 
-const UnconnectedList = ({ list }) => (
+const UList = ({ list }) => (
   <ol className="list-group list-group-flush">
     {list.map(elem => (
       <li className="list-group-item" key={elem.id}>
@@ -16,6 +16,6 @@ const UnconnectedList = ({ list }) => (
   </ol>
 )
 
-const List = connect(mapStateToProps)(UnconnectedList)
+const List = connect(mapStateToProps, null)(UList)
 
 export default List;
