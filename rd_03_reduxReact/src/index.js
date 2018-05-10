@@ -2,8 +2,6 @@ import React from 'react'
 import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
 
-
-
 import  SimplestApp  from "./SimplestApp.jsx"
 import  StatefulComponent  from "./StatefulComponent.jsx"
 
