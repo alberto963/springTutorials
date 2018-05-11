@@ -1,14 +1,16 @@
-import uuidv1 from "uuid"
-
 const initialState = {
-  n:  0
+  num:  0
 }
 
 const numbers = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_ELEM':
-      action.payload.title += (state.list.length + 1)
-      return { ...state, state.n: state.n:++ }
+    case 'INC_COUNT':
+      const num = state.num
+      return { ...state, num: num + action.payload }
+    case 'SET_NUM':
+    // TODO get the list length (from payload?)
+    const num2 = state.num
+    return { ...state, num: num2 + action.payload }
     default:
       return state
   }
