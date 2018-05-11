@@ -4,7 +4,7 @@ const initialState = {
 
 const numbers = (state = initialState, action) => {
   switch (action.type) {
-    case 'INC_COUNT':
+    case 'INC_NUM':
       const num = state.num
       return { ...state, num: num + action.payload }
     case 'SET_NUM':

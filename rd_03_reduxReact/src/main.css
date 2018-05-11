@@ -3,7 +3,7 @@ body {
     margin-left: 24px;
 }
 
-.my-button {
+.new-button {
   background: rgb(67, 187, 181);
   border: 1px solid rgb(206, 26, 26);
   float: left;
@@ -18,7 +18,7 @@ body {
   width: 16px;
 }
 
-.del-button {
+.set-button {
   background: rgb(206, 26, 26);
   border: 1px solid rgb(67, 187, 181);
   float: left;

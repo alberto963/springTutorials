@@ -7,27 +7,27 @@ import { addElem } from "../actions/index"
 
 const mapStateToProps = (state, ownProps) => {
   return { 
-    n: state.numbers.num 
+    propNum: state.numbers.num 
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    addElem: elem => dispatch(addElem(elem))
+    propAddElem: elem => dispatch(addElem(elem))
   }
 }
 
 const UForm = (props) => {
-  console.info('UForm props=', props)
+  // console.info('UForm props=', props)
 
   return (
 
-      <button className="my-button" title="new" onClick={() => {
+      <button className="new-button" title="new" onClick={() => {
             const id = uuidv1();
             const title = 'new ';
-            props.addElem({ title, id })
+            props.propAddElem({ title, id })
           }
-        }>{props.n}</button>
+        }>{props.propNum}</button>
     )
   }
 

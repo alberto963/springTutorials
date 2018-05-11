@@ -15,7 +15,7 @@ class UForm extends Component {
 
   render() {
     return (
-      <button className="my-button" title="new" onClick={() => {
+      <button className="new-button" title="new" onClick={() => {
             const id = uuidv1();
             this.props.addElem({ title: 'new ', id })
           }

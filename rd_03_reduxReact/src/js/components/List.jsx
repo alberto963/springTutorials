@@ -2,47 +2,51 @@
 import React from "react"
 import { connect } from "react-redux"
 
-import { setNum } from "../actions/index"
+import { incNum, setNum,  } from "../actions/index"
 
 const mapStateToProps = (state, ownProps) => {
   return { 
-    list: state.elems.list
+    propsList: state.elems.list,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    setNum: c => dispatch(setNum(c))
+    propsIncNum: num => dispatch(incNum(num)),
+    propsSetNum: num => dispatch(setNum(num)),
   }
 }
 
 const UList = (props) => {
-  console.info('UList props=', props)
-
+  // console.info('UList props=', props)
   return (
-
-  <ol className="list-group list-group-flush">
-    {props.list.map(elem => (
-      <li className="list-group-item" key={elem.id}>
-        {elem.title}
-        <button className="del-button" title="inc" onClick={() => {
-           console.info('props=', props)
-           props.setNum(1)
-          }
-        } />
-      </li>
-    ))}
-  </ol>
-)
+    <ol className="list-group list-group-flush">
+      {props.propsList.map(elem => (
+        <li className="list-group-item" key={elem.id}>
+          {elem.title}
+          <button className="set-button" title="inc" onClick={() => {
+            // console.info('props=', props)
+            props.propsSetNum(1)
+            }
+          } />
+          <button className="set-button" title="set" onClick={() => {
+            // console.info('props=', props)
+            props.propsSetNum(2)
+            }
+          } />
+        </li>
+      ))}
+    </ol>
+  )
 }
 
-// const UList = ({ list }) => (
+// const UList = ({ propsList }) => (
 //     <ol className="list-group list-group-flush">
-//       {list.map(elem => (
+//       {propsList.map(elem => (
 //       <li className="list-group-item" key={elem.id}>
 //         {elem.title}
 //         <button className="del-button" title="del" onClick={() => {
-//           console.info('list=', list)
+//           // console.info('propsList=', propsList)
 //           }
 //         } />
 //       </li>

@@ -27,8 +27,8 @@ export default class StatefulComponent extends Component {
     return (
       <div>
         <h2>Stateful React Component (no redux)</h2>
-        <button className="my-button" title="new" onClick={() => {
-         // console.log('my button clicked!!!')
+        <button className="new-button" title="new" onClick={() => {
+         // console.log('new button clicked!!!')
           this.setState(() => {
               return { list: list.concat({title: 'new ' + (list.length + 1), id: uuidv1()})}
               }
