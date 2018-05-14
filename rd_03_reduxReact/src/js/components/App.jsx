@@ -7,7 +7,7 @@ const App = () => (
   <div className="row mt-5">
     <div className="col-md-4 offset-md-1">
       <h2>Stateless React Functions Components (redux is used)</h2>
-      <Form accept={true}/>
+      <Form accept={true} initial={7}/>
       <List />
     </div>
   </div>
