@@ -1,18 +1,18 @@
-# webpack-4-quickstart
-> Webpack 4 tutorial: All You Need to Know, from 0 Conf to Production Mode
-
-[![Donate](https://img.shields.io/badge/donate-patreon-orange.svg)](https://www.patreon.com/valentinogagliardi)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
+### rd_03_reduxReact
+# Redux tutorial: Some basic understandings
 
 ## Development
 
-```bash
-npm i && npm run start
-```
+npm install
+npm start
 
 ## Meta
 
+Developed following tutorial from:
 Valentino Gagliardi - [valentinog.com](https://www.valentinog.com) - valentino@valentinog.com
+
+- Tutorial reference:
+https://www.valentinog.com/blog/react-redux-tutorial-beginners/
 
 ## License
 
