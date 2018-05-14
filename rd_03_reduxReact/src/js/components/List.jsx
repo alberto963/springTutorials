@@ -21,17 +21,17 @@ const UList = (props) => {
   // console.info('UList props=', props)
   return (
     <ol className="list-group list-group-flush">
-      {props.propsList.map(elem => (
+      {props.propsList.map((elem, index) => (
         <li className="list-group-item" key={elem.id}>
           {elem.title}
           <button className="set-button" title="inc" onClick={() => {
             // console.info('props=', props)
-            props.propsSetNum(1)
+            props.propsIncNum(1)
             }
           } />
-          <button className="set-button" title="set" onClick={() => {
+          <button className="set-button" name={index} title="set" onClick={() => {
             // console.info('props=', props)
-            props.propsSetNum(2)
+            props.propsSetNum(index)
             }
           } />
         </li>
