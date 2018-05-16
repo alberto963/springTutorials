@@ -1,6 +1,12 @@
 import React from 'react'
 import './../index.css'
 
+const mapStateToProps = (state) => {
+  return { 
+    status: state.status,
+  }
+}
+
 const mapDispatchToProps = {
   onClick,
 }
