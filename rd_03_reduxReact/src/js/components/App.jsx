@@ -8,7 +8,7 @@ const App = () => (
     <div className="col-md-4 offset-md-1">
       <h2>Stateless React Functions Components (redux is used)</h2>
       <Form accept={true} initial={7}/>
-      <List />
+      <List inc={2} />
     </div>
   </div>
 )

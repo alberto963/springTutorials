@@ -1,5 +1,5 @@
 const initialState = {
-  num:  0
+  num:  0,
 }
 
 const numbers = (state = initialState, action) => {
@@ -8,7 +8,7 @@ const numbers = (state = initialState, action) => {
       const num = state.num
       return { ...state, num: num + action.payload }
     case 'SET_NUM':
-    // TODO get the list length (from payload?)
+    // We get the list length from payload
     return { ...state, num: action.payload + 1 }
     default:
       return state

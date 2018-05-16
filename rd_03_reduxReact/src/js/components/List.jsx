@@ -26,14 +26,14 @@ const WrappedList = (props) => {
           {elem.title}
           <button className="set-button" title="inc" onClick={() => {
             // console.info('props=', props)
-            props.propsIncNum(1)
+            props.propsIncNum(props.inc)
             }
-          } />
+          }>+</button>
           <button className="set-button" name={index} title="set" onClick={() => {
             // console.info('props=', props)
             props.propsSetNum(index)
             }
-          } />
+          }>S</button>
         </li>
       ))}
     </ol>
