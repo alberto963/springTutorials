@@ -1,6 +1,10 @@
 import React from 'react'
 import './../index.css'
 
+const mapDispatchToProps = {
+  onClick,
+}
+
 function Square(props) {
   let winner = props.winSequence && props.winSequence.includes(props.num)
   winner = winner ? winner.toString() : 'false'
