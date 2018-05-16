@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class UForm extends Component {
+class WrappedForm extends Component {
 
   render() {
     return (
@@ -24,6 +24,6 @@ class UForm extends Component {
   }
 }
 
-const FormAsComponent = connect(null, mapDispatchToProps)(UForm);
+const FormAsComponent = connect(null, mapDispatchToProps)(WrappedForm);
 
 export default FormAsComponent;

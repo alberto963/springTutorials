@@ -3,11 +3,14 @@ body {
     margin-left: 24px;
 }
 
+li {
+  margin-left: 12px;
+}
 .new-button {
   background: rgb(67, 187, 181);
   border: 1px solid rgb(206, 26, 26);
   float: left;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: bold;
   line-height: 16px;
   height: 16px;
@@ -22,13 +25,13 @@ body {
   background: rgb(206, 26, 26);
   border: 1px solid rgb(67, 187, 181);
   float: left;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: bold;
-  line-height: 34px;
+  line-height: 16px;
   height: 16px;
   margin-right: 5px;
   margin-top: 8px;
   padding: 0;
-  text-align: center;
+  text-align: top;
   width: 16px;
 }
