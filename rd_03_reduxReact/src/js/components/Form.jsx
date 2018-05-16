@@ -42,8 +42,8 @@ const mapDispatchToProps = {
 //   }
 // }
 
-const UForm = (props) => {
-  // console.info('UForm props=', props)
+const WrappedForm = (props) => {
+  // console.info('WrappedForm props=', props)
 
   return (
 
@@ -60,7 +60,7 @@ const UForm = (props) => {
   )
 }
 
-// const Form = connect(mapStateToProps, mapDispatchToProps, mergeProps)(UForm)
-const Form = connect(mapStateToProps, mapDispatchToProps)(UForm)
+// const Form = connect(mapStateToProps, mapDispatchToProps, mergeProps)(WrappedForm)
+const Form = connect(mapStateToProps, mapDispatchToProps)(WrappedForm)
 
 export default Form;

@@ -6,7 +6,7 @@ const mapStateToProps = state => {
   return { list2: state.elems.list2 }
 }
 
-class UList extends Component {
+class WrappedList extends Component {
 
   render() {
     return (
@@ -21,6 +21,6 @@ class UList extends Component {
   }
 }
 
-const List = connect(mapStateToProps, null)(UList)
+const List = connect(mapStateToProps, null)(WrappedList)
 
 export default List;

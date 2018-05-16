@@ -17,8 +17,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const UList = (props) => {
-  // console.info('UList props=', props)
+const WrappedList = (props) => {
+  // console.info('WrappedList props=', props)
   return (
     <ol className="list-group list-group-flush">
       {props.propsList.map((elem, index) => (
@@ -40,7 +40,7 @@ const UList = (props) => {
   )
 }
 
-// const UList = ({ propsList }) => (
+// const WrappedList = ({ propsList }) => (
 //     <ol className="list-group list-group-flush">
 //       {propsList.map(elem => (
 //       <li className="list-group-item" key={elem.id}>
@@ -54,6 +54,6 @@ const UList = (props) => {
 //   </ol>
 // )
 
-const List = connect(mapStateToProps, mapDispatchToProps)(UList)
+const List = connect(mapStateToProps, mapDispatchToProps)(WrappedList)
 
 export default List;
