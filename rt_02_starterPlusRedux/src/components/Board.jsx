@@ -8,7 +8,7 @@ class Board extends React.Component {
  
      const rows = Array(3).fill(null).map((row, r) => {
        const ri = r * 3
-       return (<Row key={r} r={ri} squares={this.props.squares.slice(ri, ri + 3)} onClick={this.props.onClick} winSequence={this.props.winSequence} />)
+       return (<Row key={r} r={ri} squares={this.props.squares.slice(ri, ri + 3)} click={this.props.click} />)
      })
  
      return (

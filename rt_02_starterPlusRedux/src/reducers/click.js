@@ -1,5 +1,5 @@
 const initialState = {
-  status: null,
+  squares: Array(9).fill(null),
   xIsNext: true,
 }
 
@@ -7,10 +7,11 @@ const click = (state=initialState, action) => {
       
   switch (action.type) {
     case 'CLICK':
-
+    const s={...state}
+    s.squares[action.i]=state.xIsNext ? 'X' : 'O'
      return {
-        ...state,
-        status: !state.xIsNext, 
+        ...state, squares: s.squares,  
+        xIsNext: !state.xIsNext, 
       }
 
     default:

@@ -5,8 +5,8 @@ import reverse from './reverse'
 
 const gameApp = combineReducers({
   click,
-  jumpTo,
-  reverse,
+//  jumpTo,
+//  reverse,
 })
 
 export default gameApp
