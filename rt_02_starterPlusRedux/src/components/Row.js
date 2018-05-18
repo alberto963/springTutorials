@@ -11,7 +11,7 @@ class Row extends React.Component {
     const ri = this.props.r
 
     const squares = this.props.squares.map((square, i) => {
-      return (<Square key={i} num={ri + i} value={square} onClick={() => this.props.click(ri + i)} />)
+      return (<Square key={i} num={ri + i} value={square} click={() => this.props.click(ri + i)} />)
     })
 
     return (

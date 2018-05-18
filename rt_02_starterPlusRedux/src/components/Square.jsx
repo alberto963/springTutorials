@@ -4,7 +4,7 @@ import './../index.css'
 
 function Square(props) {
   return (
-    <button className="square-row" onClick={props.onClick} >
+    <button className="square-row" onClick={props.click} >
       <div>
         <span className="num">{props.num}</span>      
         <span className="square">{props.value}</span>
