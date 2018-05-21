@@ -1,7 +1,8 @@
 const initialState = {
   squares: Array(9).fill(null),
   xIsNext: true,
-  status: null
+  status: null,
+  moveNum: 0,
 };
 
 const click = (state = initialState, action) => {
@@ -21,10 +22,7 @@ const click = (state = initialState, action) => {
       // s1[action.i]=state.xIsNext ? 'X' : 'O'
 
       const winSequence = calculateWinSequence(state.squares);
-      let status;
-      if (winSequence) {
-        status = "Winner: " + (state.xIsNext ? "X" : "O");
-      }
+      let status = winSequence ? "Winner: " + (state.xIsNext ? "X" : "O") : state.moveNum === 8 ? 'Draw!' : ''
 
       return {
         ...state,
@@ -34,8 +32,9 @@ const click = (state = initialState, action) => {
          */
         // ...state, squares: s1,
         xIsNext: !state.xIsNext,
-        status: status
-      };
+        status: status,
+        moveNum: state.moveNum + 1,
+      }
 
     default:
       return state;
