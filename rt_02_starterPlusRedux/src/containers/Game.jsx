@@ -10,6 +10,7 @@ const mapStateToProps = (state, ownProps) => {
     squares: state.click.squares,
     xIsNext: state.click.xIsNext,
     status: state.check.status,
+    winSequence: state.check.winSequence,
   }
 }
 
@@ -28,7 +29,7 @@ class Game extends React.Component {
   render() {
     return (
       <div className="game-board">
-        <Board squares={this.props.squares} click={i => this.clickActions(i)} />
+        <Board squares={this.props.squares} winSequence={this.props.winSequence} click={i => this.clickActions(i)} />
       </div>
     )
   }

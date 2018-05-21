@@ -11,7 +11,7 @@ const click = (state = initialState, action) => {
         return state
       }
 
-      const squares = state.squares
+      const squares = [...state.squares]
       squares[action.i] = state.xIsNext ? "X" : "O"
 
       /*

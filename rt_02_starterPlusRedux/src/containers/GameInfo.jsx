@@ -20,5 +20,4 @@ class GameInfo extends React.Component {
   }
 }
 
-// export default Game
 export default connect(mapStateToProps, null)(GameInfo)

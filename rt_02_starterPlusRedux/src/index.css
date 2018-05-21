@@ -33,7 +33,7 @@ ol, ul {
 }
 
 /* Added for improvement #5 (When someone wins, highlight the three squares that caused the win.) */
-.square[winner=true] {
+.square[isWinner=true] {
   background-color: green;
 }
 

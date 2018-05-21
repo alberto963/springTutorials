@@ -12,9 +12,9 @@ const check = (state = initialState, action) => {
         return state;
       }
 
-      const squares = { ...action.squares };
+      const squares = [...action.squares]
       squares[action.i] = action.xIsNext ? "X" : "O";
-      
+
       const winSequence = calculateWinSequence(squares);
       let status = winSequence ? "Winner: " + (action.xIsNext ? "X" : "O") : state.moveNum === 8 ? 'Draw!' : ''
 

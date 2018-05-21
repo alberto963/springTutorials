@@ -9,7 +9,7 @@ class Board extends React.Component {
     // let self=this
      const rows = Array(3).fill(null).map((row, r) => {
        const ri = r * 3
-       return (<Row key={r} r={ri} squares={this.props.squares.slice(ri, ri + 3)} click={this.props.click} />)
+       return (<Row key={r} r={ri} squares={this.props.squares.slice(ri, ri + 3)} winSequence={this.props.winSequence} click={this.props.click} />)
      })
  
      return (
