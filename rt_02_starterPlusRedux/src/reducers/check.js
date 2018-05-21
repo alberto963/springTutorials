@@ -1,34 +1,34 @@
 const initialState = {
+  status: null,
   winSequence: null,
+  moveNum: 0,
 }
 
 const check = (state = initialState, action) => {
   switch (action.type) {
     case "CHECK":
-      if (state.status) {
+
+      if (state.status || action.squares[action.i] ) {
         return state;
       }
 
-      const s = { ...state };
-      s.squares[action.i] = state.xIsNext ? "X" : "O";
-
-      /*
-       * Alternative way 1
-       */
-      // const s1=[...state.squares, ]
-      // s1[action.i]=state.xIsNext ? 'X' : 'O'
-
-      const winSequence = calculateWinSequence(state.squares);
-      let status = winSequence ? "Winner: " + (state.xIsNext ? "X" : "O") : state.moveNum === 8 ? 'Draw!' : ''
+      const squares = { ...action.squares };
+      squares[action.i] = action.xIsNext ? "X" : "O";
+      
+      const winSequence = calculateWinSequence(squares);
+      let status = winSequence ? "Winner: " + (action.xIsNext ? "X" : "O") : state.moveNum === 8 ? 'Draw!' : ''
 
       return {
         ...state,
+        status: status,
+        winSequence: winSequence,
+        moveNum: state.moveNum + 1,
       }
 
     default:
       return state;
   }
-};
+}
 
 // Refactored for improvement #5 (When someone wins, highlight the three squares that caused the win.)
 function calculateWinSequence(squares) {

@@ -6,6 +6,7 @@ class Board extends React.Component {
   // Refactored for improvement #3: Rewrite Board to use two loops to make the squares instead of hardcoding them..
    render() {
  
+    // let self=this
      const rows = Array(3).fill(null).map((row, r) => {
        const ri = r * 3
        return (<Row key={r} r={ri} squares={this.props.squares.slice(ri, ri + 3)} click={this.props.click} />)
