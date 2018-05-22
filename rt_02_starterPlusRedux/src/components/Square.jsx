@@ -5,6 +5,7 @@ import './../index.css'
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    squares: state.click.squares,
     winSequence: state.check.winSequence,
   }
 }
@@ -18,7 +19,7 @@ function Square(props) {
     <button className="square-row" onClick={props.click} >
       <div>
         <span className="num">{props.num}</span>      
-        <span className="square" isWinner={isWinner}>{props.value}</span>
+        <span className="square" isWinner={isWinner}>{props.squares[props.num]}</span>
       </div>
     </button>
   )

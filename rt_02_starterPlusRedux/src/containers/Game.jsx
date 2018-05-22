@@ -28,7 +28,7 @@ class Game extends React.Component {
   render() {
     return (
       <div className="game-board">
-        <Board squares={this.props.squares} click={i => this.clickActions(i)} />
+        <Board click={i => this.clickActions(i)} />
       </div>
     )
   }
