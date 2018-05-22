@@ -1,10 +1,19 @@
 import React from 'react'
+import { connect } from "react-redux"
 
 import './../index.css'
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    winSequence: state.check.winSequence,
+  }
+}
+
 function Square(props) {
+  
   let isWinner = props.winSequence && props.winSequence.includes(props.num)
   isWinner = isWinner ? isWinner.toString() : 'false'
+
   return (
     <button className="square-row" onClick={props.click} >
       <div>
@@ -15,4 +24,4 @@ function Square(props) {
   )
 }
 
-export default Square
+export default connect(mapStateToProps)(Square)
