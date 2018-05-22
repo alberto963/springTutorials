@@ -1,7 +1,7 @@
 const initialState = {
   status: null,
   winSequence: null,
-  moveNum: 0,
+  stepNumber: 0,
 }
 
 const check = (state = initialState, action) => {
@@ -16,13 +16,13 @@ const check = (state = initialState, action) => {
       squares[action.i] = action.xIsNext ? "X" : "O";
 
       const winSequence = calculateWinSequence(squares);
-      let status = winSequence ? "Winner: " + (action.xIsNext ? "X" : "O") : state.moveNum === 8 ? 'Draw!' : ''
+      let status = winSequence ? "Winner: " + (action.xIsNext ? "X" : "O") : state.stepNumber === 8 ? 'Draw!' : ''
 
       return {
         ...state,
         status: status,
         winSequence: winSequence,
-        moveNum: state.moveNum + 1,
+        stepNumber: state.stepNumber + 1,
       }
 
     default:
