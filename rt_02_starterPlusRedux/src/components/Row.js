@@ -8,10 +8,10 @@ class Row extends React.Component {
 
   render () {
 
-    const ri = this.props.r
+    const r = this.props.r * 3
 
-    const squares = this.props.squares.map((square, i) => {
-      return (<Square key={i} num={ri + i} value={square} click={() => this.props.click(ri + i)} />)
+    const squares = Array(3).fill(null).map((square, i) => {
+      return (<Square num={r + i} click={() => this.props.click(r + i)} />)
     })
 
     return (
