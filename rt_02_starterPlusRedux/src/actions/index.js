@@ -14,9 +14,10 @@ export const click = (i, step, status) => ({
   status,
 })
 
-export const check = (i, squares, xIsNext) => ({
+export const check = (i, squares, xIsNext, step) => ({
   type: "CHECK",
   i,
   squares,
   xIsNext,
+  step,
 })

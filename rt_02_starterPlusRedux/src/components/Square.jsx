@@ -25,7 +25,7 @@ class Square extends React.Component {
     let i = this.props.num
     this.props.click(i, this.props.step, this.props.status);
     this.props.jump(this.props.step + 1);
-    this.props.check(i, this.props.history[this.props.step].squares, this.props.xIsNext);
+    this.props.check(i, this.props.history[this.props.step].squares, this.props.xIsNext, this.props.step);
   }
 
   render() {

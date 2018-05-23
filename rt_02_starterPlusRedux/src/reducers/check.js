@@ -7,21 +7,20 @@ const check = (state = initialState, action) => {
   switch (action.type) {
     case "CHECK":
 
-      if (state.status || action.squares[action.i] ) {
-        return state;
-      }
+//      if (state.status || action.squares[action.i] ) {
+//        return state;
+//      }
 
       const squares = [...action.squares]
-      squares[action.i] = action.xIsNext ? "X" : "O";
+      squares[action.i] = action.squares[action.i] ? squares[action.i] : action.xIsNext ? "X" : "O";
 
       const winSequence = calculateWinSequence(squares);
-      let status = winSequence ? "Winner: " + (action.xIsNext ? "X" : "O") : state.step === 8 ? 'Draw!' : ''
+      let status = winSequence ? "Winner: " + (action.xIsNext ? "X" : "O") : action.step === 8 ? 'Draw!' : ''
 
       return {
         ...state,
         status: status,
         winSequence: winSequence,
-        step: state.step + 1,
       }
 
     default:
