@@ -1,7 +1,7 @@
 const initialState = {
   history: [{
     squares: Array(9).fill(null),
-    i : null,
+    i: null,
   }],
   squares: Array(9).fill(null),
   xIsNext: true,
@@ -11,7 +11,7 @@ const click = (state = initialState, action) => {
   switch (action.type) {
     case "CLICK":
 
-      if (action.status || state.squares[action.i] ) {
+      if (action.status || state.squares[action.i]) {
         return state
       }
 
@@ -26,6 +26,8 @@ const click = (state = initialState, action) => {
 
       return {
         ...state,
+        history: [...state.history,
+        { squares: squares, i: action.i }],
         squares: squares,
         /*
          * Alternative way 1

@@ -6,10 +6,12 @@ import "./../index.css";
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    history: state.click.history,
     squares: state.click.squares,
     xIsNext: state.click.xIsNext,
     status: state.check.status,
-    winSequence: state.check.winSequence
+    winSequence: state.check.winSequence,
+    stepNumber: state.check.stepNumber,
   };
 };
 
@@ -21,8 +23,8 @@ const mapDispatchToProps = {
 class Square extends React.Component {
   clickActions() {
     let i = this.props.num
-    this.props.check(i, this.props.squares, this.props.xIsNext);
     this.props.click(i, this.props.status);
+    this.props.check(i, this.props.stepNumber, this.props.squares, this.props.xIsNext);
   }
 
   render() {
