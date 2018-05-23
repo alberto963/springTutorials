@@ -1,6 +1,8 @@
-export const jump = step => ({
+export const jump =  (i, squares, step) => ({
   type: "JUMP",
-  step
+  i,
+  squares,
+  step,
 })
 
 export const reverse = () => ({

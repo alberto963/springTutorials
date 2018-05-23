@@ -6,6 +6,10 @@ const jump = (state = initialState, action) => {
   switch (action.type) {
     case "JUMP":
 
+      if (action.squares[action.i]) {
+        return state
+      }
+
       return {
         ...state,
         step: action.step,

@@ -22,7 +22,7 @@ const mapDispatchToProps = {
 class GameMoves extends React.Component {
 
   clickActions(move, i) {
-    this.props.jump(move);
+    this.props.jump(i, this.props.history[move].squares, move);
     this.props.check(i, this.props.history[move].squares, this.props.xIsNext, move);
   }
 
