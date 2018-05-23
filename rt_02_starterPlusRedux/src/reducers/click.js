@@ -3,7 +3,6 @@ const initialState = {
     squares: Array(9).fill(null),
     i: null,
   }],
-  squares: Array(9).fill(null),
   xIsNext: true,
 }
 
@@ -11,15 +10,16 @@ const click = (state = initialState, action) => {
   switch (action.type) {
     case "CLICK":
 
-      if (action.status || state.squares[action.i]) {
+      const squares = [...state.history[action.stepNumber].squares]
+
+      if (action.status || squares[action.i]) {
         return state
       }
 
-      const squares = [...state.squares]
       squares[action.i] = state.xIsNext ? "X" : "O"
 
       /*
-       * Alternative way 1
+       * Alternative way 1 (starting from state.square)
        */
       // const s1=[...state.squares, ]
       // s1[action.i]=state.xIsNext ? 'X' : 'O'
@@ -28,7 +28,7 @@ const click = (state = initialState, action) => {
         ...state,
         history: [...state.history,
         { squares: squares, i: action.i }],
-        squares: squares,
+
         /*
          * Alternative way 1
          */

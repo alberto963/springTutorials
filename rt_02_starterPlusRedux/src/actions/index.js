@@ -7,16 +7,16 @@ export const reverse = () => ({
   type: "REVERSE"
 })
 
-export const click = (i, status) => ({
+export const click = (i, stepNumber, status) => ({
   type: "CLICK",
   i,
+  stepNumber,
   status,
 })
 
-export const check = (i, stepNumber, squares, xIsNext) => ({
+export const check = (i, squares, xIsNext) => ({
   type: "CHECK",
   i,
-  stepNumber,
   squares,
   xIsNext,
 })
