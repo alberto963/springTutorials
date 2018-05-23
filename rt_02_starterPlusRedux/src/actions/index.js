@@ -1,5 +1,5 @@
-export const jumpTo = step => ({
-  type: "JUMP_TO",
+export const jump = step => ({
+  type: "JUMP",
   step
 })
 
@@ -7,10 +7,10 @@ export const reverse = () => ({
   type: "REVERSE"
 })
 
-export const click = (i, stepNumber, status) => ({
+export const click = (i, step, status) => ({
   type: "CLICK",
   i,
-  stepNumber,
+  step,
   status,
 })
 

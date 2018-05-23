@@ -10,7 +10,7 @@ const click = (state = initialState, action) => {
   switch (action.type) {
     case "CLICK":
 
-      const squares = [...state.history[action.stepNumber].squares]
+      const squares = [...state.history[action.step].squares]
 
       if (action.status || squares[action.i]) {
         return state
