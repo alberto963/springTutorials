@@ -1,0 +1,30 @@
+body {
+  font: 6px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: row;
+}
+
+.panel-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.panel-elem {
+  background: rgb(67, 187, 181);
+  border: 1px solid rgb(206, 26, 26);
+  float: left;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 400px;
+  margin-right: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  width: 400px;
+}
