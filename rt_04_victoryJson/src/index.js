@@ -61,7 +61,8 @@ class JPie extends React.Component {
           <svg values='' width={200} height={200}>
             <V.VictoryPie standalone={false} width={200} height={200} data={this.props.data} innerRadius={25} labelRadius={50}
                           style={pieStyle} colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
-                          animate={{duration: 2000}} />
+                          animate={{duration: 2000, onLoad: { duration: 1000 }}}
+                          />
 
             <V.VictoryLabel textAnchor='middle' style={{ fontSize: 10 }} x={100} y={100} text={this.props.text} />
           </svg>
@@ -81,7 +82,14 @@ class JBar extends React.Component {
           <V.VictoryAxis dependentAxis tickFormat={(x) => (`${x}`)}/>
 
           <V.VictoryStack width={100} height={100} standalone={false} style={barStyle}>
-            <V.VictoryBar data={this.props.data[0]} labelComponent={<V.VictoryLabel dx={40} dy={30}/>} animate={{duration: 2000, onLoad: { duration: 1000 }}} />
+            <V.VictoryBar data={this.props.data[0]} labelComponent={<V.VictoryLabel dx={40} dy={30}/>} animate={{duration: 2000, onLoad: { duration: 1000 }}} 
+            dataComponent={
+              <V.Bar
+                events={{
+                  onClick: (evt) => alert(`(${evt.clientX}, ${evt.clientY})`)
+                }}
+              />
+            } />
             <V.VictoryBar data={this.props.data[1]} labelComponent={<V.VictoryLabel dx={40} dy={30}/>} animate={{duration: 2000, onLoad: { duration: 1000 }}} />
             <V.VictoryBar data={this.props.data[2]} labelComponent={<V.VictoryLabel dx={40} dy={30}/>} animate={{duration: 2000, onLoad: { duration: 1000 }}} />
           </V.VictoryStack>
