@@ -122,12 +122,12 @@ class Tutorial2 extends React.Component {
 }
 // ========================================
 
-ReactDOM.render(
-    <div>
-      <Pie1 />
-    </div>,
-    document.getElementById('root')
-  )
+// ReactDOM.render(
+//     <div>
+//       <Pie1 />
+//     </div>,
+//     document.getElementById('root')
+//   )
 
 // ReactDOM.render(
 //   <div>
@@ -136,9 +136,9 @@ ReactDOM.render(
 //   document.getElementById('root')
 // )
 
-// ReactDOM.render(
-//   <div className='panel'>
-//     <Tutorial2 />
-//   </div>,
-//   document.getElementById('root')
-// )
+ReactDOM.render(
+  <div className='panel'>
+    <Tutorial2 />
+  </div>,
+  document.getElementById('root')
+)
