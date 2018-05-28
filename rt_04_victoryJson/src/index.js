@@ -16,7 +16,7 @@ const data = [
   {id: 9, f1: 3, f2: 'C', f3: false},
 ]
 
-const jconfData = [
+const struct = [
   { title: 'pie1', type: 'pie', fields: ['f1', 'f3'] }, 
   { title: 'bar1', type: 'bar', fields: ['f1', 'f3'] },
 
@@ -52,31 +52,20 @@ const barData_3 = [
   {x: 1, y: 3, label: 'F1-3'},
 ]
 
-const pieStyle = { labels: { fontSize: 10, fill: 'white'}}
+const pieStyle = { labels: { fontSize: 10, fill: 'black'}}
 class JPie extends React.Component {
+  
   render() {
     return (
-      <div className='panel'>
-        <div className='panel-row'>
         <div className='panel-elem'>
-        <svg values='' width={200} height={200}>
-          <V.VictoryPie standalone={false} width={200} height={200} data={this.props.data[0]} innerRadius={25} labelRadius={50}
-                        style={pieStyle} colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}/>
+          <svg values='' width={200} height={200}>
+            <V.VictoryPie standalone={false} width={200} height={200} data={this.props.data} innerRadius={25} labelRadius={50}
+                          style={pieStyle} colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
+                          animate={{duration: 2000}} />
 
-          <V.VictoryLabel textAnchor='middle' style={{ fontSize: 10 }} x={100} y={100} text='pie1-1' />
-        </svg>
+            <V.VictoryLabel textAnchor='middle' style={{ fontSize: 10 }} x={100} y={100} text={this.props.text} />
+          </svg>
         </div>
-
-        <div className='panel-elem'>
-        <svg values='' width={200} height={200}>
-          <V.VictoryPie standalone={false} width={200} height={200} data={this.props.data[1]} innerRadius={25} labelRadius={50}
-                        style={pieStyle} colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}/>
-                        
-          <V.VictoryLabel textAnchor='middle' style={{ fontSize: 10 }} x={100} y={100} text='pie1-2' />
-        </svg>
-        </div>
-        </div>
-      </div>
     )
   }
 }
@@ -97,7 +86,7 @@ class JBar extends React.Component {
             <V.VictoryBar data={this.props.data[2]} labelComponent={<V.VictoryLabel dx={40} dy={30}/>} animate={{duration: 2000, onLoad: { duration: 1000 }}} />
           </V.VictoryStack>
 
-          <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text='Bar 1' />
+          <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text={this.props.text} />
 
         </V.VictoryChart>
       </div>
@@ -110,8 +99,9 @@ class StatsPanel extends React.Component {
     return (
       <div className='panel'>
         <div className='panel-row' >
-        <JPie data={[pieData_F1, pieData_F2]} />
-        <JBar data={[barData_1, barData_2, barData_3]} />
+          <JPie data={pieData_F1} text='pie1-1' />
+          <JPie data={pieData_F2} text='pie1-2'/>
+          <JBar data={[barData_1, barData_2, barData_3]} text='bar1' />
         </div>
     </div>
     )
@@ -121,7 +111,7 @@ class StatsPanel extends React.Component {
 
 ReactDOM.render(
   <div className='panel'>
-    <StatsPanel />
+    <StatsPanel data={data} struct={struct}/>
   </div>,
   document.getElementById('root')
 )
