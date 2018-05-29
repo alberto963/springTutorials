@@ -17,11 +17,11 @@ const data = [
 ]
 
 const struct = [
-  { title: 'pie1', type: 'pie', fields: ['f1', 'f3'] }, 
-  { title: 'bar1', type: 'bar', fields: ['f1', 'f3'] },
+  { title: 'pie1', type: 'pie', category: ['f1', 'f3', 'f2'] }, 
+  { title: 'bar1', type: 'bar', category: ['f1', 'f3'] },
 
-  { title: 'pie2', type: 'pie', fields: ['f2', 'f3'] }, 
-  { title: 'bar2', type: 'bar', fields: ['f2', 'f3'] },
+  { title: 'pie2', type: 'pie', category: ['f2', 'f3'] }, 
+  { title: 'bar2', type: 'bar', category: ['f2', 'f3'] },
 ]
 
 /*
@@ -60,7 +60,6 @@ class JPie extends React.Component {
         <div className='panel-elem'>
           <svg values='' width={200} height={200}>
             <V.VictoryPie standalone={false} width={200} height={200} data={this.props.data} innerRadius={25} labelRadius={50}
-                          x={this.props.field} y="y"
                           style={pieStyle} colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
                           animate={{duration: 2000, onLoad: { duration: 1000 }}} />
 
@@ -98,14 +97,76 @@ class JBar extends React.Component {
   }
 }
 
-class StatsPanel extends React.Component {
+class JBar2 extends React.Component {
   render() {
+
+    const bars = this.props.data.map((data, i) => {
+      return <V.VictoryBar data={data} labelComponent={<V.VictoryLabel dx={40} dy={30}/>} animate={{duration: 2000, onLoad: { duration: 1000 }}}
+      dataComponent={ <V.Bar events={{ onClick: (evt) => alert(`(${evt.clientX}, ${evt.clientY})`) }} /> } />;
+    });
+
+    return (
+      <div className='panel-elem' >
+        <V.VictoryChart domainPadding={10} theme={V.VictoryTheme.material}>
+
+          <V.VictoryAxis tickValues={this.props.struct.category}/>
+          <V.VictoryAxis dependentAxis tickFormat={(x) => (`${x}`)}/>
+
+          <V.VictoryStack width={100} height={100} standalone={false} style={barStyle}>
+            {bars}
+          </V.VictoryStack>
+
+          <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text={this.props.struct.title} />
+
+        </V.VictoryChart>
+      </div>
+    )
+  }
+}
+class StatsPanel extends React.Component {
+
+  distribute(data, category) {
+    var g=0;
+    return data.reduce((distributor, currentData) => {
+
+      if (!currentData.hasOwnProperty(category)) { 
+        return distributor;
+      }
+
+      var value = currentData[category]
+      if (distributor.values.has(value)) {
+        var current = distributor.values.get(value)
+        current.occurrencies +=1
+        distributor.values.set(value, current);
+        distributor.distribution[current.index] = {x: value, y: current.occurrencies }
+      } else {
+        var newV={index: g++, occurrencies:1}
+        distributor.values.set(value, newV);
+        distributor.distribution = distributor.distribution.concat( [{x: value, y: newV.value}])
+      }
+    
+      return distributor;
+      }, {values : new Map(), distribution: [] });
+  }
+  render() {
+    let statData1 = this.distribute(this.props.data, this.props.struct[0].category[0])
+    console.info(statData1)
+    let statData2 = this.distribute(this.props.data, this.props.struct[0].category[1])
+    console.info(statData2)
+    let statData3 = this.distribute(this.props.data, this.props.struct[0].category[2])
+    console.info(statData3)
+
     return (
       <div className='panel'>
         <div className='panel-row' >
-          <JPie data={pieData_F1} field={this.props.struct[0].fields[0]} title={this.props.struct[0].title + '-1'} />
-          <JPie data={pieData_F3} field={this.props.struct[0].fields[1]} title={this.props.struct[0].title + '-2'}/>
-          <JBar data={[barData_1, barData_2, barData_3]} title={this.props.struct[1].title} />
+        <JPie data={statData1.distribution} title={this.props.struct[0].category[0]} />
+        <JPie data={statData2.distribution} title={this.props.struct[0].category[1]} />
+        <JPie data={statData3.distribution} title={this.props.struct[0].category[2]} />
+        <JPie data={pieData_F1} title={this.props.struct[0].title + '-1'} />
+        <JPie data={pieData_F3} title={this.props.struct[0].title + '-2'} />
+
+        <JBar data={[barData_1, barData_2, barData_3]} title={this.props.struct[1].title} />
+        <JBar2 data={[barData_1, barData_2, barData_3]} struct={this.props.struct[1]} />
         </div>
     </div>
     )
@@ -115,7 +176,7 @@ class StatsPanel extends React.Component {
 
 ReactDOM.render(
   <div className='panel'>
-    <StatsPanel data={data} struct={struct}/>
+    <StatsPanel data={data} struct={struct} />
   </div>,
   document.getElementById('root')
 )
