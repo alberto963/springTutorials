@@ -6,18 +6,18 @@ import './index.css'
 
 const data = [
   {id: 1, f1: 1, f2: 'A', f3: true},
-  {id: 2, f1: 2, f2: 'A', f3: true},
-  {id: 3, f1: 3, f2: 'A', f3: true},
-  {id: 4, f1: 1, f2: 'B', f3: true},
-  {id: 5, f1: 2, f2: 'B', f3: false},
-  {id: 6, f1: 3, f2: 'B', f3: false},
+  {id: 2, f1: 2, f2: 'B', f3: true},
+  {id: 3, f1: 3, f2: 'B', f3: true},
+  {id: 4, f1: 1, f2: 'C', f3: true},
+  {id: 5, f1: 2, f2: 'C', f3: false},
+  {id: 6, f1: 3, f2: 'C', f3: false},
   {id: 7, f1: 1, f2: 'C', f3: false},
   {id: 8, f1: 2, f2: 'C', f3: false},
   {id: 9, f1: 3, f2: 'C', f3: false},
 ]
 
 const struct = [
-  { title: 'pie1', type: 'pie', category: ['f1', 'f3', 'f2'] }, 
+  { title: 'pie1', type: 'pie', category: ['f1', 'f2', 'f3'] }, 
   { title: 'bar1', type: 'bar', category: ['f1', 'f3'] },
 
   { title: 'pie2', type: 'pie', category: ['f2', 'f3'] }, 
@@ -123,6 +123,21 @@ class JBar2 extends React.Component {
     )
   }
 }
+
+class SingleAttributJBar extends React.Component {
+  render() {
+    return (
+      <div className='panel-elem' >
+        <V.VictoryChart domainPadding={10} theme={V.VictoryTheme.material}>
+          <V.VictoryAxis tickValues={[" 1", " 2", " 3"] } />
+          <V.VictoryAxis dependentAxis tickFormat={(x) => (`${x}`)}/>
+          <V.VictoryBar width={100} height={100} standalone={false} data={this.props.data} />
+          <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text={this.props.title} />
+        </V.VictoryChart>
+      </div>
+    )
+  }
+}
 class StatsPanel extends React.Component {
 
   distribute(data, category) {
@@ -134,39 +149,44 @@ class StatsPanel extends React.Component {
       }
 
       var value = currentData[category]
+      var current
       if (distributor.values.has(value)) {
-        var current = distributor.values.get(value)
+        current = distributor.values.get(value)
         current.occurrencies +=1
-        distributor.values.set(value, current);
-        distributor.distribution[current.index] = {x: value, y: current.occurrencies }
       } else {
-        var newV={index: g++, occurrencies:1}
-        distributor.values.set(value, newV);
-        distributor.distribution = distributor.distribution.concat( [{x: value, y: newV.value}])
+        current={index: g++, occurrencies:1}
       }
-    
+
+      distributor.values.set(value, current);
+      distributor.distribution[current.index] = {x: value, y: current.occurrencies }
+
       return distributor;
       }, {values : new Map(), distribution: [] });
   }
   render() {
-    let statData1 = this.distribute(this.props.data, this.props.struct[0].category[0])
+    let statData0 = this.distribute(this.props.data, this.props.struct[0].category[0])
+    console.info(statData0)
+    let statData1 = this.distribute(this.props.data, this.props.struct[0].category[1])
     console.info(statData1)
-    let statData2 = this.distribute(this.props.data, this.props.struct[0].category[1])
+    let statData2 = this.distribute(this.props.data, this.props.struct[0].category[2])
     console.info(statData2)
-    let statData3 = this.distribute(this.props.data, this.props.struct[0].category[2])
-    console.info(statData3)
 
     return (
       <div className='panel'>
         <div className='panel-row' >
-        <JPie data={statData1.distribution} title={this.props.struct[0].category[0]} />
-        <JPie data={statData2.distribution} title={this.props.struct[0].category[1]} />
-        <JPie data={statData3.distribution} title={this.props.struct[0].category[2]} />
-        <JPie data={pieData_F1} title={this.props.struct[0].title + '-1'} />
-        <JPie data={pieData_F3} title={this.props.struct[0].title + '-2'} />
+          <JPie data={statData0.distribution} title={this.props.struct[0].category[0]} />
+          <JPie data={statData1.distribution} title={this.props.struct[0].category[1]} />
+          <JPie data={statData2.distribution} title={this.props.struct[0].category[2]} />
+          <JPie data={pieData_F1} title={this.props.struct[0].title + '-1'} />
+          <JPie data={pieData_F3} title={this.props.struct[0].title + '-2'} />
 
-        <JBar data={[barData_1, barData_2, barData_3]} title={this.props.struct[1].title} />
-        <JBar2 data={[barData_1, barData_2, barData_3]} struct={this.props.struct[1]} />
+          
+          <SingleAttributJBar data={statData0.distribution} title={this.props.struct[0].category[0]} />
+          <SingleAttributJBar data={statData1.distribution} title={this.props.struct[0].category[1]} />
+          <SingleAttributJBar data={statData2.distribution} title={this.props.struct[0].category[2]} />
+
+          <JBar data={[barData_1, barData_2, barData_3]} title={this.props.struct[1].title} />
+          <JBar2 data={[barData_1, barData_2, barData_3]} struct={this.props.struct[1]} />
         </div>
     </div>
     )
