@@ -1,0 +1,35 @@
+body {
+  font: 6px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: row;
+}
+
+/*
+ * The ::after selector inserts something after the content of each selected element(s).
+ * Use the content property to specify the content to insert.
+ * Use the ::before selector to insert something before the content.
+ */
+.panel-row::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.panel-elem {
+  width: 200px;
+  height: 200px;
+  background: rgb(67, 187, 181);
+  border: 1px solid rgb(206, 26, 26);
+  float: left;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 34px;
+  margin-right: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+}
