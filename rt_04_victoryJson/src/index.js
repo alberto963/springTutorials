@@ -19,9 +19,8 @@ const data = [
 const struct = [
   { title: 'pie1', type: 'pie', attributes: ['f1', 'f2', 'f3'] }, 
   { title: 'bar1', type: 'bar', attributes: ['f1', 'f2', 'f3'] },
-
-  { title: 'pie2', type: 'pie', attributes: ['f2', 'f3'] }, 
-  { title: 'bar2', type: 'bar', attributes: ['f2', 'f3'] },
+  { title: 'pie2', type: 'pie', attributes: ['f1', ['f2','f3']] }, 
+  { title: 'bar2', type: 'bar', attributes: ['f1', ['f2', 'f3']] },
 ]
 
 /*
@@ -133,15 +132,20 @@ class SingleAttributeJBar extends React.Component {
       <div className='panel-elem' >
         <V.VictoryChart domainPadding={10} theme={V.VictoryTheme.material}>
           <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text={this.props.struct.title + "-"+ this.props.title} />
-          <V.VictoryAxis tickValues={Array.from(this.props.data.values.keys())} label="Label"
-  style={{
-    axis: {stroke: "#756f6a"},
-    axisLabel: {fontSize: 20, padding: 30},
-    grid: {stroke: (t) => t > 0.5 ? "red" : "grey"},
-    ticks: {stroke: "grey", size: 5},
-    tickLabels: {fontSize: 15, padding: 5, margin: 5}
-  }} />
-          <V.VictoryAxis dependentAxis tickFormat={(x) => (`${x}`)} />
+          <V.VictoryAxis tickValues={Array.from(this.props.data.values.keys())} label="Values"
+                          style={{ 
+                            axis: {stroke: "#756f6a"}, 
+                            axisLabel: {fontSize: 20, padding: 30},
+                            grid: {stroke: (x) => x > 2 ? "red" : "grey"}, 
+                            ticks: {stroke: "white", size: 1}, 
+                            tickLabels: {fontSize: 15, padding: 5, margin: 5} }} />
+          <V.VictoryAxis dependentAxis tickFormat={(y) => (`${y}`)}
+                          style={{ 
+                            axis: {stroke: "#756f6a"}, 
+                            axisLabel: {fontSize: 20, padding: 30},
+                            grid: {stroke: (x) => x > 2 ? "red" : "green"}, 
+                            ticks: {stroke: "white", size: 1}, 
+                            tickLabels: {fontSize: 15, padding: 5, margin: 5} }} />
           <V.VictoryBar width={50} height={20} standalone={false} data={this.props.data.distribution} style={barStyle} alignment="start"
                         animate={{duration: 2000, onLoad: { duration: 1000 }}}
                         barRatio={0.25} />
