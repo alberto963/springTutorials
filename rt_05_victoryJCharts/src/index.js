@@ -114,13 +114,10 @@ class StatsPanel extends React.Component {
         let sdata = distribute(this.props.data, cattr)
 
         if (typeof attr !== 'string') {
-          sdata.distribution = merge(sdata, attr.category)
-          sdata.values = sdata.distribution.reduce(
-            (accumulator, currentValue ) => accumulator.set(currentValue.x, currentValue.y), new Map()
-          )
+          sdata = merge(sdata, attr.category)
         }
 
-        console.info( 'attr=', attr)
+        console.info('attr=', attr)
         console.info('title='+ struct.title + ' attr=' + attr + ' data=', sdata)
 
         if (struct.type === 'pie') {
@@ -182,9 +179,16 @@ function merge(data, category) {
 
   console.info('groupedList=', groupedList)
 
-  return data.distribution.reduce((grouped, elem) => { 
+  const mergedDistribution = data.distribution.reduce((grouped, elem) => { 
     return groupedList.includes(elem.x) ? grouped : grouped.concat({ x : ''+elem.x, y:elem.y} )
   }, grouped )
+
+  const mergedValues = mergedDistribution.reduce(
+    (accumulator, currentValue ) => accumulator.set(currentValue.x, currentValue.y), new Map()
+  )
+
+  return { distribution: mergedDistribution,
+           values: mergedValues }
 }
 // ========================================
 
