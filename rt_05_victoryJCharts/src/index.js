@@ -5,7 +5,7 @@ import uuidv1 from 'uuid'
 
 import './index.css'
 
-const data = [
+const data0 = [
   {id: 0, f1: 0, f2: 'A', f3: true},
   {id: 1, f1: 1, f2: 'B', f3: true},
   {id: 2, f1: 2, f2: 'B', f3: true},
@@ -39,6 +39,10 @@ const data = [
   {id: 30, f1: 4, f2: 'E', f3: false},
   {id: 31, f1: 0, f2: 'E', f3: false},
 ]
+
+const data = Array(100000).fill(null).map((row, i) => {
+  return {id: i, f1: i%97, f2: i%2 === 0 ? 'A' : i%3=== 0 ? 'B' : i%5=== 0 ? 'C' : i%7=== 0 ? 'D' : 'E', f3: i%2 === 0}
+})
 
 // const struct = [
 //   { title: 'bar2-g', table: 'UnivariateFrequency', type: 'bar', attributes: [ { attr: 'f2', category: [['A', 'B'], ['C','D']]}] },
@@ -117,8 +121,8 @@ class StatsPanel extends React.Component {
           sdata = merge(sdata, attr.category)
         }
 
-        console.info('attr=', attr)
-        console.info('title='+ struct.title + ' attr=' + attr + ' data=', sdata)
+        // console.info('attr=', attr)
+        // console.info('title='+ struct.title + ' attr=' + attr + ' data=', sdata)
 
         if (struct.type === 'pie') {
           return <SingleAttributeJPie key={uuidv1()} data={sdata} struct={struct} title={cattr} />
