@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import * as V from 'victory'
+import uuidv1 from "uuid"
 
 import './index.css'
 
@@ -33,17 +34,24 @@ const data = [
   {id: 25, f1: 4, f2: 'D', f3: false},
   {id: 26, f1: 0, f2: 'D', f3: false},
   {id: 27, f1: 1, f2: 'D', f3: false},
-  {id: 28, f1: 2, f2: 'D', f3: false},
-  {id: 29, f1: 3, f2: 'D', f3: false},
-  {id: 30, f1: 4, f2: 'D', f3: false},
-  {id: 31, f1: 0, f2: 'D', f3: false},
+  {id: 28, f1: 2, f2: 'E', f3: false},
+  {id: 29, f1: 3, f2: 'E', f3: false},
+  {id: 30, f1: 4, f2: 'E', f3: false},
+  {id: 31, f1: 0, f2: 'E', f3: false},
 ]
 
+// const struct = [
+//   { title: 'bar2-g', table: 'UnivariateFrequency', type: 'bar', attributes: [ { attr: 'f2', category: [['A', 'B'], ['C','D']]}] },
+// ]
 const struct = [
   { title: 'pie1', table: 'UnivariateFrequency', type: 'pie', attributes: ['f1', 'f2', 'f3'] }, 
   { title: 'bar1', table: 'UnivariateFrequency', type: 'bar', attributes: ['f1', 'f2', 'f3'] },
-  { title: 'pie2', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [[0, 1], [3,4]]}, 'f2', 'f3'] }, 
-  { title: 'bar2', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [[0, 1], [3,4]]}, 'f2', 'f3'] },
+  { title: 'pie2-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [[0, 1], [3, 4]]},
+                                                                             { attr: 'f2', category: [['A', 'B'], ['C','D']]},
+                                                                              'f3'] }, 
+  { title: 'bar2-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [[0, 1], [3, 4]]},
+                                                                             { attr: 'f2', category: [['A', 'B'], ['C','D']]},
+                                                                              'f3'] },
 ]
 
 const pieStyle = { labels: { fontSize: 10, fill: 'black'}}
@@ -70,7 +78,7 @@ const barStyle = { labels: { fontSize: 20, fill: "black" },
 class SingleAttributeJBar extends React.Component {
   render() {
     return (
-      <div className='panel-elem' >
+      <div className='panel-elem'>
         <V.VictoryChart domainPadding={10} theme={V.VictoryTheme.material}>
           <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text={this.props.struct.title + "-"+ this.props.title} />
           <V.VictoryAxis tickValues={Array.from(this.props.data.values.keys())} label="Values"
@@ -103,17 +111,25 @@ class StatsPanel extends React.Component {
       return struct.attributes.map((attr) => {
 
         const cattr = typeof attr === 'string' ? attr : attr.attr
-        const sdata = distribute(this.props.data, cattr)
-        console.info('sdata=', sdata)
-        if (typeof attr !== 'string'){
-          const t = merge(sdata, attr.category)
+        let sdata = distribute(this.props.data, cattr)
+
+        if (typeof attr !== 'string') {
+          sdata.distribution = merge(sdata, attr.category)
+          sdata.values = sdata.distribution.reduce(
+            (accumulator, currentValue ) => accumulator.set(currentValue.x, currentValue.y), new Map()
+          )
         }
 
-        if (struct.type === 'pie')
-          return <SingleAttributeJPie data={sdata} struct={struct} title={cattr} />
+        console.info( 'attr=', attr)
+        console.info('title='+ struct.title + ' attr=' + attr + ' data=', sdata)
+
+        if (struct.type === 'pie') {
+          return <SingleAttributeJPie key={uuidv1()} data={sdata} struct={struct} title={cattr} />
+        }
         
-        if (struct.type === 'bar')
-          return <SingleAttributeJBar data={sdata} struct={struct} title={cattr} />
+        if (struct.type === 'bar') {
+          return <SingleAttributeJBar key={uuidv1()} data={sdata} struct={struct} title={cattr} />
+        }
         
         return <span>Wrong chart type</span>
       })
@@ -142,7 +158,7 @@ function distribute(data, attribute) {
     if (distributor.values.has(value)) {
       current = distributor.values.get(value)
       current.occurrencies +=1
-    } 
+    }
     distributor.values.set(value, current)
     distributor.distribution[current.index] = { x: value, y: current.occurrencies }
 
@@ -152,31 +168,23 @@ function distribute(data, attribute) {
 
 function merge(data, category) {
 
-  const newDistr = category.map((group, i) => {
-    const x = group.reduce((newe, elem) => { return newe + ','+elem})
-    console.info('x='+x)
-    return x
+  let grouped = category.map((group) => {
+    return group.reduce((newe, elem) => { 
+      return {
+        x: newe.x + (newe.x !== '' ? ',' : '') + elem,
+        y: newe.y + data.values.get(elem).occurrencies,
+      }
+    }, {x: "", y: 0})
   })
-  
-  console.info('newDistr=', newDistr)
 
-  return newDistr
+  const flatten = arr => arr.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), [])
+  const groupedList = flatten(category)
 
-  // return data.reduce((merger, row) => {
+  console.info('groupedList=', groupedList)
 
-  //   var attribute = row.x
-  //   var value = row.y
-  //   var current = { index: merger.values.size, occurrencies: value }
-  //   if (merger.values.has(attribute)) {
-  //     current = merger.values.get(value)
-  //     current.occurrencies +=value
-  //   }
-
-  //   merger.values.set(value, current)
-  //   merger.distribution[current.index] = { x: value, y: current.occurrencies }
-
-  //   return merger
-  //   }, [])
+  return data.distribution.reduce((grouped, elem) => { 
+    return groupedList.includes(elem.x) ? grouped : grouped.concat({ x : ""+elem.x, y:elem.y} )
+  }, grouped )
 }
 // ========================================
 
