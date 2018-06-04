@@ -8,6 +8,11 @@ body {
   flex-direction: row;
 }
 
+.main-panel {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 /*
  * The ::after selector inserts something after the content of each selected element(s).
  * Use the content property to specify the content to insert.
@@ -32,4 +37,7 @@ body {
   margin-top: 20px;
   padding: 10px;
   text-align: center;
+}
+.chart-button {
+  background-color: green;
 }
