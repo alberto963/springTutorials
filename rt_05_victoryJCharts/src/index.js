@@ -159,7 +159,7 @@ class StatsPanel extends React.Component {
         let sdata = distribute(this.state.data, cattr)
 
         if (typeof attr !== 'string') {
-          sdata = merge(sdata, attr.category)
+          sdata = merge2(sdata, attr.category)
         }
 
         // console.info('attr=', attr)
@@ -251,17 +251,10 @@ function merge(data, category) {
  /*
   * Looping on the groups a new distribution is computed by merging all grouped values
   */
-  let grouped = category
-    .map((group) => {
-      return group.reduce((merger, elem) => { 
-        const value =  data.values.get(elem)
-        return value ? {
+  let grouped = category.map(group => group.reduce((merger, elem) => data.values.get(elem) ? {
           x: merger.x + (merger.x !== '' ? ',' : '') + elem,
-          y: merger.y + value.occurrencies,
-        } : merger
-      }, {x: '', y: 0})
-    })
-    .filter(e => e.x)
+          y: merger.y + data.values.get(elem).occurrencies,
+        } : merger, {x: '', y: 0})).filter(elem => elem.x)
 
   console.info('grouped=', grouped)
 
@@ -273,9 +266,8 @@ function merge(data, category) {
   /*
    * Remove all the realizations in the distribution that are now grouped starting from the grouped realization just computed as initial value
    */
-  const mergedDistribution = data.distribution.reduce((grouped, elem) => { 
-    return groupedList.includes(elem.x) ? grouped : grouped.concat({ x : ''+elem.x, y:elem.y} )
-  }, grouped )
+  const mergedDistribution = data.distribution.reduce((grouped, elem) => groupedList.includes(elem.x) ? grouped :
+   grouped.concat({ x : ''+elem.x, y:elem.y} ), grouped )
 
   console.info('mergedDistribution=', mergedDistribution)
 
@@ -286,6 +278,35 @@ function merge(data, category) {
   const mergedValues = mergedDistribution.reduce(
     (accumulator, currentValue ) => accumulator.set(currentValue.x, currentValue.y), new Map()
   )
+
+  return { distribution: mergedDistribution,
+           values: mergedValues }
+}
+
+/*
+ * A more compress merge function
+ */
+function merge2(data, category) {
+ /*
+  * Looping on the groups a new distribution is computed by merging all grouped values
+  */
+  const flatten = arr => arr.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), [])
+
+  /*
+   * Remove all the realizations in the distribution that are now grouped starting from the grouped realization just computed as initial value
+   */
+  const mergedDistribution = data.distribution.reduce((grouped, elem) => flatten(category).includes(elem.x) ? grouped :
+   grouped.concat({ x : ''+elem.x, y:elem.y} ), category.map(group => group.reduce((merger, elem) => data.values.get(elem) ? {
+    x: merger.x + (merger.x !== '' ? ',' : '') + elem,
+    y: merger.y + data.values.get(elem).occurrencies,
+  } : merger, {x: '', y: 0})).filter(elem => elem.x))
+
+  /*
+   * Update also values map to remove all the values (index + occurrency) that are now grouped 
+   * (and should not count twice)
+   */
+  const mergedValues = mergedDistribution.reduce(
+    (accumulator, currentValue ) => accumulator.set(currentValue.x, currentValue.y), new Map())
 
   return { distribution: mergedDistribution,
            values: mergedValues }
