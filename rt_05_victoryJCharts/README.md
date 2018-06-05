@@ -16,9 +16,9 @@ Redux is meant to be an help for initial setup and possible future enhancements 
 ## JSON
 
 JSON file will provide the following information:
-- the tipe of data to be shown 
+- the type of data to be shown 
   - Univariate frequency tables
-- the type of the chart (pie/bar)
+- the type of chart (pie/bar)
 - involved fields (attributes) of input data to be shown (one chart per field)
 - values may be counted as merged (categories)
 
