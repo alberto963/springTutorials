@@ -76,49 +76,30 @@ const struct = [
 
 ]
 
-const pieStyle = { labels: { fontSize: 10, fill: 'black'}}
-class SingleAttributeJPie extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: props.data,
-    }
+function SingleAttributeJPie(props) {
+  const pieStyle = { labels: { fontSize: 10, fill: 'black'}}
 
-    update = update.bind(this)
-  }
-  render() {
-    return (
-        <div className='panel-elem'>
+  return <div className='panel-elem'>
           <svg values='' width={200} height={200}>
-            <V.VictoryPie standalone={false} width={200} height={200} data={this.state.data.distribution} innerRadius={25} labelRadius={50}
+            <V.VictoryPie standalone={false} width={200} height={200} data={props.data.distribution} innerRadius={25} labelRadius={50}
                           style={pieStyle} colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy' ]}
                           animate={{duration: 2000, onLoad: { duration: 1000 }}} />
 
-            <V.VictoryLabel textAnchor='middle' style={{ fontSize: 10 }} x={100} y={100} text={this.props.struct.title + '-'+ this.props.title}  />
+            <V.VictoryLabel textAnchor='middle' style={{ fontSize: 10 }} x={100} y={100} text={props.struct.title + '-'+ props.title}  />
           </svg>
         </div>
-    )
   }
-}
 
-const barStyle = { labels: { fontSize: 20, fill: 'black' },
+
+function SingleAttributeJBar(props) {
+
+  const barStyle = { labels: { fontSize: 20, fill: 'black' },
                    data: { fill: (d) => d.x <0 ? '#000000' : '#c43a31', stroke: (d) => d.x < 0 ? '#000000' : '#c43a31', fillOpacity: 0.7, strokeWidth: 3 }}
 
-class SingleAttributeJBar extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: props.data,
-    }
-
-    update = update.bind(this)
-  }
-  render() {
-    return (
-      <div className='panel-elem'>
+  return <div className='panel-elem'>
         <V.VictoryChart domainPadding={10} theme={V.VictoryTheme.material}>
-          <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text={this.props.struct.title + '-'+ this.props.title} />
-          <V.VictoryAxis tickValues={Array.from(this.state.data.values.keys())} label='Values'
+          <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text={props.struct.title + '-'+ props.title} />
+          <V.VictoryAxis tickValues={Array.from(props.data.values.keys())} label='Values'
                           style={{ 
                             axis: {stroke: '#756f6a'}, 
                             axisLabel: {fontSize: 20, padding: 30},
@@ -132,13 +113,11 @@ class SingleAttributeJBar extends React.Component {
                             grid: {stroke: (x) => x > 2 ? 'red' : 'green'}, 
                             ticks: {stroke: 'white', size: 1}, 
                             tickLabels: {fontSize: 15, padding: 5, margin: 5} }} />
-          <V.VictoryBar width={50} height={20} standalone={false} data={this.state.data.distribution} style={barStyle} alignment='start'
+          <V.VictoryBar width={50} height={20} standalone={false} data={props.data.distribution} style={barStyle} alignment='start'
                         animate={{duration: 2000, onLoad: { duration: 1000 }}}
                         barRatio={0.25} />
         </V.VictoryChart>
       </div>
-    )
-  }
 }
 class StatsPanel extends React.Component {
   constructor(props) {
@@ -147,7 +126,7 @@ class StatsPanel extends React.Component {
       data: props.data,
     }
 
-    update = update.bind(this)
+    clickUpdate = clickUpdate.bind(this)
   }
 
   render() {
@@ -177,49 +156,31 @@ class StatsPanel extends React.Component {
       })
     })
 
-    return (
-      <div className='panel'>
-        <div className='panel-row' >
-          {charts}
-        </div>
-    </div>
-    )
+    return <div className='panel'>
+            <div className='panel-row' >
+              {charts}
+            </div>
+          </div>
   }
 }
 
-class StatsButtonsPanel extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: props.data,
-    }
-  }
-  clickUpdate() {
-    const data = updateData(this.state.data);
-    this.setState({data : data})
-    update(data)
-  }
-  render() {
-
-    const buttons = this.props.struct.map((struct) => {
+function StatsButtonsPanel(props) {
+    const buttons = props.struct.map((struct) => {
       return struct.attributes.map((attr) => {
           const cattr = typeof attr === 'string' ? attr : attr.attr
-          return <button className="chart-button" key={uuidv1()} onClick={() => this.clickUpdate()} >{struct.title + '-' + cattr}</button>
+          return <button className="chart-button" key={uuidv1()} onClick={() => clickUpdate()} >{struct.title + '-' + cattr}</button>
       })
     })
 
-    return (
-      <div className='panel'>
+    return <div className='panel'>
         <div className='panel-row' >
           {buttons}
         </div>
     </div>
-    )
   }
-}
 
-function update(data) {
-  this.setState({data})
+function clickUpdate() {
+  this.setState({data: updateData(this.state.data)})
 }
 
 function distribute(data, attribute) {

@@ -10,8 +10,9 @@ rt_05: This project was copied from rt_04 project
 ## Introduction
 
 After experiments and drills with Victory react library in rt_04, I try to implement a reusable component that can display an array of statistic data in the form of pie chars and bar charts.
-This component makes use of React Victory and Redux. 
-Redux is meant to be an help for initial setup and possible future enhancements (like event handling and command execution)
+This component makes use of React Victory.
+Initial intention was to introduce also Redux, but as a workflow choice, I decided to move this addition to next iteration rt_07, where react custom componenets (bar, pie, stats) are split in different files (not all in one index.js file, as it released in rt_05)
+Redux is meant to be an help for initial setup and possible future enhancements (like event handling and command execution).
 
 ## JSON
 
