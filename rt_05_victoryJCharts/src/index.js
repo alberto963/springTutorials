@@ -45,15 +45,6 @@ const generateData = (dataSet, n) => {
     })
 }
 
-const updateData = (data) => { 
-  return data.map(row => {
-      return {
-        ...row,
-        f1: row.f1 + 1
-      }
-    })
-}
-
 // const struct = [
 //   { title: 'bar2-g', table: 'UnivariateFrequency', type: 'bar', attributes: [ { attr: 'f2', category: [['A', 'B'], ['C','D']]}] },
 // ]
@@ -89,7 +80,6 @@ function SingleAttributeJPie(props) {
           </svg>
         </div>
   }
-
 
 function SingleAttributeJBar(props) {
 
@@ -156,11 +146,7 @@ class StatsPanel extends React.Component {
       })
     })
 
-    return <div className='panel'>
-            <div className='panel-row' >
-              {charts}
-            </div>
-          </div>
+    return <div className='panel'><div className='panel-row' >{charts}</div></div>
   }
 }
 
@@ -168,24 +154,19 @@ function StatsButtonsPanel(props) {
     const buttons = props.struct.map((struct) => {
       return struct.attributes.map((attr) => {
           const cattr = typeof attr === 'string' ? attr : attr.attr
-          return <button className="chart-button" key={uuidv1()} onClick={() => clickUpdate()} >{struct.title + '-' + cattr}</button>
+          return <button className='chart-button' key={uuidv1()} onClick={() => clickUpdate()} >{struct.title + '-' + cattr}</button>
       })
     })
 
-    return <div className='panel'>
-        <div className='panel-row' >
-          {buttons}
-        </div>
-    </div>
-  }
+    return <div className='panel'><div className='panel-row' >{buttons}</div></div>
+}
 
 function clickUpdate() {
+  const updateData = data => data.map(row => { return { ...row, f1: row.f1 + 1 }})
   this.setState({data: updateData(this.state.data)})
 }
 
-function distribute(data, attribute) {
-
-  return data.reduce((distributor, row) => {
+const distribute = (data, attribute) => data.reduce((distributor, row) => {
 
     if (!row.hasOwnProperty(attribute)) { 
       return distributor
@@ -202,9 +183,8 @@ function distribute(data, attribute) {
 
     return distributor
     }, { values : new Map(), distribution: [] })
-}
 
-function merge2(data, category) {
+const merge2 = (data, category) => {
 
   console.info('data=', data)
   console.info('category=', category)
@@ -243,7 +223,7 @@ function merge2(data, category) {
 /*
  * A more compressed merge function
  */
-function merge(data, category) {
+const merge = (data, category) => {
 
   const flatten = arr => arr.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), [])
 
@@ -257,6 +237,7 @@ function merge(data, category) {
 
   return { distribution, values }
 }
+
 // ========================================
 const data = generateData('data1', 10)
 ReactDOM.render(
