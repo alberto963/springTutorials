@@ -154,7 +154,7 @@ function StatsButtonsPanel(props) {
     const buttons = props.struct.map((struct) => {
       return struct.attributes.map((attr) => {
           const cattr = typeof attr === 'string' ? attr : attr.attr
-          return <button className='chart-button' key={uuidv1()} onClick={() => clickUpdate()} >{struct.title + '-' + cattr}</button>
+          return <button className='chart-button' key={uuidv1()} onClick={clickUpdate} >{struct.title + '-' + cattr}</button>
       })
     })
 
@@ -243,7 +243,7 @@ const data = generateData('data1', 10)
 ReactDOM.render(
   <div className='main-panel'>
     <StatsPanel data={data} struct={struct} />
-    <StatsButtonsPanel data={data} struct={struct} />
+    <StatsButtonsPanel struct={struct} />
   </div>,
   document.getElementById('root')
 )
