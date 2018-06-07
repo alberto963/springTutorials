@@ -1,32 +1,28 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import uuidv1 from 'uuid'
+import { connect } from "react-redux";
 
 import '../index.css'
 
 import SingleAttributeJPie from '../components/SingleAttributeJPie'
 import SingleAttributeJBar from '../components/SingleAttributeJBar'
 import StatsButtonsPanel from '../containers/StatsButtonsPanel'
-export default class StatsPanel extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: props.data,
-    }
 
-    this.clickUpdate = this.clickUpdate.bind(this)
+const mapStateToProps = (state, ownProps) => {
+  return {
+    data: state.update.data,
   }
-  clickUpdate() {
-    const updateData = data => data.map(row => { return { ...row, f1: row.f1 + 1 }})
-    this.setState({data: updateData(this.state.data)})
-  }
+}
+
+class StatsPanel extends React.Component {
+  
   render() {
 
     const charts = this.props.struct.map((struct) => {
       return struct.attributes.map((attr) => {
 
         const cattr = typeof attr === 'string' ? attr : attr.attr
-        let sdata = distribute(this.state.data, cattr)
+        let sdata = distribute(this.props.data, cattr)
 
         if (typeof attr !== 'string') {
           sdata = merge(sdata, attr.category)
@@ -48,7 +44,7 @@ export default class StatsPanel extends React.Component {
     })
 
     return <div className='panel'>
-        <div className='panel-row'><StatsButtonsPanel struct={this.props.struct} clickUpdate={this.clickUpdate}/></div>
+        <div className='panel-row'><StatsButtonsPanel struct={this.props.struct}/></div>
         <div className='panel-row'>{charts}</div>
     </div>
   }
@@ -87,3 +83,4 @@ const merge = (data, category) => {
   return { distribution, values }
 }
 
+export default connect(mapStateToProps, null)(StatsPanel)
