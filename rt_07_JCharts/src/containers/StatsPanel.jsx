@@ -6,7 +6,6 @@ import '../index.css'
 
 import SingleAttributeJPie from '../components/SingleAttributeJPie'
 import SingleAttributeJBar from '../components/SingleAttributeJBar'
-import StatsButtonsPanel from '../containers/StatsButtonsPanel'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -44,7 +43,6 @@ class StatsPanel extends React.Component {
     })
 
     return <div className='panel'>
-        <div className='panel-row'><StatsButtonsPanel struct={this.props.struct}/></div>
         <div className='panel-row'>{charts}</div>
     </div>
   }
@@ -78,7 +76,7 @@ const merge = (data, category) => {
     y: merger.y + data.values.get(elem).occurrencies,
   } : merger, {x: '', y: 0})).filter(elem => elem.x))
 
-  const values = distribution.reduce((merger, currentValue ) => merger.set(currentValue.x, currentValue.y), new Map())
+  const values = distribution.reduce((merger, currentValue) => merger.set(currentValue.x, currentValue.y), new Map())
 
   return { distribution, values }
 }

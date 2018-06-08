@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 
 import reducer from './reducers'
 import StatsPanel from './containers/StatsPanel'
+import StatsButtonsPanel from './containers/StatsButtonsPanel'
 
 import './index.css'
 
@@ -36,7 +37,8 @@ const struct = [
 // ========================================
 ReactDOM.render(
   <Provider store={store}>
-    <div className='main-panel'>
+    <div className='panel'>
+      <StatsButtonsPanel struct={struct}/>
       <StatsPanel struct={struct} />
     </div>
   </Provider>,

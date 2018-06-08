@@ -40,4 +40,6 @@ body {
 }
 .chart-button {
   background-color: green;
+  margin: 3px;
+  padding: 1px;
 }
