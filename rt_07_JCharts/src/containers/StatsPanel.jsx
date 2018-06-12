@@ -9,7 +9,7 @@ import SingleAttributeJBar from '../components/SingleAttributeJBar'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: state.update.data,
+    data: state.dataset.data,
   }
 }
 

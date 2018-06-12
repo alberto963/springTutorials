@@ -6,7 +6,7 @@ import '../index.css'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-      data: state.modify.data,
+      data: state.distribution.data,
     }
  }
   

@@ -1,4 +1,4 @@
-const generateData = (dataSet, n) => { 
+const generateDataset = (dataSet, n) => { 
   return dataSet === 'data0' ? [
     {id: 0, f1: 0, f2: 'A', f3: true},
     {id: 1, f1: 1, f2: 'B', f3: true},
@@ -38,11 +38,10 @@ const generateData = (dataSet, n) => {
     })
 }
 
-const initialState = {
-  data: generateData('data1', 10),
-}
+const data = generateDataset('data1', 10)
+const initialState = { data }
 
-const update = (state = initialState, action) => {
+const dataset = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE":
 
@@ -56,4 +55,4 @@ const update = (state = initialState, action) => {
   }
 }
 
-export default update
+export default dataset

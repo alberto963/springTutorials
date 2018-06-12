@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import update from './update'
-import modify from './modify'
+import dataset from './dataset'
+import distribution from './distribution'
 
-export default combineReducers({update, modify})
+export default combineReducers({dataset, distribution})
