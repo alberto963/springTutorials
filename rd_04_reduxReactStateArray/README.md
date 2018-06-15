@@ -1,4 +1,4 @@
-### rd_04_reduxReactTwoStates
+### rd_04
 # Redux tutorial: Some basic understandings
 
 Trying to have a component that is able to create an array of components that will all render with the same initial data, but that do not share the same state (they have indipendent states)
