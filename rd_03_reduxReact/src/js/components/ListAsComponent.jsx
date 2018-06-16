@@ -21,6 +21,6 @@ class WrappedList extends Component {
   }
 }
 
-const List = connect(mapStateToProps, null)(WrappedList)
+const ListAsComponent = connect(mapStateToProps, null)(WrappedList)
 
-export default List;
+export default ListAsComponent;
