@@ -1,30 +1,35 @@
 import React from 'react'
 import uuidv1 from 'uuid'
 import { connect } from "react-redux";
-import { modifyDataset, modify } from "../actions/index";
+import { modify, reload, add, remove } from "../actions/index";
 
 import '../index.css'
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    datas: state.dataset.charts,
+  }
+}
+
 const mapDispatchToProps = {
-  modifyDataset,
-  modify
+  reload,
+  add,
+  remove,
+  modify,
 }
 
 class StatsButtonsPanel extends React.Component {
 
   render() {
-      const buttons = this.props.struct.map((struct) => {
-      return struct.attributes.map((attr) => {
-          const cattr = typeof attr === 'string' ? attr : attr.attr
-          if (struct.type === 'pie') {
-            return <button className='chart-button' key={uuidv1()} 
-              onClick={this.props.modifyDataset}>{struct.title + '-' + cattr}</button>
-          }
-          return <button className='chart-button' key={uuidv1()} 
-            onClick={this.props.update}>{struct.title + '-' + cattr}</button>
-      })
-    })
-    return <div className='panel-row'>{buttons}</div>
+    const buttons = this.props.datas.map((d) => (
+      <button className='chart-button' key={uuidv1()}
+        onClick={() => this.props.reload(d.sstruct.id)}>{'Reload ' + d.sstruct.title + '-' + d.sstruct.attr}</button>
+    ))
+
+    const modifyButton = <div className='panel-row'><br /><button className='chart-button' key={uuidv1()}
+      onClick={() => this.props.modify()}>{'Modify'}</button></div>
+
+    return <div className='panel-row'>{buttons}{modifyButton}</div>
   }
 }
-export default connect(null, mapDispatchToProps)(StatsButtonsPanel)
+export default connect(mapStateToProps, mapDispatchToProps)(StatsButtonsPanel)
