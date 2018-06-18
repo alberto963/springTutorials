@@ -11,7 +11,7 @@ export default function SingleAttributeJBar(props) {
   return <div className='panel-elem'>
         <V.VictoryChart domainPadding={10} theme={V.VictoryTheme.material}>
           <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text={props.struct.title + '-'+ props.title} />
-          <V.VictoryAxis tickValues={Array.from(props.data.values.keys())} label='Values'
+          <V.VictoryAxis tickValues={props.data.distribution.map(d => d.x)} label='Values'
                           style={{ 
                             axis: {stroke: '#756f6a'}, 
                             axisLabel: {fontSize: 20, padding: 30},

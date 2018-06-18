@@ -69,11 +69,11 @@ const distribute = (data, attribute) => data.reduce((distributor, row) => {
     current = distributor.values.get(value)
     current.occurrencies += 1
   }
-  distributor.values.set(value, current)
+    distributor.values.set(value, current)
   distributor.distribution[current.index] = { x: value, y: current.occurrencies }
 
   return distributor
-}, { values: new Map(), distribution: [] })
+}, { distribution: [], values: new Map() })
 
 const flatten = arr => arr.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), [])
 
@@ -85,9 +85,9 @@ const merge = (data, category) => {
       y: merger.y + data.values.get(elem).occurrencies,
     } : merger, { x: '', y: 0 })).filter(elem => elem.x))
 
-  const values = distribution.reduce((merger, currentValue) => merger.set(currentValue.x, currentValue.y), new Map())
+  //const values = distribution.reduce((merger, currentValue) => merger.set(currentValue.x, currentValue.y), new Map())
 
-  return { distribution, values }
+  return distribution
 }
 
 let i = 0
@@ -102,9 +102,11 @@ const charts = flatten(structs.map((struct) => {
 
     if (typeof attr !== 'string') {
       sstruct.category = attr.category
-      sdata = merge(sdata, attr.category)
+      sdata.distribution = merge(sdata, attr.category)
     }
 
+   sdata.values = new Map(Array.from(sdata.values, ([key, value]) => [key, value.index]))
+    
     // console.info('attr=', attr)
     // console.info('title='+ struct.title + ' attr=' + attr + ' data=', sdata)
 
@@ -138,13 +140,15 @@ const dataset = (state = { data, charts }, action) => {
       const data = state.data.map((row, i) => { return i === 0 ? { ...row, f1: newValue } : row })
 
       /*
-       * Update now only involved chart (those with mofified attribute attribute)
+       * Update only involved chart (those with modified attribute)
        */
       // To be implemented....
+      const charts = state.charts.map(chart => { return chart.sstruct.cattr === 'f1' ? { ...chart} : chart })
 
       return {
         ...state, data
       }
+
     default:
       return state
   }
