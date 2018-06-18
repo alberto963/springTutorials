@@ -69,7 +69,7 @@ const distribute = (data, attribute) => data.reduce((distributor, row) => {
     current = distributor.values.get(value)
     current.occurrencies += 1
   }
-    distributor.values.set(value, current)
+  distributor.values.set(value, current)
   distributor.distribution[current.index] = { x: value, y: current.occurrencies }
 
   return distributor
@@ -105,8 +105,8 @@ const charts = flatten(structs.map((struct) => {
       sdata.distribution = merge(sdata, attr.category)
     }
 
-   sdata.values = new Map(Array.from(sdata.values, ([key, value]) => [key, value.index]))
-    
+    sdata.values = new Map(Array.from(sdata.values, ([key, value]) => [key, value.index]))
+
     // console.info('attr=', attr)
     // console.info('title='+ struct.title + ' attr=' + attr + ' data=', sdata)
 
@@ -143,7 +143,32 @@ const dataset = (state = { data, charts }, action) => {
        * Update only involved chart (those with modified attribute)
        */
       // To be implemented....
-      const charts = state.charts.map(chart => { return chart.sstruct.cattr === 'f1' ? { ...chart} : chart })
+      const charts1 = state.charts.filter(chart => chart.sstruct.attr === 'f1')
+      console.info('filtered charts=', charts1)
+
+      const newDistributions = charts1.map(chart => {
+        return {
+          ...chart, sdata: chart.sdata.distribution.map(v => v.x === chart.sdata.values.get(prevValue) ?
+            { ...v, y: v.y - 1 } : v.x === chart.sdata.values.get(newValue) ?
+              { ...v, y: v.y + 1 } : v).filter(v => v.y !== 0).map(v => !chart.sdata.values.has(newValue) ? { ...v, y: 1 } : v)
+        }
+      })
+      // Uhm, not ok, it is difficult to update both the distribution and the map,
+      // now I should remove the element in the map with key prevVal only if it has been removed from the distribution
+      // but how can I know it now...? Also all the elements indexes should be updated, not easy
+
+      // Same topic if a new value is added to the distribution
+
+      // TODO consider computing the distribution by using only distribution, 
+      // i.e. not using the map (that is so useless after the computation of the distribution)
+      // Yess, it is much easer, get rid of the map!!!!!
+      
+      console.info('newDistributions=', newDistributions)
+
+      // .map(d => d.filter(v => v.y !== 0))
+
+      // .map(d => !chart.sdata.values.has(newValue) ?
+      // [ ...d, { x: newValue, y: 1 } ] : d)
 
       return {
         ...state, data
