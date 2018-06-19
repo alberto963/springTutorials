@@ -34,7 +34,7 @@ const generateDataset = (dataSet, n) => {
     { id: 31, f1: 0, f2: 'E', f3: false },
   ] :
     Array(n).fill(null).map((row, i) => {
-      return { id: i, f1: i % 97, f2: i % 2 === 0 ? 'A' : i % 3 === 0 ? 'B' : i % 5 === 0 ? 'C' : i % 7 === 0 ? 'D' : 'E', f3: i % 2 === 0 }
+      return { id: i, f1: i % 97, f2: i % 2 === 0 ? 'AAA' : i % 3 === 0 ? 'BBB' : i % 5 === 0 ? 'C' : i % 7 === 0 ? 'D' : 'E', f3: i % 2 === 0 }
     })
 }
 
@@ -44,17 +44,17 @@ const structs = [
   { title: 'pie1', table: 'UnivariateFrequency', type: 'pie', attributes: ['f1', 'f2', 'f3'] },
   { title: 'bar1', table: 'UnivariateFrequency', type: 'bar', attributes: ['f1', 'f2', 'f3'] },
   {
-    title: 'pie2-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [[0, 1], [3, 4]] },
-    { attr: 'f2', category: [['A', 'B'], ['C', 'D']] },
+    title: 'pie2-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [['0', '1'], ['3', '4']] },
+    { attr: 'f2', category: [['AAA', 'BBB'], ['C', 'D']] },
       'f3']
   },
   {
-    title: 'bar2-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [[0, 1], [3, 4]] },
-    { attr: 'f2', category: [['A', 'B'], ['C', 'D']] },
+    title: 'bar2-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [['0', '1'], ['3', '4']] },
+    { attr: 'f2', category: [['AAA', 'BBB'], ['C', 'D']] },
       'f3']
   },
-  { title: 'pie3-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [[10, 11], [13, 14]] },] },
-  { title: 'bar3-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [[10, 11], [13, 14]] },] },
+  { title: 'pie3-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [['10', '11'], ['13', '14']] },] },
+  { title: 'bar3-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [['10', '11'], ['13', '14']] },] },
 ]
 
 const distribute = (data, attribute) => data.reduce((distributor, row) => {
@@ -63,7 +63,7 @@ const distribute = (data, attribute) => data.reduce((distributor, row) => {
     return distributor
   }
 
-  var value = row[attribute]
+  var value = String(row[attribute])
   var current = { index: distributor.values.size, occurrencies: 1 }
   if (distributor.values.has(value)) {
     current = distributor.values.get(value)
@@ -116,6 +116,16 @@ const charts = flatten(structs.map((struct) => {
 
 console.info('charts=', charts)
 
+// NOTE: takeaway, it is difficult to update both the distribution and the map,
+// now I should remove the element in the map with key prevVal only if it has been removed from the distribution
+// but how can I know it now...? Also all the element indexes should be updated, not easy
+
+// Same topic if a new value is added to the distribution
+
+// DONE: instead of using the map computed in distribute function above,I compute the new distribution by using only distribution, 
+// i.e. not using the map (that is hence useless after the computation of the distribution)
+// Yess, it is much easer, get rid of the map here
+
 const dataset = (state = { data, charts }, action) => {
   switch (action.type) {
     case "RELOAD":
@@ -134,44 +144,32 @@ const dataset = (state = { data, charts }, action) => {
       /*
        * Update only f1 field (just for test)
        */
-      const prevValue = state.data[0].f1
-      const newValue = prevValue + 1
+      const ATTR = 'f1'
+      const PREVVALUE = state.data[0].f1
+      const NEWVALUE = PREVVALUE + 1
 
-      const data = state.data.map((row, i) => { return i === 0 ? { ...row, f1: newValue } : row })
+      /*
+       * Update dataSet in order to have correct previous value for subsequent events
+       */
+      const data = state.data.map((row, i) => { return i === 0 ? { ...row, f1: NEWVALUE } : row })
+
+      const contains = (vx, value) => { const vs=vx.split(','); const r=vs.includes(value); console.info('vs=',vs); console.info(vs + ' ' + vx+ ' '+ value + ' r=',r); return r}
 
       /*
        * Update only involved chart (those with modified attribute)
        */
-      // To be implemented....
-      const charts1 = state.charts.filter(chart => chart.sstruct.attr === 'f1')
-      console.info('filtered charts=', charts1)
-
-      const newDistributions = charts1.map(chart => {
-        return {
-          ...chart, sdata: chart.sdata.distribution.map(v => v.x === chart.sdata.values.get(prevValue) ?
-            { ...v, y: v.y - 1 } : v.x === chart.sdata.values.get(newValue) ?
-              { ...v, y: v.y + 1 } : v).filter(v => v.y !== 0).map(v => !chart.sdata.values.has(newValue) ? { ...v, y: 1 } : v)
-        }
+      const charts = state.charts.map(chart => {
+        return chart.sstruct.attr === ATTR ? {
+          ...chart, sdata: { distribution: chart.sdata.distribution.map(v => contains(v.x, PREVVALUE) ?
+            { ...v, y: v.y - 1 } : contains(v.x, NEWVALUE) ?
+              { ...v, y: v.y + 1 } : v).filter(v => v.y !== 0).concat(!chart.sdata.distribution.find(v => contains(v.x, NEWVALUE)) ? [{x: String(NEWVALUE), y: 1}] : [])
+        } } : chart
       })
-      // Uhm, not ok, it is difficult to update both the distribution and the map,
-      // now I should remove the element in the map with key prevVal only if it has been removed from the distribution
-      // but how can I know it now...? Also all the elements indexes should be updated, not easy
-
-      // Same topic if a new value is added to the distribution
-
-      // TODO consider computing the distribution by using only distribution, 
-      // i.e. not using the map (that is so useless after the computation of the distribution)
-      // Yess, it is much easer, get rid of the map!!!!!
       
-      console.info('newDistributions=', newDistributions)
-
-      // .map(d => d.filter(v => v.y !== 0))
-
-      // .map(d => !chart.sdata.values.has(newValue) ?
-      // [ ...d, { x: newValue, y: 1 } ] : d)
+      console.info('Modified charts=', charts)
 
       return {
-        ...state, data
+        ...state, data, charts,
       }
 
     default:
