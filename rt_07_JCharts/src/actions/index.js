@@ -1,4 +1,5 @@
 // src/actions/index.js
+export const normalize = data => ({ type: "NORMALIZE", payload: data })
 export const reload = data => ({ type: "RELOAD", payload: data })
 export const add = data => ({ type: "ADD", payload: data })
 export const remove = data => ({ type: "REMOVE", payload: data })

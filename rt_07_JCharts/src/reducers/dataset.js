@@ -38,8 +38,6 @@ const generateDataset = (dataSet, n) => {
     })
 }
 
-const data = generateDataset('data1', 10)
-
 const structs = [
   { title: 'pie1', table: 'UnivariateFrequency', type: 'pie', attributes: ['f1', 'f2', 'f3'] },
   { title: 'bar1', table: 'UnivariateFrequency', type: 'bar', attributes: ['f1', 'f2', 'f3'] },
@@ -90,31 +88,31 @@ const merge = (data, category) => {
   return distribution
 }
 
-let i = 0
-const charts = flatten(structs.map((struct) => {
-  return struct.attributes.map((attr) => {
+const process = (data, structs) => {
+  let i = 0
+  return flatten(structs.map((struct) => {
+    return struct.attributes.map((attr) => {
 
-    let sstruct = { type: struct.type, title: struct.title, id: i++ }
+      let sstruct = { type: struct.type, title: struct.title, id: i++ }
 
-    const cattr = typeof attr === 'string' ? attr : attr.attr
-    sstruct.attr = cattr
-    let sdata = distribute(data, cattr)
+      const cattr = typeof attr === 'string' ? attr : attr.attr
+      sstruct.attr = cattr
+      let sdata = distribute(data, cattr)
 
-    if (typeof attr !== 'string') {
-      sstruct.category = attr.category
-      sdata.distribution = merge(sdata, attr.category)
-    }
+      if (typeof attr !== 'string') {
+        sstruct.category = attr.category
+        sdata.distribution = merge(sdata, attr.category)
+      }
 
-    sdata.values = new Map(Array.from(sdata.values, ([key, value]) => [key, value.index]))
+      sdata.values = new Map(Array.from(sdata.values, ([key, value]) => [key, value.index]))
 
-    // console.info('attr=', attr)
-    // console.info('title='+ struct.title + ' attr=' + attr + ' data=', sdata)
+      // console.info('attr=', attr)
+      // console.info('title='+ struct.title + ' attr=' + attr + ' data=', sdata)
 
-    return { sstruct, sdata }
-  })
-}))
-
-console.info('charts=', charts)
+      return { sstruct, sdata }
+    })
+  }))
+}
 
 const contains = (vx, v) => vx.split(',').includes(String(v))
 const containsXOR = (vx, v1, v2) => vx.split(',').includes(String(v1)) && !vx.split(',').includes(String(v2))
@@ -176,38 +174,65 @@ const containsForDebug = function (vx, v) {
 // i.e. not using the map (that is hence useless after the computation of the distribution)
 // Yess, it is much easer, get rid of the map here
 
+const data = generateDataset('data1', 10)
+console.info('Initial data=', data)
 
+const charts = process(data, structs)
+console.info('Initial charts=', charts)
 
 const dataset = (state = { data, charts }, action) => {
 
-
   switch (action.type) {
-    case "RELOAD":
+    case "NORMALIZE":
       /*
        * Reload now only involved chart (specified by id payload attribute)
        */
       const chart = state.charts[action.payload]
-      // To be continued....
+      console.info('Before normalize chart=', chart)
+
+      const nchart = chart.sdata.distribution.map(v => { return { ...v, y: 1 } })
+      console.info('After normalize nchart=', nchart)
+
+      const ncharts = state.charts.map(c => c.sstruct.id === action.payload ?
+        { sstruct: c.sstruct, sdata: { distribution: nchart } } : c)
+      console.info('After normalize ncharts=', ncharts)
 
       return {
-        ...state,
+        ...state, charts: ncharts
+      }
+
+    case "RELOAD":
+
+      console.info('Before reload data=', state.data)
+
+      const rdata = generateDataset('data1', 10)
+      console.info('Before reload Initial data=', rdata)
+
+      return {
+        ...state, data: rdata, charts: process(rdata, structs)
       }
 
     case "MODIFY":
+
+      console.info('Before modify data=', state.data)
+
+      if (state.data.length === 0) {
+        return { ...state }
+      }
 
       /*
        * Update only f1 field (just for test)
        */
       const ATTR = 'f1'
-      const ID = 0
+      const ID = state.data[0].id
       const PREVVALUE = state.data.find(row => row.id === ID)[ATTR]
       const NEWVALUE = PREVVALUE + 1
 
       /*
        * Update dataSet in order to have correct previous value for subsequent events
        */
-      const data = state.data.map((row) => row.id === ID ? { ...row, [ATTR]: NEWVALUE } : row)
-      console.info('Modified data=', data)
+      const data = state.data.map(row => row.id === ID ? { ...row, [ATTR]: NEWVALUE } : row)
+      console.info('After modify data=', data)
 
       /*
        * Update only involved chart (those with modified attribute)
@@ -221,19 +246,20 @@ const dataset = (state = { data, charts }, action) => {
         }
       } : chart)
 
-      console.info('Modified charts=', charts)
+      console.info('After modify charts=', charts)
 
       return {
         ...state, data, charts,
       }
 
     case "ADD":
+      console.info('Before add data=', data)
 
       const ID_ADD = state.data.length
       const NEWROW = { id: ID_ADD, f1: 1, f2: 'ZZZ', f3: false }
 
       const dataAdd = [...state.data, NEWROW]
-      console.info('Added data=', dataAdd)
+      console.info('After add data=', dataAdd)
 
       const chartsAdd = state.charts.map(chart => NEWROW.hasOwnProperty(chart.sstruct.attr) ? {
         ...chart, sdata: {
@@ -243,10 +269,38 @@ const dataset = (state = { data, charts }, action) => {
         }
       } : chart)
 
+      console.info('After add charts=', chartsAdd)
+
       return {
         ...state, data: dataAdd, charts: chartsAdd,
       }
 
+    case "REMOVE":
+      console.info('Before remove data=', data)
+
+      if (state.data.length === 0) {
+        return { ...state }
+      }
+
+      const ID_REMOVE = state.data[0].id
+      const DELROW = state.data.filter(row => row.id === ID_REMOVE)[0]
+      console.info('To be removed row=', DELROW)
+
+      const dataRem = state.data.filter(row => row.id !== ID_REMOVE)
+      console.info('After remove data=', dataRem)
+
+      const chartsRem = state.charts.map(chart => DELROW.hasOwnProperty(chart.sstruct.attr) ? {
+        ...chart, sdata: {
+          distribution: chart.sdata.distribution.map(v => contains(v.x, DELROW[chart.sstruct.attr]) ?
+            { ...v, y: v.y - 1 } : v).filter(v => v.y !== 0)
+        }
+      } : chart)
+
+      console.info('After remove charts=', chartsRem)
+
+      return {
+        ...state, data: dataRem, charts: chartsRem,
+      }
     default:
       return state
   }
