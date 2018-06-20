@@ -29,7 +29,10 @@ class StatsButtonsPanel extends React.Component {
     const modifyButton = <div className='panel-row'><br /><button className='chart-button' key={uuidv1()}
       onClick={() => this.props.modify()}>{'Modify'}</button></div>
 
-    return <div className='panel-row'>{buttons}{modifyButton}</div>
+    const addButton = <div className='panel-row'><br /><button className='chart-button' key={uuidv1()}
+      onClick={() => this.props.add()}>{'Add'}</button></div>
+
+    return <div className='panel-row'>{buttons}{modifyButton}{addButton}</div>
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(StatsButtonsPanel)

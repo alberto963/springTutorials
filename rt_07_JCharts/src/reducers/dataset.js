@@ -118,50 +118,50 @@ console.info('charts=', charts)
 
 const contains = (vx, v) => vx.split(',').includes(String(v))
 const containsXOR = (vx, v1, v2) => vx.split(',').includes(String(v1)) && !vx.split(',').includes(String(v2))
-const computeLabel = (category, v) => { 
-  const ret = category ? category.reduce((r, c) => c.includes(String(v)) ? c.toString(): r+'', '' ) : String(v)
+const computeLabel = (category, v) => {
+  const ret = category ? category.reduce((r, c) => c.includes(String(v)) ? c.toString() : r + '', '') : String(v)
 
   return ret === '' ? String(v) : ret
 }
 
 // eslint-disable-next-line
 const computeLabelForDebug = (category, v) => {
-  console.info('category=',category)
+  console.info('category=', category)
 
-  let ret = category ? category.reduce((r, c) => { 
+  let ret = category ? category.reduce((r, c) => {
 
-    console.info('r=',r)
-    console.info('c=',c)
-    console.info('c=',c.toString())
+    console.info('r=', r)
+    console.info('c=', c)
+    console.info('c=', c.toString())
 
-    return c.includes(String(v)) ? c.toString(): r+'' 
-}, '' ) : String(v)
+    return c.includes(String(v)) ? c.toString() : r + ''
+  }, '') : String(v)
 
-if (ret === '') {
-  ret = String(v)
-}
+  if (ret === '') {
+    ret = String(v)
+  }
 
-console.info('ret=',ret)
-console.info('typeof ret=', typeof ret)
-return ret
+  console.info('ret=', ret)
+  console.info('typeof ret=', typeof ret)
+  return ret
 }
 
 // eslint-disable-next-line
-const containsForDebug=function (vx, v) {
-  console.info('vx=',vx)
-  console.info('typeof vx=',typeof vx)
-  
-  console.info('v=',v);
-  console.info('typeof v=',typeof v)
+const containsForDebug = function (vx, v) {
+  console.info('vx=', vx)
+  console.info('typeof vx=', typeof vx)
 
-  const vs=vx.split(',')
-  
-  console.info('vs=',vs);
-  console.info('typeof vs=',typeof vs)
+  console.info('v=', v);
+  console.info('typeof v=', typeof v)
 
-  const r=vs.includes(v)
-  console.info('r=',r); 
-  console.info('============================================'); 
+  const vs = vx.split(',')
+
+  console.info('vs=', vs);
+  console.info('typeof vs=', typeof vs)
+
+  const r = vs.includes(v)
+  console.info('r=', r);
+  console.info('============================================');
 
   return r
 }
@@ -176,7 +176,11 @@ const containsForDebug=function (vx, v) {
 // i.e. not using the map (that is hence useless after the computation of the distribution)
 // Yess, it is much easer, get rid of the map here
 
+
+
 const dataset = (state = { data, charts }, action) => {
+
+
   switch (action.type) {
     case "RELOAD":
       /*
@@ -202,35 +206,45 @@ const dataset = (state = { data, charts }, action) => {
       /*
        * Update dataSet in order to have correct previous value for subsequent events
        */
-      const data = state.data.map((row) => row.id === ID ? { ...row, [ATTR]: NEWVALUE } : row )
+      const data = state.data.map((row) => row.id === ID ? { ...row, [ATTR]: NEWVALUE } : row)
       console.info('Modified data=', data)
 
       /*
        * Update only involved chart (those with modified attribute)
        */
       const charts = state.charts.map(chart => chart.sstruct.attr === ATTR ? {
-          ...chart, sdata: { distribution: chart.sdata.distribution.map(v => containsXOR(v.x, PREVVALUE, NEWVALUE) ?
+        ...chart, sdata: {
+          distribution: chart.sdata.distribution.map(v => containsXOR(v.x, PREVVALUE, NEWVALUE) ?
             { ...v, y: v.y - 1 } : containsXOR(v.x, NEWVALUE, PREVVALUE) ?
-            { ...v, y: v.y + 1 } : v).filter(v => v.y !== 0).concat(!chart.sdata.distribution.find(v => contains(v.x, NEWVALUE)) ?
-             [{x: computeLabel(chart.sstruct.category, NEWVALUE), y: 1}] : [])
-          } } : chart)
-      
+              { ...v, y: v.y + 1 } : v).filter(v => v.y !== 0).concat(!chart.sdata.distribution.find(v => contains(v.x, NEWVALUE)) ?
+                [{ x: computeLabel(chart.sstruct.category, NEWVALUE), y: 1 }] : [])
+        }
+      } : chart)
+
       console.info('Modified charts=', charts)
 
       return {
         ...state, data, charts,
       }
 
-      case "ADD":
+    case "ADD":
 
-      const ID_ADD = state.data.size()
-      const NEWROW = {id: ID_ADD, f1: 0, f2: 'ZZZ', f3: false}
+      const ID_ADD = state.data.length
+      const NEWROW = { id: ID_ADD, f1: 1, f2: 'ZZZ', f3: false }
 
-      const dataadd = state.data.map((row) => row.id === ID ? { ...row, [ATTR]: NEWVALUE } : row )
-      console.info('Modified data=', data)
+      const dataAdd = [...state.data, NEWROW]
+      console.info('Added data=', dataAdd)
+
+      const chartsAdd = state.charts.map(chart => NEWROW.hasOwnProperty(chart.sstruct.attr) ? {
+        ...chart, sdata: {
+          distribution: chart.sdata.distribution.map(v => contains(v.x, NEWROW[chart.sstruct.attr]) ?
+            { ...v, y: v.y + 1 } : v).concat(!chart.sdata.distribution.find(v => contains(v.x, NEWROW[chart.sstruct.attr])) ?
+              [{ x: computeLabel(chart.sstruct.category, NEWROW[chart.sstruct.attr]), y: 1 }] : [])
+        }
+      } : chart)
 
       return {
-        ...state, data, charts,
+        ...state, data: dataAdd, charts: chartsAdd,
       }
 
     default:
