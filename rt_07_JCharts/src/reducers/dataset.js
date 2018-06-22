@@ -83,8 +83,6 @@ const merge = (data, category) => {
       y: merger.y + data.values.get(elem).occurrencies,
     } : merger, { x: '', y: 0 })).filter(elem => elem.x))
 
-  //const values = distribution.reduce((merger, currentValue) => merger.set(currentValue.x, currentValue.y), new Map())
-
   return distribution
 }
 
@@ -185,7 +183,7 @@ const dataset = (state = { data, charts }, action) => {
   switch (action.type) {
     case "NORMALIZE":
       /*
-       * Reload now only involved chart (specified by id payload attribute)
+       * Normalize now only involved chart (specified by id payload attribute)
        */
       const chart = state.charts[action.payload]
       console.info('Before normalize chart=', chart)
