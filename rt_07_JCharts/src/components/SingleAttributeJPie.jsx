@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import * as V from 'victory'
 
 import '../index.css'
 
-export default function SingleAttributeJPie(props) {
+const SingleAttributeJPie = (props) => {
 
   const pieStyle = { labels: { fontSize: 10, fill: 'black' } }
 
@@ -17,3 +18,11 @@ export default function SingleAttributeJPie(props) {
     </svg>
   </div>
 }
+
+SingleAttributeJPie.propTypes = {
+  data: PropTypes.object.isRequired,
+  struct: PropTypes.object.isRequired,
+  props: PropTypes.string.isRequired,
+}
+
+export default SingleAttributeJPie

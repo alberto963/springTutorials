@@ -7,7 +7,7 @@ import '../index.css'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    datas: state.dataset.charts,
+    charts: state.dataset.charts,
   }
 }
 
@@ -22,9 +22,9 @@ const mapDispatchToProps = {
 class StatsButtonsPanel extends React.Component {
 
   render() {
-    const buttons = this.props.datas.map((d) => (
+    const buttons = this.props.charts.map((chart) => (
       <button className='chart-button' key={uuidv1()}
-        onClick={() => this.props.normalize(d.sstruct.id)}>{'Normalize ' + d.sstruct.title + '-' + d.sstruct.attr}</button>
+        onClick={() => this.props.normalize(chart.sstruct.id)}>{'Normalize ' + chart.sstruct.title + '-' + chart.sstruct.attr}</button>
     ))
 
     const reloadButton = <div className='panel-row'><br /><button className='chart-button' key={uuidv1()}

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import * as V from 'victory'
 
 import '../index.css'
@@ -30,4 +31,10 @@ export default function SingleAttributeJBar(props) {
                         barRatio={0.25} />
         </V.VictoryChart>
       </div>
+}
+
+SingleAttributeJBar.propTypes = {
+  data: PropTypes.object.isRequired,
+  struct: PropTypes.object.isRequired,
+  props: PropTypes.string.isRequired,
 }

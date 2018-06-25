@@ -9,21 +9,21 @@ import SingleAttributeJBar from '../components/SingleAttributeJBar'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    datas: state.dataset.charts,
+    charts: state.dataset.charts,
   }
 }
 
 class StatsPanel extends React.Component {
 
   render() {
-    const charts = this.props.datas.map((d) => {
+    const charts = this.props.charts.map((chart) => {
 
-      if (d.sstruct.type === 'pie') {
-        return <SingleAttributeJPie key={uuidv1()} data={d.sdata} struct={{ title: d.sstruct.title }} title={d.sstruct.attr} />
+      if (chart.sstruct.type === 'pie') {
+        return <SingleAttributeJPie key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title }} title={chart.sstruct.attr} />
       }
 
-      if (d.sstruct.type === 'bar') {
-        return <SingleAttributeJBar key={uuidv1()} data={d.sdata} struct={{ title: d.sstruct.title }} title={d.sstruct.attr} />
+      if (chart.sstruct.type === 'bar') {
+        return <SingleAttributeJBar key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title }} title={chart.sstruct.attr} />
       }
 
       return <span>Wrong chart type</span>
