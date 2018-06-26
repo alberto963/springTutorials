@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import StatsPanel from './containers/StatsPanel'
 import StatsButtonsPanel from './containers/StatsButtonsPanel'
+import StatsContainer from './containers/StatsContainer'
 
 import './index.css'
 
@@ -15,10 +16,10 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window
 // ========================================
 ReactDOM.render(
   <Provider store={store}>
-    <div className='panel'>
+    <StatsContainer>
       <StatsButtonsPanel />
       <StatsPanel />
-    </div>
+    </StatsContainer>
   </Provider>,
   document.getElementById('root')
 )
