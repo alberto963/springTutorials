@@ -19,11 +19,11 @@ class StatsPanel extends React.Component {
     const charts = this.props.charts.map((chart) => {
 
       if (chart.sstruct.type === 'pie') {
-        return <SingleAttributeJPie key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title }} title={chart.sstruct.attr} />
+        return <SingleAttributeJPie key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title, xtitle: chart.sstruct.attr}} />
       }
 
       if (chart.sstruct.type === 'bar') {
-        return <SingleAttributeJBar key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title }} title={chart.sstruct.attr} />
+        return <SingleAttributeJBar key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title, xtitle: chart.sstruct.attr}} />
       }
 
       return <span>Wrong chart type</span>
