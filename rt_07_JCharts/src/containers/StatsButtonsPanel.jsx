@@ -28,7 +28,7 @@ class StatsButtonsPanel extends React.Component {
     ))
 
     const reloadButton = <div className='panel-row'><br /><button className='chart-button' key={uuidv1()}
-      onClick={() => this.props.reload()}>{'Reload'}</button></div>
+      onClick={() => this.props.reload()}>{'Load Internal Example'}</button></div>
 
     const modifyButton = <div className='panel-row'><br /><button className='chart-button' key={uuidv1()}
       onClick={() => this.props.modify()}>{'Modify'}</button></div>

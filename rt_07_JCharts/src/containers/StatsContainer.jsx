@@ -1,6 +1,9 @@
 import React from 'react'
 import uuidv1 from 'uuid'
+import PropTypes from 'prop-types'
+
 import { connect } from "react-redux";
+import { load } from '../actions'
 
 import '../index.css'
 
@@ -11,11 +14,13 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = {
+  load
 }
 
 class StatsContainer extends React.Component {
   constructor(props) {
     super(props)
+    props.load(props.data, props.structs)
   }
 
   render() {
@@ -24,6 +29,11 @@ class StatsContainer extends React.Component {
         {this.props.children}
       </div>)
   }
+}
+
+StatsContainer.propTypes = {
+  data: PropTypes.array.isRequired,
+  structs: PropTypes.array.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatsContainer)

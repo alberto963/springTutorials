@@ -1,4 +1,4 @@
-const generateDataset = (dataSet, n) => {
+export const generateDataset = (dataSet, n) => {
   return dataSet === 'data0' ? [
     { id: 0, f1: 0, f2: 'A', f3: true },
     { id: 1, f1: 1, f2: 'B', f3: true },
@@ -38,7 +38,7 @@ const generateDataset = (dataSet, n) => {
     })
 }
 
-const structs = [
+const exampleStructs = [
   { title: 'pie1', table: 'UnivariateFrequency', type: 'pie', attributes: ['f1', 'f2', 'f3'] },
   { title: 'bar1', table: 'UnivariateFrequency', type: 'bar', attributes: ['f1', 'f2', 'f3'] },
   {
@@ -175,7 +175,7 @@ const containsForDebug = function (vx, v) {
 const data = generateDataset('data1', 10)
 console.info('Initial data=', data)
 
-const charts = process(data, structs)
+const charts = process(data, exampleStructs)
 console.info('Initial charts=', charts)
 
 const dataset = (state = { data, charts }, action) => {
@@ -193,115 +193,127 @@ const dataset = (state = { data, charts }, action) => {
 
       const ncharts = state.charts.map(c => c.sstruct.id === action.payload ?
         { sstruct: c.sstruct, sdata: { distribution: nchart } } : c)
+
       console.info('After normalize ncharts=', ncharts)
 
       return {
         ...state, charts: ncharts
       }
 
-    case "RELOAD":
+      case "LOAD":
+        console.info('Before load data=', state.data)
 
-      console.info('Before reload data=', state.data)
+        const ldata = action.payload.data
+        const lstructs = action.payload.structs
 
-      const rdata = generateDataset('data1', 10)
-      console.info('Before reload Initial data=', rdata)
-
-      return {
-        ...state, data: rdata, charts: process(rdata, structs)
-      }
-
-    case "MODIFY":
-
-      console.info('Before modify data=', state.data)
-
-      if (state.data.length === 0) {
-        return { ...state }
-      }
-
-      /*
-       * Update only f1 field (just for test)
-       */
-      const ATTR = 'f1'
-      const ID = state.data[0].id
-      const PREVVALUE = state.data.find(row => row.id === ID)[ATTR]
-      const NEWVALUE = PREVVALUE + 1
-
-      /*
-       * Update dataSet in order to have correct previous value for subsequent events
-       */
-      const data = state.data.map(row => row.id === ID ? { ...row, [ATTR]: NEWVALUE } : row)
-      console.info('After modify data=', data)
-
-      /*
-       * Update only involved chart (those with modified attribute)
-       */
-      const charts = state.charts.map(chart => chart.sstruct.attr === ATTR ? {
-        ...chart, sdata: {
-          distribution: chart.sdata.distribution.map(v => containsXOR(v.x, PREVVALUE, NEWVALUE) ?
-            { ...v, y: v.y - 1 } : containsXOR(v.x, NEWVALUE, PREVVALUE) ?
-              { ...v, y: v.y + 1 } : v).filter(v => v.y !== 0).concat(!chart.sdata.distribution.find(v => contains(v.x, NEWVALUE)) ?
-                [{ x: computeLabel(chart.sstruct.category, NEWVALUE), y: 1 }] : [])
+        return {
+          ...state, data: ldata, charts: process(ldata, lstructs)
         }
-      } : chart)
+      
 
-      console.info('After modify charts=', charts)
+      case "RELOAD":
+          console.info('Before reload data=', state.data)
 
-      return {
-        ...state, data, charts,
-      }
+          const rdata = generateDataset('data1', 10)
+          console.info('Before reload Initial data=', rdata)
 
-    case "ADD":
-      console.info('Before add data=', data)
+          return {
+            ...state, data: rdata, charts: process(rdata, exampleStructs)
+          }
 
-      const ID_ADD = state.data.length
-      const NEWROW = { id: ID_ADD, f1: 1, f2: 'ZZZ', f3: false }
+      case "MODIFY":
 
-      const dataAdd = [...state.data, NEWROW]
-      console.info('After add data=', dataAdd)
+        console.info('Before modify data=', state.data)
 
-      const chartsAdd = state.charts.map(chart => NEWROW.hasOwnProperty(chart.sstruct.attr) ? {
-        ...chart, sdata: {
-          distribution: chart.sdata.distribution.map(v => contains(v.x, NEWROW[chart.sstruct.attr]) ?
-            { ...v, y: v.y + 1 } : v).concat(!chart.sdata.distribution.find(v => contains(v.x, NEWROW[chart.sstruct.attr])) ?
-              [{ x: computeLabel(chart.sstruct.category, NEWROW[chart.sstruct.attr]), y: 1 }] : [])
+        if (state.data.length === 0) {
+          return { ...state }
         }
-      } : chart)
 
-      console.info('After add charts=', chartsAdd)
+        /*
+        * Update only f1 field (just for test)
+        */
+        const ATTR = 'f1'
+        const ID = state.data[0].id
+        const PREVVALUE = state.data.find(row => row.id === ID)[ATTR]
+        const NEWVALUE = PREVVALUE + 1
 
-      return {
-        ...state, data: dataAdd, charts: chartsAdd,
-      }
+        /*
+        * Update dataSet in order to have correct previous value for subsequent events
+        */
+        const data = state.data.map(row => row.id === ID ? { ...row, [ATTR]: NEWVALUE } : row)
+        console.info('After modify data=', data)
 
-    case "REMOVE":
-      console.info('Before remove data=', data)
+        /*
+        * Update only involved chart (those with modified attribute)
+        */
+        const charts = state.charts.map(chart => chart.sstruct.attr === ATTR ? {
+          ...chart, sdata: {
+            distribution: chart.sdata.distribution.map(v => containsXOR(v.x, PREVVALUE, NEWVALUE) ?
+              { ...v, y: v.y - 1 } : containsXOR(v.x, NEWVALUE, PREVVALUE) ?
+                { ...v, y: v.y + 1 } : v).filter(v => v.y !== 0).concat(!chart.sdata.distribution.find(v => contains(v.x, NEWVALUE)) ?
+                  [{ x: computeLabel(chart.sstruct.category, NEWVALUE), y: 1 }] : [])
+          }
+        } : chart)
 
-      if (state.data.length === 0) {
-        return { ...state }
-      }
+        console.info('After modify charts=', charts)
 
-      const ID_REMOVE = state.data[0].id
-      const DELROW = state.data.filter(row => row.id === ID_REMOVE)[0]
-      console.info('To be removed row=', DELROW)
-
-      const dataRem = state.data.filter(row => row.id !== ID_REMOVE)
-      console.info('After remove data=', dataRem)
-
-      const chartsRem = state.charts.map(chart => DELROW.hasOwnProperty(chart.sstruct.attr) ? {
-        ...chart, sdata: {
-          distribution: chart.sdata.distribution.map(v => contains(v.x, DELROW[chart.sstruct.attr]) ?
-            { ...v, y: v.y - 1 } : v).filter(v => v.y !== 0)
+        return {
+          ...state, data, charts,
         }
-      } : chart)
 
-      console.info('After remove charts=', chartsRem)
+      case "ADD":
+        console.info('Before add data=', data)
 
-      return {
-        ...state, data: dataRem, charts: chartsRem,
-      }
-    default:
-      return state
-  }
+        const ID_ADD = state.data.length
+        const NEWROW = { id: ID_ADD, f1: 1, f2: 'ZZZ', f3: false }
+
+        const dataAdd = [...state.data, NEWROW]
+        console.info('After add data=', dataAdd)
+
+        const chartsAdd = state.charts.map(chart => NEWROW.hasOwnProperty(chart.sstruct.attr) ? {
+          ...chart, sdata: {
+            distribution: chart.sdata.distribution.map(v => contains(v.x, NEWROW[chart.sstruct.attr]) ?
+              { ...v, y: v.y + 1 } : v).concat(!chart.sdata.distribution.find(v => contains(v.x, NEWROW[chart.sstruct.attr])) ?
+                [{ x: computeLabel(chart.sstruct.category, NEWROW[chart.sstruct.attr]), y: 1 }] : [])
+          }
+        } : chart)
+
+        console.info('After add charts=', chartsAdd)
+
+        return {
+          ...state, data: dataAdd, charts: chartsAdd,
+        }
+
+      case "REMOVE":
+        console.info('Before remove data=', data)
+
+        if (state.data.length === 0) {
+          return { ...state }
+        }
+
+        const ID_REMOVE = state.data[0].id
+        const DELROW = state.data.filter(row => row.id === ID_REMOVE)[0]
+        console.info('To be removed row=', DELROW)
+
+        const dataRem = state.data.filter(row => row.id !== ID_REMOVE)
+        console.info('After remove data=', dataRem)
+
+        const chartsRem = state.charts.map(chart => DELROW.hasOwnProperty(chart.sstruct.attr) ? {
+          ...chart, sdata: {
+            distribution: chart.sdata.distribution.map(v => contains(v.x, DELROW[chart.sstruct.attr]) ?
+              { ...v, y: v.y - 1 } : v).filter(v => v.y !== 0)
+          }
+        } : chart)
+
+        console.info('After remove charts=', chartsRem)
+
+        return {
+          ...state, data: dataRem, charts: chartsRem,
+        }
+
+      default:
+        return state
+    }
 }
 
 export default dataset

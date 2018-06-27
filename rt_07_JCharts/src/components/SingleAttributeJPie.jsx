@@ -22,7 +22,7 @@ const SingleAttributeJPie = (props) => {
 SingleAttributeJPie.propTypes = {
   data: PropTypes.object.isRequired,
   struct: PropTypes.object.isRequired,
-  props: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 }
 
 export default SingleAttributeJPie
