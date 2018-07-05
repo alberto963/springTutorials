@@ -6,6 +6,7 @@ import '../index.css'
 
 import SingleAttributeJPie from '../components/SingleAttributeJPie'
 import SingleAttributeJBar from '../components/SingleAttributeJBar'
+import SingleAttributeJHBar from '../components/SingleAttributeJHBar'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -24,6 +25,10 @@ class StatsPanel extends React.Component {
 
       if (chart.sstruct.type === 'bar') {
         return <SingleAttributeJBar key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title, xtitle: chart.sstruct.attr}} />
+      }
+
+      if (chart.sstruct.type === 'hbar') {
+        return <SingleAttributeJHBar key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title, xtitle: chart.sstruct.attr}} />
       }
 
       return <span>Wrong chart type</span>
