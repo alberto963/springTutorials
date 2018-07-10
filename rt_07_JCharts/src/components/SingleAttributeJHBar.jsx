@@ -1,10 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from "react-redux";
 import * as V from 'victory'
 
 import '../index.css'
 
-export default function SingleAttributeJHBar(props) {
+const mapStateToProps = (state, ownProps) => {
+  return {
+    x: state.domain.x,
+    y: state.domain.y,
+    xl: state.domain.xl,
+    yl: state.domain.yl,
+  }
+}
+
+function SingleAttributeJHBar(props) {
 
   const barStyle = {
     labels: { fontSize: 20, fill: 'white' },
@@ -20,9 +30,9 @@ export default function SingleAttributeJHBar(props) {
   }
 
   return <div className='panel-elem'>
-    <V.VictoryChart theme={V.VictoryTheme.material} domainPadding={{y: 10}} >
+    <V.VictoryChart theme={V.VictoryTheme.material} domainPadding={{x: props.x, y: props.y}} >
       <V.VictoryLabel textAnchor='start' style={{ fontSize: 20, fill: 'white' }}
-        x={150} y={10} labelPlacement='parallel' text={props.struct.title} />
+        x={props.xl} y={props.yl} labelPlacement='parallel' text={props.struct.title} />
       <V.VictoryAxis label={props.struct.xtitle} style={axisStyle} />
       <V.VictoryAxis dependentAxis style={axisStyle} tickFormat={y => `${y}`}  />
       <V.VictoryBar horizontal data={props.data.distribution} style={barStyle} />
@@ -34,3 +44,5 @@ SingleAttributeJHBar.propTypes = {
   data: PropTypes.object.isRequired,
   struct: PropTypes.object.isRequired,
 }
+
+export default connect(mapStateToProps, null)(SingleAttributeJHBar)

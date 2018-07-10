@@ -1,9 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import uuidv1 from 'uuid'
 import { connect } from "react-redux";
-import { ReactSlider } from "react-slider";
-
-import { reload, modify, normalize, add, remove } from "../actions/index";
+import Slider, { Range } from 'rc-slider';
+// We can just import Slider or Range to reduce bundle size
+// import Slider from 'rc-slider/lib/Slider';
+// import Range from 'rc-slider/lib/Range';
+import 'rc-slider/assets/index.css';
+import { reload, modify, normalize, add, remove, x, y, xl, yl } from "../actions";
 
 import '../index.css'
 
@@ -19,6 +23,10 @@ const mapDispatchToProps = {
   add,
   remove,
   modify,
+  x,
+  y,
+  xl,
+  yl,
 }
 
 function log(value) {
@@ -30,25 +38,19 @@ function percentFormatter(v) {
 }
 
 class StatsButtonsPanel extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     value: 50,
-  //   };
-  // }
-  // onSliderChange = (value) => {
-  //   log(value);
-  //   this.setState({
-  //     value,
-  //   });
-  // }
-  // onAfterChange = (value) => {
-  //   console.log(value); //eslint-disable-line
-  // }
 
+  handleChange = (value) => {
+    console.log(value);
+  }
   render() {
-    //const sliders = <div className='panel-row'><Slider value={this.state.value} /></div>
-    const sliders =  <div className='panel-row'><ReactSlider defaultValue={50} /></div>
+    const sliders = <div className='panel-row'>
+      <div className='panel-row'><Slider onChange={this.props.x} /></div>
+      <div className='panel-row'><Slider onChange={this.props.y} /></div>
+      <div className='panel-row'><Slider onChange={this.props.xl} /></div>
+      <div className='panel-row'><Slider onChange={this.props.yl} /></div>
+      <div className='panel-row'><Range onChange={this.handleChange} /></div>
+    </div>
+
     const buttons = this.props.charts.map((chart) => (
       <button className='chart-button' key={uuidv1()}
         onClick={() => this.props.normalize(chart.sstruct.id)}>{'Normalize ' + chart.sstruct.title + '-' + chart.sstruct.attr}</button>
