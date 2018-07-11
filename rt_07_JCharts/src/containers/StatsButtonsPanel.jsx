@@ -60,6 +60,16 @@ const handle = (props) => {
 
 class StatsButtonsPanel extends React.Component {
 
+  constructor(props) {
+    super(props)
+
+    this.props.x(0)
+    this.props.y(30)
+    this.props.w(-1)
+    this.props.h(4)
+    this.props.xl(100)
+    this.props.yl(10)
+  }
   handleChange = (value) => {
     console.log(value);
   }
@@ -68,9 +78,9 @@ class StatsButtonsPanel extends React.Component {
     const sliders = <div className='panel-row' style={style}>
 
       <div className='panel-row'><label><strong>Chart domainPadding X</strong></label>
-      <Slider max={300} defaultValue={0} onChange={this.props.x} handle={handle} /></div><br /><br />
+      <Slider min={-300} max={300} defaultValue={0} onChange={this.props.x} handle={handle} /></div><br /><br />
       <div className='panel-row'><label><strong>Chart domainPadding Y</strong></label>
-      <Slider max={300} defaultValue={30} onChange={this.props.y} handle={handle} /></div><br /><br />
+      <Slider min={-300} max={300} defaultValue={30} onChange={this.props.y} handle={handle} /></div><br /><br />
 
       <div className='panel-row'><label><strong>Chart domain X min</strong></label>
       <Slider min={-20} max={20} disabled={false} defaultValue={-1} onChange={this.props.w} handle={handle} marks={{}} /></div><br /><br />
@@ -86,7 +96,7 @@ class StatsButtonsPanel extends React.Component {
     </div>
 
     const buttons = this.props.charts.map((chart) => (
-      <div className='panel-row'><br />
+      <div key={uuidv1()} className='panel-row'><br />
         <button className='chart-button' key={uuidv1()}
           onClick={() => this.props.normalize(chart.sstruct.id)}>{'Normalize ' + chart.sstruct.title + '-' + chart.sstruct.attr}
         </button>
