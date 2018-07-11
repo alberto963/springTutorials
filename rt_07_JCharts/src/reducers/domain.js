@@ -17,6 +17,19 @@ const domain = (state = {
         ...state,
         y: action.payload
       }
+
+    case "W":
+      return {
+        ...state,
+        w: action.payload
+      }
+
+    case "H":
+      return {
+        ...state,
+        h: action.payload
+      }
+      
     case "XL":
       return {
         ...state,
