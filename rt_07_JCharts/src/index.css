@@ -3,6 +3,10 @@ body {
   margin: 20px;
 }
 
+label {
+  font-size: small;
+}
+
 .panel {
   display: flex;
   flex-direction: row;
