@@ -16,6 +16,12 @@ import '../index.css'
 const mapStateToProps = (state, ownProps) => {
   return {
     charts: state.dataset.charts,
+    dvx: state.domain.x,
+    dvy: state.domain.y,
+    dvw: state.domain.w,
+    dvh: state.domain.h,
+    dvxl: state.domain.xl,
+    dvyl: state.domain.yl,
   }
 }
 
@@ -60,37 +66,28 @@ const handle = (props) => {
 
 class StatsButtonsPanel extends React.Component {
 
-  constructor(props) {
-    super(props)
-
-    this.props.x(0)
-    this.props.y(30)
-    this.props.w(-1)
-    this.props.h(4)
-    this.props.xl(100)
-    this.props.yl(10)
-  }
   handleChange = (value) => {
     console.log(value);
   }
+
   render() {
 
     const sliders = <div className='panel-row' style={style}>
 
       <div className='panel-row'><label><strong>Chart domainPadding X</strong></label>
-      <Slider min={-300} max={300} defaultValue={0} onChange={this.props.x} handle={handle} /></div><br /><br />
+      <Slider min={-300} max={300} defaultValue={this.props.dvx} onChange={this.props.x} handle={handle} /></div><br /><br />
       <div className='panel-row'><label><strong>Chart domainPadding Y</strong></label>
-      <Slider min={-300} max={300} defaultValue={30} onChange={this.props.y} handle={handle} /></div><br /><br />
+      <Slider min={-300} max={300} defaultValue={this.props.dvy} onChange={this.props.y} handle={handle} /></div><br /><br />
 
       <div className='panel-row'><label><strong>Chart domain X min</strong></label>
-      <Slider min={-20} max={20} disabled={false} defaultValue={-1} onChange={this.props.w} handle={handle} marks={{}} /></div><br /><br />
+      <Slider min={-20} max={20} disabled={false} defaultValue={this.props.dvw} onChange={this.props.w} handle={handle} marks={{}} /></div><br /><br />
       <div className='panel-row'><label><strong>Chart domain X MAX</strong></label>
-      <Slider min={-10} max={10} disabled={false} defaultValue={4} onChange={this.props.h} handle={handle} /></div><br /><br />
+      <Slider min={-10} max={10} disabled={false} defaultValue={this.props.dvh} onChange={this.props.h} handle={handle} /></div><br /><br />
 
       <label><strong>DependentAxis offsetX and Label X</strong></label>
-      <div className='panel-row'><Slider max={300} defaultValue={100} onChange={this.props.xl} handle={handle} /></div><br /><br />
+      <div className='panel-row'><Slider max={300} defaultValue={this.props.dvxl} onChange={this.props.xl} handle={handle} /></div><br /><br />
       <label><strong>Label Y</strong></label>
-      <div className='panel-row'><Slider max={300} defaultValue={10} onChange={this.props.yl} handle={handle} /></div><br /><br />
+      <div className='panel-row'><Slider max={300} defaultValue={this.props.dvyl} onChange={this.props.yl} handle={handle} /></div><br /><br />
 
       <div className='panel-row'><Range onChange={this.handleChange} /></div><br />
     </div>

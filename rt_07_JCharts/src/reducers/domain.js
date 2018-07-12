@@ -1,8 +1,10 @@
 const domain = (state = {
   x: 0,
-  y: 0,
-  xl: 0,
-  yl: 0
+  y: 30,
+  w: -1,
+  h: 4,
+  xl: 100,
+  yl: 10,
 }, action) => {
 
   switch (action.type) {
@@ -29,7 +31,7 @@ const domain = (state = {
         ...state,
         h: action.payload
       }
-      
+
     case "XL":
       return {
         ...state,
