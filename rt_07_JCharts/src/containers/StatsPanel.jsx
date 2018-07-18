@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import '../index.css'
 
 import SingleAttributeJPie from '../components/SingleAttributeJPie'
+import SingleAttributeJPie1 from '../components/SingleAttributeJPie1'
 import SingleAttributeJBar from '../components/SingleAttributeJBar'
 import SingleAttributeJHBar from '../components/SingleAttributeJHBar'
 
@@ -21,6 +22,10 @@ class StatsPanel extends React.Component {
 
       if (chart.sstruct.type === 'pie') {
         return <SingleAttributeJPie key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title, xtitle: chart.sstruct.attr}} />
+      }
+
+      if (chart.sstruct.type === 'pie1') {
+        return <SingleAttributeJPie1 key={uuidv1()} data={chart.sdata} struct={{ title: chart.sstruct.title, xtitle: chart.sstruct.attr}} />
       }
 
       if (chart.sstruct.type === 'bar') {

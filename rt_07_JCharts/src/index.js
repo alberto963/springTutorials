@@ -20,6 +20,8 @@ const testStructs = [
   { title: 'pie1', table: 'UnivariateFrequency', type: 'pie', attributes: ['f1',] },
   { title: 'bar1', table: 'UnivariateFrequency', type: 'bar', attributes: ['f2',] },
   { title: 'bar2', table: 'UnivariateFrequency', type: 'hbar', attributes: [ 'f2', ] },
+  { title: 'pie2', table: 'UnivariateFrequency', type: 'pie1', attributes: ['f2'] },
+
 ]
 
 // ========================================

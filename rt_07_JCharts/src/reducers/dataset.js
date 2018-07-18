@@ -40,6 +40,7 @@ export const generateDataset = (dataSet, n) => {
 
 const exampleStructs = [
   { title: 'pie1', table: 'UnivariateFrequency', type: 'pie', attributes: ['f1', 'f2', 'f3'] },
+  { title: 'pie2', table: 'UnivariateFrequency', type: 'pie1', attributes: ['f2'] },
   { title: 'bar1', table: 'UnivariateFrequency', type: 'bar', attributes: ['f1', 'f2', 'f3'] },
   {
     title: 'pie2-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [['0', '1'], ['3', '4']] },
