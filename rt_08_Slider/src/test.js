@@ -11,7 +11,13 @@
     if(S[i]=='-')
     {
         for(let j=0; j<K; j++) {
+
           S[i+j] ^= '-' ^ '+';
+          // Explaination (my):
+          // S = S XOR '-' XOR '+'
+          // if S is '-' ==> S will be '+' (if A='-' B='+' then A XOR (A XOR B) is B i.e. '+')
+          // if S is '+' ==> S will be '-' (if A='-' B='+' then B XOR (A XOR B) is A i.e. '-')
+          // that is toggle S[i+j] from '-' to '+' and viceversa
         }
         ans++;
     }
