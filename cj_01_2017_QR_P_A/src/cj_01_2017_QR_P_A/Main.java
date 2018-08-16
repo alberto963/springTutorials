@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String... p) throws Exception {
 		/*-
-		 * Trying to solve large dataset I get the following error, as expected:
+		 * Trying to solve large dataset with resolveSmall I get the following error, as expected:
 		 * 
 		 * Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 		 * at java.util.Arrays.copyOf(Unknown Source)
@@ -21,12 +21,12 @@ public class Main {
 		 * at cj_01_2017_QR_P_A.Main.permutate(Main.java:99)
 		 * at cj_01_2017_QR_P_A.Main.main(Main.java:68)
 		 */
-		// String fileName = "A-large-practice";
+		String fileName = "A-large-practice";
 
 		/*
 		 * Result submitted and judged correct
 		 */
-		String fileName = "A-small-practice";
+		// String fileName = "A-small-practice";
 		// String fileName = "A-simple-practice";
 
 		/*
@@ -56,42 +56,10 @@ public class Main {
 		for (int n = 0; n < numCases; n++) {
 			String S = input.next();
 			int K = input.nextInt();
-			int s = S.length();
-			int c = s - K + 1;
-			double pow = Math.pow(2, c);
-			// System.out.printf("Case #%d: K=%d s=%d c=%d pow=%d\n", n + 1, K, s, c, (int)
-			// pow);
+			int N = S.length();
 
-			Set<Set<String>> sets = new HashSet<Set<String>>();
-
-			for (int m = 0; m < pow; m++) {
-				// System.out.printf("Case #%d: m=%d\n", n + 1, m);
-				Set<String> set = new HashSet<String>();
-
-				String P = S;
-				for (int k = 0; k < c; k++) {
-
-					// call permutate for all 1 bit of binary representation of k with k equal to
-					// the 1 position
-					int pow2 = (int) Math.pow(2, k);
-					int i = m & pow2;
-
-					// System.out.printf("Case #%d: k=%d pow2=%d i=%d\n", n + 1, k, pow2, i);
-
-					if (i != 0) {
-						P = permutate(P, K, k);
-						set.add(P);
-					}
-				}
-				sets.add(set);
-			}
-			// System.out.printf("Case #%d: sets=%s\n", n + 1, sets);
-
-			String finalResult = buildResult(s);
-			Optional<Set<String>> minSet = findMinSet(sets, finalResult);
-			int r = minSet.isPresent() ? minSet.get().size() : 0;
-
-			Object o = r == 0 ? S.compareTo(finalResult) == 0 ? r : "IMPOSSIBLE" : r;
+			// Object o = resolveSmall(n, S, K, s);
+			Object o = resolveLarge(n, S, K, N);
 
 			String result = String.format("Case #%d: %s\n", n + 1, o);
 
@@ -100,6 +68,112 @@ public class Main {
 		}
 
 		out.close();
+	}
+
+	/*
+	 * complexity is O(N^3)
+	 */
+	private static Object resolveSmall(int n, String S, int K, int N) {
+
+		int c = N - K + 1;
+		double pow = Math.pow(2, c);
+
+		System.out.printf("Case #%d: K=%d N=%d c=%d pow=%d\n", n + 1, K, N, c, (int) pow);
+
+		Set<Set<String>> sets = new HashSet<Set<String>>();
+
+		for (int m = 0; m < pow; m++) {
+
+			System.out.printf("Case #%d: m=%d\n", n + 1, m);
+
+			Set<String> set = new HashSet<String>();
+
+			String P = S;
+			for (int k = 0; k < c; k++) {
+
+				// call permutate for all 1 bit of binary representation of k with k equal to
+				// the 1 position
+				int pow2 = (int) Math.pow(2, k);
+				int i = m & pow2;
+
+				System.out.printf("Case #%d: k=%d pow2=%d i=%d\n", n + 1, k, pow2, i);
+
+				if (i != 0) {
+					P = permutate(P, K, k);
+					set.add(P);
+				}
+			}
+
+			sets.add(set);
+		}
+
+		System.out.printf("Case #%d: sets=%s\n", n + 1, sets);
+
+		String finalResult = buildResult(N);
+		Optional<Set<String>> minSet = findMinSet(sets, finalResult);
+		int r = minSet.isPresent() ? minSet.get().size() : 0;
+
+		Object o = r == 0 ? S.compareTo(finalResult) == 0 ? r : "IMPOSSIBLE" : r;
+
+		return o;
+	}
+
+	/*
+	 * complexity is O(N^2)
+	 */
+	private static Object resolveLarge(int n, String S, int K, int N) {
+
+		System.out.printf("Case #%d: K=%d N=%d\n", n + 1, K, N);
+
+		int r = 0;
+
+		for (int k = 0; k < N - K + 1; k++) {
+
+			// call permutate if kth elem is '-'
+			if (S.charAt(k) == '-') {
+				S = permutate(S, K, k);
+				r++;
+			}
+		}
+
+		String finalResult = buildResult(N);
+
+		Object o = S.compareTo(finalResult) == 0 ? r : "IMPOSSIBLE";
+
+		return o;
+	}
+
+	/*
+	 * We can reduce complexity to O(N) by only flipping one pancake at a time, and
+	 * keeping a running count of the number of flips that we "owe" the current
+	 * pancake. For instance, suppose that N = 10 and K = 5, and the first pancake
+	 * is blank side up. We start with the first pancake, and because we must flip
+	 * it, we know we must flip the first five pancakes. We increase our flip count
+	 * to 1, and also make a memo to decrease the flip count by 1 once we reach the
+	 * sixth pancake. We continue from left to right, and whenever a pancake is
+	 * blank side up and the flip count is even, or a pancake is happy side up and
+	 * the flip count is odd, we increase the flip count and make another memo.
+	 * These memos can be easily stored in another array of length N that is checked
+	 * before handling each pancake.
+	 */
+	private static Object resolveSmart(int n, String S, int K, int N) {
+
+		System.out.printf("Case #%d: K=%d N=%d\n", n + 1, K, N);
+
+		int r = 0;
+		int fc = 0;
+		boolean memo[] = new boolean[N];
+
+		for (int k = 0; k < N - K + 1; k++) {
+			// TODO
+			fc++;
+		}
+
+		String finalResult = buildResult(N);
+
+		Object o = S.compareTo(finalResult) == 0 ? r : "IMPOSSIBLE";
+
+		return o;
 	}
 
 	public static String permutate(String S, int K, int p) {
@@ -115,10 +189,10 @@ public class Main {
 		return out;
 	}
 
-	public static String buildResult(int s) {
+	public static String buildResult(int N) {
 
 		String result = new String();
-		for (int i = 0; i < s; i++) {
+		for (int i = 0; i < N; i++) {
 			result = result.concat("+");
 		}
 
