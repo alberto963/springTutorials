@@ -1,0 +1,27 @@
+{
+  "name": "rd_06",
+  "version": "1.0.0",
+  "description": "> ---",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "keywords": [],
+  "author": "AP",
+  "license": "MIT",
+  "devDependencies": {
+    "react-scripts": "^0.9.3",
+    "react-hot-loader": "^3.0.0-beta"
+  },
+  "dependencies": {
+    "connected-react-router": "^4.4.0",
+    "history": "^4.4.1",
+    "prop-types": "^15.5.8",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-redux": "^4.4.8",
+    "react-router": "^4.1.0",
+    "react-router-dom": "^4.1.0",
+    "redux": "^3.6.0"
+  }
+}
