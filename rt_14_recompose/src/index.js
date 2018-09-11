@@ -12,7 +12,7 @@ import './index.css'
 
 const store = createStore((state, action) => state, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-const initialState = {s: false, t: false}
+const initialState = {s: false, t: false, selected: null}
 
 const reducer = (state, action) => {
   switch(action.type) {
@@ -22,6 +22,8 @@ const reducer = (state, action) => {
       return {...state, t: true};
     case 'HIDE':
       return {...state, t: false};
+    case 'SELECT':
+      return {...state, selected: action.payload};
     default:
       return state;
   }
@@ -29,7 +31,7 @@ const reducer = (state, action) => {
 const toggle = ({ dispatch }) => (e) => dispatch({ type: 'TOGGLE' })
 const show = ({ dispatch }) => (e) => dispatch({ type: 'SHOW' })
 const hide = ({ dispatch }) => (e) => dispatch({ type: 'HIDE' })
-const select = ({ dispatch }) => (e) => dispatch({ type: 'SELECT' })
+const select = ({ dispatch }) => (e, s) => dispatch({ type: 'SELECT', payload: s })
 
 const withToggle = compose(
   withReducer('toggledOn', 'dispatch', reducer, initialState),
@@ -38,15 +40,15 @@ const withToggle = compose(
 )
 
 const StatusListFactory = compose(
-  withReducer('toggledOn', 'dispatch', reducer, initialState),
-  withHandlers({ toggle, show, hide, select}),
+  withReducer('selected', 'dispatch', reducer, initialState),
+  withHandlers({ select }),
 )
 
 const StatusList = StatusListFactory(({select}) => 
   <div className="StatusList">
      <div onClick={select}>pending</div>
-     <div>inactive</div>
-     <div>active</div>
+     <div onClick={select}>inactive</div>
+     <div onClick={select}>active</div>
    </div>
 )
 
@@ -58,9 +60,13 @@ const StatusList = StatusListFactory(({select}) =>
 //   </div>
 
 const Status = withToggle(({ toggledOn, status, toggle, select }) =>
-  <span onClick={ toggle }>
-    { status }
-    { toggledOn.s && <StatusList select={ select } /> }
+  <span>
+    <span onClick={ toggle }>
+      { status }
+    </span>
+    <span>
+      { toggledOn.s && <StatusList select={ select } /> }
+    </span>
   </span>
 )
 
