@@ -1,0 +1,33 @@
+.User {
+  position: relative;
+  background: lightblue;
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.StatusList {
+  background: #eee;
+  padding: 5px;
+  margin: 5px 0;
+}
+
+.UserList {
+  background: #eee;
+  padding: 5px;
+  margin: 5px;
+}
+
+.Tooltip {
+  position: absolute;
+  top: -10px;
+  width: 80px;
+  background: rgb(102, 102, 102);
+  color: white;
+  text-align: center;
+}
+
+a {
+  margin: 5px;
+}
