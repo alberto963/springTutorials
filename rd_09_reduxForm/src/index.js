@@ -154,13 +154,22 @@ InitializeFromStateForm = reduxForm({
   form: 'initializeFromState' // a unique identifier for this form
 })(InitializeFromStateForm)
 
-// You have to connect() to any reducers that you wish to connect to yourself
-InitializeFromStateForm = connect(
-  state => ({
+
+
+const mapStateToProps = state => {
+  return {
     initialValues: state.account.data // pull initial values from account reducer
-  }),
-  { load: loadAccount } // bind account loading action creator
-)(InitializeFromStateForm)
+  }
+}
+
+const mapDispatchToProps = {
+  load: loadAccount,
+}
+
+// You have to connect() to any reducers that you wish to connect to yourself
+InitializeFromStateForm = connect(mapStateToProps, mapDispatchToProps)(reduxForm({form: 'initializeFromState'})(InitializeFromStateForm))
+
+
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
