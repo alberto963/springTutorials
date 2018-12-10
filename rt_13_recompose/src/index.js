@@ -44,7 +44,7 @@ const Tooltip = withToggle(({ text, children, toggledOn, show, hide }) =>
   </span>
 )
 
-const User = ({ name, status }) =>
+const User = ( {name, status} ) =>
   <div className="User">
     <Tooltip text="Cool Dude!">{ name }</Tooltip>—
     <Status status={ status } />

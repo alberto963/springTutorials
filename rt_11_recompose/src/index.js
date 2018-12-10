@@ -9,14 +9,13 @@ const { Component } = React;
 // Not working, hence commented out, for further study
 // const setName = name => bc => { bc['displayName'] = name; return bc }
 
-const overrideProps = (overrideProps) => (BaseComponent) => (props) =>
-  <BaseComponent {...props} {...overrideProps} />
+const overrideProps = overrideProps => BaseComponent => props => <BaseComponent {...props} {...overrideProps} />
 
 //  const alwaysBob = setName('overridden') (overrideProps({ name: 'Bob' }))
 
 const alwaysBob = overrideProps({ name: 'Bob' })
 
-const neverRender = (BaseComponent) =>
+const neverRender = BaseComponent =>
   class extends Component {
     shouldComponentUpdate() {
       return false;
@@ -26,8 +25,7 @@ const neverRender = (BaseComponent) =>
     }
   };
 
-const User = ({ name } ) =>
-  <div className="User" style={{backgroundColor:'red'}} >{ name }</div>;
+const User = ({name}) => <div className="User">{name}</div>;
 
 const User2 = alwaysBob(User);
 const User3 = neverRender(User);
