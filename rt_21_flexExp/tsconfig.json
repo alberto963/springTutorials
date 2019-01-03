@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es6",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "jsx": "preserve",
+    "allowJs": true,
+    "skipLibCheck": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "errorsAsWarnings": true,
+    "useBabel": true,
+    "babelOptions": {
+      "babelrc": true,
+      "presets": [
+        [
+          "env",
+          {
+            "targets": "last 2 versions, ie 11",
+            "modules": false
+          }
+        ]
+      ]
+    },
+    "useCache": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "skipLibCheck": true
+}
