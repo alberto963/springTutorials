@@ -1,7 +1,4 @@
 import * as React from 'react'
-import { withState } from 'recompose'
-
-const withCounter = withState('c' , 'getC', 0)
 
 const Tile = p => {
   return (
@@ -10,7 +7,7 @@ const Tile = p => {
       style={{width: '450px', height: '300px', padding: '2px', border: 'dotted 1px deeppink'}}
     >
       <header id='TileCommands' style={{border: 'dotted 1px'}}>
-        {p.stat.title} Commands
+        {p.stat.title}
       </header>
       <div id='TileChartWrapper' style={{display: 'flex', flexDirection: 'row', height: '91%', padding: '2px', border: 'dotted 1px dodgerblue'}}>
         <article style={{flex: '2', height: '100%', border: 'dotted 1px blueviolet'}}>
@@ -24,4 +21,4 @@ const Tile = p => {
   )
 }
 
-export default withCounter(Tile)
+export default Tile
