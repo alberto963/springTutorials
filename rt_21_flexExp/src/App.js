@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { withState } from 'recompose'
 import StatsPanel from './StatsPanel'
 
-const reducer = (state = {}, action) => {
+const reducer = (state = {tile: {}}, action) => {
   switch (action.type) {
+    case 'ADD_TILE':
+      return {...state, tile: action.payload}
     default:
       return state
   }
@@ -13,7 +14,7 @@ const reducer = (state = {}, action) => {
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-const withCounter = withState('c' , 'getC', 0)
+//         <StatsPanel datasets={['d0', 'd1', 'd2', 'd3', 'd4']} />
 
 const App = () => {
   return (
@@ -22,10 +23,10 @@ const App = () => {
         <header>
           <p><center>Experiments on <code>css flex</code> for panel development.</center></p>
         </header>
-        <StatsPanel datasets={['d0', 'd1', 'd2', 'd3', 'd4']} />
+        <StatsPanel datasets={['d4']} />
       </div>
     </Provider>
   )
 }
 
-export default withCounter(App)
+export default App
