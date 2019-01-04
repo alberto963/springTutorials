@@ -23,7 +23,7 @@ const App = () => {
         <header>
           <p><center>Experiments on <code>css flex</code> for panel development.</center></p>
         </header>
-        <StatsPanel datasets={['d4']} />
+        <StatsPanel datasets={['d0', 'd1', 'd2', 'd3', 'd4']} />
       </div>
     </Provider>
   )
