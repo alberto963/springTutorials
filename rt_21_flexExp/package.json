@@ -8,8 +8,6 @@
     "react-dom": "*",
     "react-scripts": "*",
     "recompose": "*",
-    "redux": "*",
-    "react-redux": "*",
     "@types/node": "*",
     "@types/react": "*",
     "@types/react-dom": "*"
