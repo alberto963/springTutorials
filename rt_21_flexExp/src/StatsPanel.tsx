@@ -1,27 +1,12 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
 import TileGroup from './TileGroup'
 import structs from './StatsSpecs'
 
-const mapStateToProps = testStructures => state => {
-  return {
-    stat: state.stat || testStructures,
-  }
-}
+const StatsPanel = p =>
+  <div id='MainContainer' style={{margin: '10px', padding: '10px', border: 'dotted 1px coral',
+            display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', alignItems: 'center',
+            minWidth: '500px', minHeight: '800px'}}>
+    {p.datasets.map((ds, id) => <TileGroup title={ds} stat={structs()[ds]} id={id} key={id} />)}
+  </div>
 
-const StatsPanel = p => {
-const groups = p.datasets.map((ds, id) => <TileGroup title={ds} stat={p.stat[ds]} id={id} key={id} />)
-
-  return (
-    <div
-      id='MainContainer'
-      style={{margin: '10px', padding: '10px', border: 'dotted 1px coral',
-              display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', alignItems: 'center',
-              minWidth: '500px', minHeight: '800px'}}
-    >
-      {groups}
-    </div>
-  )
-}
-
-export default connect(mapStateToProps(structs()), null)(StatsPanel)
+export default StatsPanel
