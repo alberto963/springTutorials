@@ -2,8 +2,36 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import * as V from 'victory'
 import uuidv1 from 'uuid'
+import NormalDistribution from 'normal-distribution'
 
 import './index.css'
+
+//const normDist = new NormalDistribution();
+const normDist = new NormalDistribution(0, 5);
+
+const normal = () => {
+  const u = Math.random() * 2 - 1;
+  const v = Math.random() * 2 - 1;
+  const r = u * u + v * v;
+  if (r === 0 || r > 1) {
+    return normal();
+  }
+  const c = Math.sqrt(-2 * Math.log(r) / r);
+
+  return u * c;
+}
+
+const normal2 = () => Math.sqrt(-2 * Math.log(Math.random()))*Math.cos((2*Math.PI) * Math.random())
+
+const catU = (r=10) => {
+  const val = Math.random() * r; 
+  return Math.floor(val)
+}
+
+const catN = (r=10) => {
+  const val = normal() * r /4.0 + r / 2.0; 
+  return (val > r || val < 0)  ? catN(r) : Math.floor(val)
+}
 
 const generateData = (dataSet, n) => { 
   return dataSet === 'data0' ? [
@@ -39,9 +67,33 @@ const generateData = (dataSet, n) => {
     {id: 29, f1: 3, f2: 'E', f3: false},
     {id: 30, f1: 4, f2: 'E', f3: false},
     {id: 31, f1: 0, f2: 'E', f3: false},
-  ] :
+  ] : dataSet === 'data1' ?
     Array(n).fill(null).map((row, i) => {
-      return {id: i, f1: i%97, f2: i%2 === 0 ? 'A' : i%3=== 0 ? 'B' : i%5=== 0 ? 'C' : i%7=== 0 ? 'D' : 'E', f3: i%2 === 0}
+      const x = i - n/2
+      // const e = x/25.0
+      // const y = Math.exp(-e*e)*100.0
+      // const r0 = (i * 10  - 10)/10
+      // const r1 = (i * 10  + 10)/10
+      // console.log(r0, r1)
+      return {
+        id: i,
+        f1: i%97, f2: i%2 === 0 ? 'A' : i%3=== 0 ? 'B' : i%5=== 0 ? 'C' : i%7=== 0 ? 'D' : 'E', f3: i%2 === 0,
+        f4: catU(40), f5: catN(40), f6: normDist.pdf(x) * n / 10.0
+//        f4: catU(10), f5: catN(10), f6: 1.0 * n / 10.0
+      }
+    }) :
+    Array(n).fill(null).map((row, i) => {
+      const x = i - n/2
+      // const e = x/25.0
+      // const y = Math.exp(-e*e)*100.0
+      // const r0 = (i * 10  - 10)/10
+      // const r1 = (i * 10  + 10)/10
+      // console.log(r0, r1)
+      const f6 = normDist.pdf(x) * n / 10.0
+      // const f6 =1.0 * n / 10.0
+      return {
+        id: x, f6
+      }
     })
 }
 
@@ -54,18 +106,37 @@ const generateData = (dataSet, n) => {
 // ]
 
 const struct = [
-  { title: 'pie1', table: 'UnivariateFrequency', type: 'pie', attributes: ['f1', 'f2', 'f3'] }, 
-  { title: 'bar1', table: 'UnivariateFrequency', type: 'bar', attributes: ['f1', 'f2', 'f3'] },
-  { title: 'pie2-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [[0, 1], [3, 4]]},
-                                                                             { attr: 'f2', category: [['A', 'B'], ['C','D']]},
-                                                                              'f3'] }, 
-  { title: 'bar2-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [[0, 1], [3, 4]]},
-                                                                             { attr: 'f2', category: [['A', 'B'], ['C','D']]},
-                                                                              'f3'] },
-  { title: 'pie3-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [[10, 11], [13, 14]]}, ] }, 
-  { title: 'bar3-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [[10, 11], [13, 14]]}, ] }, 
-
+  // { title: 'pie1', table: 'UnivariateFrequency', type: 'pie', attributes: ['f1', 'f2', 'f3'] }, 
+  // { title: 'bar1', table: 'UnivariateFrequency', type: 'bar', attributes: ['f1', 'f2', 'f3'] },
+  // { title: 'pie2-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [[0, 1], [3, 4]]},
+  //                                                                            { attr: 'f2', category: [['A', 'B'], ['C','D']]},
+  //                                                                             'f3'] }, 
+  // { title: 'bar2-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [[0, 1], [3, 4]]},
+  //                                                                            { attr: 'f2', category: [['A', 'B'], ['C','D']]},
+  //                                                                             'f3'] },
+  // { title: 'pie3-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f1', category: [[10, 11], [13, 14]]}, ] }, 
+  // { title: 'bar3-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f1', category: [[10, 11], [13, 14]]}, ] }, 
+  // { title: 'bar3-g', table: 'UnivariateFrequency', type: 'bar', scale: 'log', attributes: [{ attr: 'f1', category: [[10, 11], [13, 14]]},] },
+  // { title: 'pie4-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f4', category: [] }, ] }, 
+  // { title: 'bar4li-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f4', category: [] },] }, 
+  // { title: 'bar4lo-g', table: 'UnivariateFrequency', type: 'bar', scale: 'log', attributes: [{ attr: 'f4', category: [], },] },
+  // { title: 'pie5-g', table: 'UnivariateFrequency', type: 'pie', attributes: [{ attr: 'f5', category: [] }, ] }, 
+  { title: 'bar5li-g', table: 'UnivariateFrequency', type: 'bar', attributes: [{ attr: 'f5', category: [] },] }, 
+  { title: 'bar5lo-g', table: 'UnivariateFrequency', type: 'bar', scale: 'log', attributes: [{ attr: 'f5', category: [], },] }, 
+  { title: 'line1-g', table: 'UnivariateFrequency', type: 'lin', attributes: [{ attr: 'f6', category: [], },] }, 
 ]
+
+function SingleAttributeLine(props) {
+  return <div className='panel-elem'>
+          <V.VictoryChart theme={V.VictoryTheme.material}>
+            <V.VictoryLine
+              data={props.data}
+              x='id'
+              y='f6'
+            />
+          </V.VictoryChart>
+        </div>
+  }
 
 function SingleAttributeJPie(props) {
   const pieStyle = { labels: { fontSize: 10, fill: 'black'}}
@@ -87,7 +158,7 @@ function SingleAttributeJBar(props) {
                    data: { fill: (d) => d.x <0 ? '#000000' : '#c43a31', stroke: (d) => d.x < 0 ? '#000000' : '#c43a31', fillOpacity: 0.7, strokeWidth: 3 }}
 
   return <div className='panel-elem'>
-        <V.VictoryChart domainPadding={10} theme={V.VictoryTheme.material}>
+        <V.VictoryChart domainPadding={10} theme={V.VictoryTheme.material} scale={{y: props.struct.scale, x: 'linear'}} >
           <V.VictoryLabel textAnchor='start' style={{ fontSize: 20 }} x={150} y={10} labelPlacement='parallel' text={props.struct.title + '-'+ props.title} />
           <V.VictoryAxis tickValues={Array.from(props.data.values.keys())} label='Values'
                           style={{ 
@@ -134,6 +205,12 @@ class StatsPanel extends React.Component {
         // console.info('attr=', attr)
         // console.info('title='+ struct.title + ' attr=' + attr + ' data=', sdata)
 
+        sdata.distribution.sort((e, f) => e.x * 1 - f.x * 1)
+
+        if (struct.type === 'lin') {
+          return <SingleAttributeLine key={uuidv1()} data={this.state.data} struct={struct} title={cattr} />
+        }
+        
         if (struct.type === 'pie') {
           return <SingleAttributeJPie key={uuidv1()} data={sdata} struct={struct} title={cattr} />
         }
@@ -239,7 +316,7 @@ const merge = (data, category) => {
 }
 
 // ========================================
-const data = generateData('data1', 10)
+const data = generateData('data1', 5000)
 ReactDOM.render(
   <div className='main-panel'>
     <StatsPanel data={data} struct={struct} />
