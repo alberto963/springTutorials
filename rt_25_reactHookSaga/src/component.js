@@ -30,12 +30,14 @@ const Example = props => {
   // const callback = () => setCid(id/2)
   const callback = useCallback(() => setCid(id/2), [id])
   const memo = useMemo(() => id/2, [id])
-  const callbackMemo = useCallback(() => setCid(memo) , [id])
+  const comp = () => setCid(memo)
+  const callbackMemo = useCallback(() => setCid(memo), [memo])
 
   // Register the functions so we can count them
   functions.add(inc)
   functions.add(dec)
   functions.add(get)
+  functions.add(comp)
   callbackFunctions.add(callback)
   memoFunctions.add(memo)
   callbackMemoFunctions.add(callbackMemo)
@@ -62,7 +64,7 @@ const Example = props => {
       </button>
       <br />
       <p />
-      <button onClick={() => setCid(memo)}>
+      <button onClick={comp}>
         Test hook memo
       </button>
       <br />
@@ -91,4 +93,4 @@ const mapDispatchToProps = {
   getData,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Example)
+export default connect(mapStateToProps, mapDispatchToProps)(Example)
