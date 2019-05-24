@@ -10,6 +10,35 @@ const functions = new Set()
 const callbackMemoFunctions = new Set()
 
 const Example = props => {
+
+  const computeHalf = id => {
+    console.info('Running computeHalf id=', id)
+
+    return id/2
+  }
+
+  const wordCounts = w => {
+    console.info('Running wordCounts w=', w)
+
+    return w.split(' ').length
+  }
+
+  const treeScan = a => {
+    let r = 0
+
+    const st = a => a.forEach(e => {
+      if (e.child !== []) {
+        st(e.child)
+        r=r+1
+      }
+    })
+
+    console.info('Running treeScan a=', a)
+    st(a)
+
+    return r
+  }
+
   // Declare a new state variable, which we'll call "count"
   const [id, setId] = useState(1)
   const [cid, setCid] = useState(0)
@@ -29,9 +58,11 @@ const Example = props => {
   const get = () => props.getData(id)
   // const callback = () => setCid(id/2)
   const callback = useCallback(() => setCid(id/2), [id])
-  const memo = useMemo(() => id/2, [id])
-  const comp = () => setCid(memo)
-  const callbackMemo = useCallback(() => setCid(memo), [memo])
+  const cidMemo = useMemo(() => computeHalf(id), [id])
+  const wcMemo = useMemo(() => props.json ? wordCounts(props.json.title) : 0, [props.json ? props.json.title : props.json])
+  const tdMemo = useMemo(() => props.tree ? treeScan(props.tree) : 0, [props.tree])
+  const comp = () => setCid(cidMemo)
+  const callbackMemo = useCallback(() => setCid(cidMemo), [cidMemo])
 
   // Register the functions so we can count them
   functions.add(inc)
@@ -39,7 +70,9 @@ const Example = props => {
   functions.add(get)
   functions.add(comp)
   callbackFunctions.add(callback)
-  memoFunctions.add(memo)
+  memoFunctions.add(cidMemo)
+  memoFunctions.add(wcMemo)
+  memoFunctions.add(tdMemo)
   callbackMemoFunctions.add(callbackMemo)
 
   return (
@@ -56,9 +89,13 @@ const Example = props => {
       <button onClick={get}>
         Get data
       </button>
+      <p>Compute half id={id} half: {cidMemo}</p>
       <p>Retrieved data id={props.id} {props.json ? props.json.title: ''}</p>
+      <p>Retrieved data id={props.id} words count: {wcMemo}</p>
+      <p>Retrieved data id={props.id} td count: {tdMemo}</p>
       <p />
-      <p>Current cid is {cid}</p>
+      <p>Current cid (computed id with Test hook callback) is {cid}</p>
+      <br />
       <button onClick={callback}>
         Test hook callback
       </button>
@@ -72,7 +109,6 @@ const Example = props => {
       <button onClick={callbackMemo}>
         Test hook callback and memo
       </button>
-      <br />
       <p />
       <div> Newly Created Functions: {functions.size} </div>
       <div> Newly Created callback Functions: {callbackFunctions.size} </div>
@@ -85,7 +121,8 @@ const Example = props => {
 const mapStateToProps = (state, ownProps) => {
   return {
     id: state.options.id,
-    json: state.data.json
+    json: state.data.json,
+    tree: state.data.tree
   }
 }
 

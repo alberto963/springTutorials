@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GET_DATA, SET_DATA } from './actions'
+import { GET_DATA, SET_DATA, SET_TREE } from './actions'
 
 const options = (state = {}, action) => {
   switch (action.type) {
@@ -16,6 +16,9 @@ const data = (state = {}, action) => {
     case SET_DATA:
       const {json} = action.payload
       return {...state, json}
+    case SET_TREE:
+      const {tree} = action.payload
+      return {...state, tree}
     default:
       return state
   }
