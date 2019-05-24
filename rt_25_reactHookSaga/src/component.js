@@ -39,7 +39,7 @@ const Example = props => {
     return r
   }
 
-  // Declare a new state variable, which we'll call "count"
+  // Declare a new state variable, which we'll call "id"
   const [id, setId] = useState(1)
   const [cid, setCid] = useState(0)
 
