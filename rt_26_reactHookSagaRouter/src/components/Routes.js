@@ -1,21 +1,32 @@
 import React from 'react'
 
-import { Router  } from 'react-router'
-import { Switch, Route } from 'react-router-dom'
-import Todo from './Todo'
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import HookTester from './HookTester'
 import Home from './Home'
 import About from './About'
-import User from './User'
 import NoMatch from './NoMatch'
 
 const Routes = () => 
-  <Router history={ {location: '/' }}>
-    <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route path='/about' component={About}/>
-      <Route exact path='/todo' component={Todo}/>
-      <Route path='/:user' component={User}/>
-      <Route component={NoMatch}/>
-    </Switch>
+  <Router>
+    <div>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/hook">Test and Drill React Hooks</Link>
+        </li>
+      </ul>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/hook" component={HookTester} />
+        <Route component={NoMatch} />
+      </Switch>
+    </div>
   </Router>
+
 export default Routes

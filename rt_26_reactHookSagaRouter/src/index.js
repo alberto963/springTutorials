@@ -17,8 +17,6 @@ sagaMiddleware.run(saga)
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>
-      <Routes />
-    </div>
+    <Routes />
   </Provider>, document.getElementById('root')
 )
