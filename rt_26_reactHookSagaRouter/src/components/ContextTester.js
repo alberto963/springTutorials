@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+import { compose, pure } from 'recompose'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
@@ -22,56 +22,27 @@ const styles = theme => ({
   },
 })
 
-const wordCounts = ({title=''}) => {
-  console.info('Running wordCounts title=', title)
-
-  return title !== '' ? title.split(' ').length : 0
-}
-
 const ContextTester = ({classes, getData, json, lid}) => {
 
-  const [id, setId] = useState(lid)
-
   useEffect(() => {
-    document.title = `id ${id} Ready`
-    getData(id)
+    document.title = `id ${lid} Ready`
 
-    return () => document.title = `id ${lid} Ready`
-  }, [id])
+    getData(lid)
+  }, [lid])  
 
   return (
     <div className={classes.root}>
-    <Paper className={classes.paper}>
-      <Grid container wrap="nowrap" spacing={2}>
-        <Grid item>
-          <Avatar>W</Avatar>
+      <Paper className={classes.paper}>
+        <Grid container wrap="nowrap" spacing={2}>
+          <Grid item>
+            <Avatar>W</Avatar>
+          </Grid>
+          <Grid item xs>
+            <Typography>{json.title}</Typography>
+          </Grid>
         </Grid>
-        <Grid item xs zeroMinWidth>
-          <Typography noWrap>{json}</Typography>
-        </Grid>
-      </Grid>
-    </Paper>
-    <Paper className={classes.paper}>
-      <Grid container wrap="nowrap" spacing={2}>
-        <Grid item>
-          <Avatar>W</Avatar>
-        </Grid>
-        <Grid item xs>
-          <Typography noWrap>{json}</Typography>
-        </Grid>
-      </Grid>
-    </Paper>
-    <Paper className={classes.paper}>
-      <Grid container wrap="nowrap" spacing={2}>
-        <Grid item>
-          <Avatar>W</Avatar>
-        </Grid>
-        <Grid item xs>
-          <Typography>{json}</Typography>
-        </Grid>
-      </Grid>
-    </Paper>
-  </div>
+      </Paper>
+    </div>
   )
 }
 
@@ -86,6 +57,13 @@ const mapDispatchToProps = {
   getData,
 }
 
-export default withStyles(styles)(ContextTester)
+// export default withStyles(styles)(ContextTester)
 
 // export default connect(mapStateToProps, mapDispatchToProps)(styledContextTester)
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  pure,
+  withStyles(styles)
+)(ContextTester)
+

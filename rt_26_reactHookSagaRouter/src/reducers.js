@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { GET_DATA, SET_DATA } from './actions'
 
-const options = (state = {id: 0}, action) => {
+const options = (state = {id: 1}, action) => {
   switch (action.type) {
     case GET_DATA:
     const {id} = action.payload
