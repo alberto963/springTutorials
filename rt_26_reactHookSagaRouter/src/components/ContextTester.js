@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useCallback, useContext} from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { compose, pure } from 'recompose'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
