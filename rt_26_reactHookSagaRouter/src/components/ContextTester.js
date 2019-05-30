@@ -1,13 +1,14 @@
 
-import React, { useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useContext} from 'react'
 import { compose, pure } from 'recompose'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
-import { getData } from '../actions'
+import { getDataP2 } from '../actions'
 
 const styles = theme => ({
   root: {
@@ -20,50 +21,67 @@ const styles = theme => ({
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
   },
+  margin: {
+    margin: theme.spacing(1),
+  },
 })
 
-const ContextTester = ({classes, getData, json, lid}) => {
+const ContextTester = ({classes, getData, json, lastId}) => {
+
+  const [id, setId] = useState(lastId)
 
   useEffect(() => {
-    document.title = `id ${lid} Ready`
-
-    getData(lid)
-  }, [lid])  
-
+    document.title = `id ${id}`
+    getData(id)
+  }, [id])  
+  
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={2}>
+        <Grid container wrap='nowrap' spacing={2}>
           <Grid item>
-            <Avatar>W</Avatar>
+            <Avatar>{json.id ? json.id : id}</Avatar>
           </Grid>
-          <Grid item xs>
-            <Typography>{json.title}</Typography>
+          <Grid item xs zeroMinWidth>
+            <Typography noWrap>{json.title}</Typography>
           </Grid>
         </Grid>
       </Paper>
+      <Grid item xs={12}>
+        <Grid  className={classes.paper} container>
+          <Grid item>
+          <Button variant='outlined' size='medium' color='primary' className={classes.margin} onClick={useCallback(() => setId(id - 1), [id])}>
+            Previous
+          </Button>
+          <Button variant='outlined' size='medium' color='primary' className={classes.margin} onClick={useCallback(() => setId(id + 1), [id])}>
+            Next
+          </Button>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    lid: state.options.id,
-    json: state.data.json
+const mapStateToProps = ({options, data}) => (
+  {
+    lastId: options.idP2,
+    json: data.jsonP2
   }
-}
+)
 
 const mapDispatchToProps = {
-  getData,
+  getData: getDataP2,
 }
 
 // export default withStyles(styles)(ContextTester)
-
 // export default connect(mapStateToProps, mapDispatchToProps)(styledContextTester)
+// export default connect(mapStateToProps, mapDispatchToProps) (pure()(withStyles(styles)(ContextTester))
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   pure,
   withStyles(styles)
 )(ContextTester)
+
 

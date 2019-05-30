@@ -18,10 +18,10 @@ const Routes = () =>
           <Link to="/about">About</Link>
         </li>
         <li>
-          <Link to="/hook">Test and Drill React Hooks</Link>
+          <Link to="/hook">1) Test and Drill React Hooks</Link>
         </li>
         <li>
-          <Link to="/context">Test and Drill React Context and Hooks Context</Link>
+          <Link to="/context">2) Test and Drill React Context and Hooks Context</Link>
         </li>
       </ul>
       <Switch>
