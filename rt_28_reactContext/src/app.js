@@ -16,10 +16,10 @@ const App = () => {
       </button>
       <div>
         <Button />
-        <BtnColorContext.Provider value="btn btn-info">
+        <BtnColorContext.Provider value='btn btn-info'>
           <Button />
         </BtnColorContext.Provider>
-        <BtnColorContext.Provider value="btn btn-warning">
+        <BtnColorContext.Provider value='btn btn-warning'>
           <Button />
         </BtnColorContext.Provider>
 
@@ -42,7 +42,7 @@ const App = () => {
 }
 
 const Button = props => // Note: props are not used
-  <div className="container">
+  <div className='container'>
     <ThemedButton />    
   </div>
 
@@ -52,7 +52,7 @@ const ThemedButton = props => // Note: props are not used
   </button>
 
 const ConsumerButton = props =>
-  <div className="container">
+  <div className='container'>
     <BtnColorContext.Consumer>
       {(value) => <button style={{margin: '10px'}} className={value} onClick={() => {}}>Consumer</button>}
     </BtnColorContext.Consumer>
