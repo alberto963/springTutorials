@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback, useContext } from 'react'
-import { compose, pure } from 'recompose'
+import { compose, pure } from 'recompose' // I tried not to use it, but did not find a way to compose withStyles
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
@@ -58,19 +58,16 @@ const Controls = () => {
   )
 }
 
-const ContextTester = (props) => {
+const ContextPanel = () => 
+  <div className={useContext(Context).classes.root}>
+    <Card />
+    <Controls />
+  </div>
 
-  const {classes} = props
-  
-  return (
-    <div className={classes.root}>
-      <Context.Provider value={props}>
-        <Card />
-        <Controls />
-      </Context.Provider>
-    </div>
-  )
-}
+const ContextTester = (props) =>
+  <Context.Provider value={props}>
+    <ContextPanel />
+  </Context.Provider>
 
 const mapStateToProps = ({options, data}) => (
   {
