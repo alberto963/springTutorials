@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { connect } from 'react-redux'
-import { getDataP1 } from '../actions'
+import { getData } from '../actions'
 
 const wordCounts = ({title=''}) => {
   console.info('Running wordCounts title=', title)
@@ -9,7 +9,7 @@ const wordCounts = ({title=''}) => {
   return title !== '' ? title.split(' ').length : 0
 }
 
-const HookTester = ({getData, json, lastId}) => {
+const HookTester = ({getData, json={}, lastId}) => {
 
   const [id, setId] = useState(lastId)
 
@@ -30,7 +30,7 @@ const HookTester = ({getData, json, lastId}) => {
         Decrease id
       </button>
       <p />
-      <button onClick={useCallback(() => getData(id), [id])}>
+      <button onClick={useCallback(() => getData(id, 'panel1'), [id])}>
        Get data id {id}
       </button>
       <p>Last retrieved data: id={lastId} "{json.title}"</p>
@@ -41,12 +41,12 @@ const HookTester = ({getData, json, lastId}) => {
 }
 
 const mapStateToProps = ({options, data}) => ({
-  lastId: options.idP1,
-  json: data.jsonP1
+  lastId: options.panel1.id,
+  json: data.panel1.json
 })
 
 const mapDispatchToProps = {
-  getData: getDataP1,
+  getData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HookTester)

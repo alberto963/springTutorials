@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
-import { getDataP2 } from '../actions'
+import { getData } from '../actions'
 
 const Context = React.createContext()
 
@@ -21,10 +21,10 @@ const Card = () =>  {
     <Paper className={paper}>
       <Grid container wrap='nowrap' spacing={2}>
         <Grid item>
-          <Avatar>{json.id ? json.id : lastId}</Avatar>
+          <Avatar>{json ? json.id : lastId}</Avatar>
         </Grid>
         <Grid item xs zeroMinWidth>
-          <Typography noWrap>{json.title}</Typography>
+          <Typography noWrap>{json ? json.title: ''}</Typography>
         </Grid>
       </Grid>
     </Paper>
@@ -39,7 +39,7 @@ const Controls = () => {
 
   useEffect(() => {
     document.title = `id ${id}`
-    getData(id)
+    getData(id, 'panel2')
   }, [id]) 
 
   return (
@@ -71,13 +71,13 @@ const ContextTester = (props) =>
 
 const mapStateToProps = ({options, data}) => (
   {
-    lastId: options.idP2,
-    json: data.jsonP2
+    lastId: options.panel2.id,
+    json: data.panel2.json
   }
 )
 
 const mapDispatchToProps = {
-  getData: getDataP2,
+  getData: getData,
 }
 
 const styles = theme => ({
