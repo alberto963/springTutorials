@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import { connect } from 'react-redux'
-import { getData, getDataAsync } from '../actions'
+import { getDataAsync } from '../actions'
 
 const Context = React.createContext()
 

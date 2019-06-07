@@ -15,6 +15,6 @@ ref: https://reactjs.org/docs/hooks-overview.html + saga
 	 
 	 Adding router to address different pages
 	 
-
+handling react context and hooks useContext following: https://www.taniarascia.com/using-context-api-in-react/
 
 
