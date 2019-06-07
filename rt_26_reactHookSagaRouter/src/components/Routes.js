@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import HookTester from './HookTester'
-import ContextTester from './ContextTester'
+import ContextTester from './contextTester/ContextTester'
 import Home from './Home'
 import About from './About'
 import NoMatch from './NoMatch'
