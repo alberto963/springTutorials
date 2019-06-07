@@ -6,9 +6,9 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 import { connect } from 'react-redux'
-import { getData } from '../actions'
+import { getData, getDataAsync } from '../actions'
 
 const Context = React.createContext()
 
@@ -21,10 +21,10 @@ const Card = () =>  {
     <Paper className={paper}>
       <Grid container wrap='nowrap' spacing={2}>
         <Grid item>
-          <Avatar>{json ? json.id : lastId}</Avatar>
+          <Avatar>{lastId}</Avatar>
         </Grid>
         <Grid item xs zeroMinWidth>
-          <Typography noWrap>{json ? json.title : 'No Data'}</Typography>
+          <Typography noWrap>{json ? json.title: ''}</Typography>
         </Grid>
       </Grid>
     </Paper>
@@ -77,7 +77,7 @@ const mapStateToProps = ({options, data}) => (
 )
 
 const mapDispatchToProps = {
-  getData,
+  getData: getDataAsync,
 }
 
 const styles = theme => ({
@@ -105,5 +105,3 @@ export default compose(
   pure,
   withStyles(styles)
 )(ContextTester)
-
-

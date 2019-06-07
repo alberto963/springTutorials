@@ -1,22 +1,20 @@
-const actionCreator = (type, payload, meta) => ({ type, payload, meta })
+const actionCreator = (type, payload) => ({ type, payload })
 export const GET_DATA = 'GET_DATA'
 export const SET_DATA = 'SET_DATA'
 
-export const getData = async (id, panel) => {
-  const payload = {id, panel}
-  const meta = {id}
+const URL = 'https://jsonplaceholder.typicode.com/todos/'
+export const getData = (id, panel) => actionCreator(GET_DATA, {id, panel})
 
-  await new Promise(() => fetch('https://jsonplaceholder.typicode.com/todos/'+ id )).then(response => {
-      const r = response.json()
-      console.info(r)
-      return r
-    })
-
-  return actionCreator(GET_DATA, payload, meta)
+export const setData = (json, panel) => actionCreator(SET_DATA, {json, panel})
+export const getDataAsync = (id, panel) => {
+  return dispatch => fetch(URL + id ).then(r => r.json()).then(json => dispatch(setData(json, panel)))
 }
 
-export const setData = (json, panel) => {
-  const payload = {json, panel}
-
-  return actionCreator(SET_DATA, payload, null)
+export const asyncTimeout = (id, panel) => {
+  return dispatch => {
+    setTimeout(() => {
+      // Yay! Can invoke sync or async actions with `dispatch`
+      dispatch(actionCreator(GET_DATA, {id, panel}))
+    }, 1000)
+  }
 }
