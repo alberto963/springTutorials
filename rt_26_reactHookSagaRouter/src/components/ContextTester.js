@@ -21,7 +21,7 @@ const Card = () =>  {
     <Paper className={paper}>
       <Grid container wrap='nowrap' spacing={2}>
         <Grid item>
-          <Avatar>{json ? json.id : lastId}</Avatar>
+          <Avatar>{lastId}</Avatar>
         </Grid>
         <Grid item xs zeroMinWidth>
           <Typography noWrap>{json ? json.title: ''}</Typography>
