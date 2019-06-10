@@ -3,15 +3,16 @@ export const GET_DATA = 'GET_DATA'
 export const SET_DATA = 'SET_DATA'
 
 const URL = 'https://jsonplaceholder.typicode.com/todos/'
-const getData = (id, panel) => actionCreator(GET_DATA, {id, panel})
+const _getData = (id, panel) => actionCreator(GET_DATA, {id, panel})
 const setData = (json, panel) => actionCreator(SET_DATA, {json, panel})
-export const getDataAsync = (id, panel) => dispatch => {
-  dispatch(getData(id, panel))
+export const getData = (id, panel) => dispatch => {
+  dispatch(_getData(id, panel))
   return fetch(URL + id ).then(r => r.json()).then(json => dispatch(setData(json, panel)))
 }
 
 // Only for reference
-export const asyncTimeout = (id, panel) => {
+// eslint-disable-next-line 
+const asyncTimeout = (id, panel) => {
   return dispatch => {
     setTimeout(() => {
       // Yay! Can invoke sync or async actions with `dispatch`
