@@ -1,27 +1,10 @@
 
 import React from 'react'
-import { compose, pure } from 'recompose' // I tried not to use it, but did not find a way to compose withStyles
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { getData } from '../../actions'
 import { Panel } from './Panel'
 import { ContextProvider } from './Context'
-
-const Todos = props =>
-  <ContextProvider value={props}>
-    <Panel />
-  </ContextProvider>
-
-const mapStateToProps = ({options, data}) => (
-  {
-    lastId: options.panel2.id,
-    json: data.panel2.json
-  }
-)
-
-const mapDispatchToProps = {
-  getData
-}
 
 const styles = theme => ({
   root: {
@@ -39,14 +22,20 @@ const styles = theme => ({
   },
 })
 
-// export default withStyles(styles)(Todos)
-// export default connect(mapStateToProps, mapDispatchToProps)(styledTodos)
-// export default connect(mapStateToProps, mapDispatchToProps) (pure()(withStyles(styles)(Todos))
+const Todos = props =>
+  <ContextProvider value={props}>
+    <Panel />
+  </ContextProvider>
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  pure,
-  withStyles(styles)
-)(Todos)
+const mapStateToProps = ({options, data}) => (
+  {
+    lastId: options.todos.id,
+    json: data.todos.json
+  }
+)
 
+const mapDispatchToProps = {
+  getData
+}
 
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Todos))

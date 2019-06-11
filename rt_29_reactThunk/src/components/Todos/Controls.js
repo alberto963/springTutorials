@@ -11,7 +11,7 @@ export const Controls = () => {
 
   useEffect(() => {
     document.title = `id ${id}`
-    getData(id, 'panel2')
+    getData(id, 'todos')
   }, [id]) 
 
   return (

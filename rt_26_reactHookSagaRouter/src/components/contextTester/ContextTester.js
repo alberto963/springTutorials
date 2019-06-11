@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { compose, pure } from 'recompose' // I tried not to use it, but did not find a way to compose withStyles
+// Solution can be found in rt_29, after reading https://stackoverflow.com/questions/45704681/react-material-ui-export-multiple-higher-order-components/45705291#45705291
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { getData } from '../../actions'

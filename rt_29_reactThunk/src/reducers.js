@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { GET_DATA, SET_DATA } from './actions'
 
-const options = (state = {panel2: {id: 1}}, {type, payload}) => {
+const options = (state = {todos: {id: 1}}, {type, payload}) => {
   switch (type) {
     case GET_DATA:
       const {id, panel} = payload
@@ -11,7 +11,7 @@ const options = (state = {panel2: {id: 1}}, {type, payload}) => {
   }
 }
 
-const data = (state = {panel2: {}}, {type, payload}) => {
+const data = (state = {todos: {}}, {type, payload}) => {
   switch (type) {
     case SET_DATA:
       const {json, panel} = payload
