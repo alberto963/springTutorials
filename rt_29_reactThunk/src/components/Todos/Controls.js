@@ -12,6 +12,8 @@ export const Controls = () => {
   useEffect(() => {
     document.title = `id ${id}`
     getData(id, 'todos')
+
+    return () => document.title = ``
   }, [id]) 
 
   return (

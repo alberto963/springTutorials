@@ -8,7 +8,7 @@ export const Panel = () => {
   const {classes} = useContext(Context)
   const {root} = classes
 
-  return(
+  return (
     <div className={root}>
       <Card />
       <Controls />
