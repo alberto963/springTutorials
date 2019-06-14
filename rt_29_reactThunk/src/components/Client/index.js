@@ -15,8 +15,13 @@ const styles = theme => ({
   paper: {
     maxWidth: 400,
     margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2)
+  },
+  paperLoading: {
+    maxWidth: 400,
+    margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
-//    backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'yellow'
   },
   margin: {
     margin: theme.spacing(1),

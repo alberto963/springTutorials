@@ -8,19 +8,18 @@ import Context from './Context'
 export const Card = () =>  {
 
   const {classes, lastId, card, loading} = useContext(Context)
-  const {paper} = classes
+  const {paper, paperLoading} = classes
 
   return (
-    <Paper className={paper}>
-      {loading && <div>Loading</div>}
-      {!loading && <Grid container wrap='nowrap' spacing={2}>
+    <Paper className={loading ? paperLoading : paper}>
+      <Grid container wrap='nowrap' spacing={2}>
         <Grid item>
           <Avatar>{lastId}</Avatar>
         </Grid>
         <Grid item xs zeroMinWidth>
           <Typography noWrap>{card}</Typography>
         </Grid>
-      </Grid>}
+      </Grid>
     </Paper>
   )
 }
