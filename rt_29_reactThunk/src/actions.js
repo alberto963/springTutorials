@@ -2,12 +2,12 @@ const actionCreator = (type, payload) => ({ type, payload })
 export const GET_DATA = 'GET_DATA'
 export const SET_DATA = 'SET_DATA'
 
-const URL = 'https://jsonplaceholder.typicode.com/todos/'
+const BASE_URL = 'https://jsonplaceholder.typicode.com/'
 const _getData = (id, panel) => actionCreator(GET_DATA, {id, panel})
 const setData = (json, panel) => actionCreator(SET_DATA, {json, panel})
 export const getData = (id, panel) => dispatch => {
   dispatch(_getData(id, panel))
-  return fetch(URL + id ).then(r => r.json()).then(json => dispatch(setData(json, panel)))
+  return fetch(BASE_URL + panel + '/' + id ).then(r => r.json()).then(json => dispatch(setData(json, panel)))
 }
 
 // Only for reference

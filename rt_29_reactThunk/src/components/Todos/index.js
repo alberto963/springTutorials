@@ -27,10 +27,10 @@ const Todos = props =>
     <Panel />
   </ContextProvider>
 
-const mapStateToProps = ({options, data}) => (
+const mapStateToProps = ({options, data}, {panel}) => (
   {
-    lastId: options.todos.id,
-    json: data.todos.json
+    lastId: options[panel] ? options[panel].id : 1,
+    card: data[panel] ? data[panel].card : ''
   }
 )
 

@@ -5,13 +5,13 @@ import Context from './Context'
 
 export const Controls = () => {
 
-  const {classes, lastId, getData} = useContext(Context)
+  const {classes, lastId, getData, panel} = useContext(Context)
   const {paper, margin} = classes
   const [id, setId] = useState(lastId)
 
   useEffect(() => {
     document.title = `id ${id}`
-    getData(id, 'todos')
+    getData(id, panel)
 
     return () => document.title = ``
   }, [id]) 

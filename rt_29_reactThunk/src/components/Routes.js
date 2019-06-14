@@ -4,7 +4,7 @@ import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
-import Tabs from '@material-ui/core/Tabs'
+import Tabs  from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 
@@ -25,9 +25,11 @@ const TabContainer = props =>
     {props.children}
   </Typography>
 
-const Routes = () => {
+const Routes = props => {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
+
+  const {conf} = props
 
   return (
     <TabContainer>
@@ -36,14 +38,14 @@ const Routes = () => {
         <AppBar position='static'>
           <Tabs variant='fullWidth' value={value} onChange={useCallback((e, v) => setValue(v), [value])}>
             <Tab label='Home' component={Link} to='/' />
-            <Tab label='Todos' component={Link} to='/todos' />
+            {conf.map(t => <Tab key={t} label={t} component={Link} to={'/' + t} />)}
             <Tab label='About' component={Link} to='/about' />
           </Tabs>
         </AppBar>
         <TabContainer>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/todos' component={Todos} />
+            {conf.map(t => <Route key={t} path={'/' + t} component={() => <Todos panel={t} />} />)}
             <Route path='/about' component={About} />
             <Route component={NoMatch} />
           </Switch>

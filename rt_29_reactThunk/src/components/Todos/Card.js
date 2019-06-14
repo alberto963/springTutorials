@@ -7,7 +7,7 @@ import Context from './Context'
 
 export const Card = () =>  {
 
-  const {classes, json, lastId} = useContext(Context)
+  const {classes, lastId, card} = useContext(Context)
   const {paper} = classes
 
   return (
@@ -17,7 +17,7 @@ export const Card = () =>  {
           <Avatar>{lastId}</Avatar>
         </Grid>
         <Grid item xs zeroMinWidth>
-          <Typography noWrap>{json ? json.title: ''}</Typography>
+          <Typography noWrap>{card}</Typography>
         </Grid>
       </Grid>
     </Paper>
