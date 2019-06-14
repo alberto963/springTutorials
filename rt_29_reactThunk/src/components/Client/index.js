@@ -22,7 +22,7 @@ const styles = theme => ({
   },
 })
 
-const Todos = props =>
+const Client = props =>
   <ContextProvider value={props}>
     <Panel />
   </ContextProvider>
@@ -38,4 +38,4 @@ const mapDispatchToProps = {
   getData
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Todos))
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Client))

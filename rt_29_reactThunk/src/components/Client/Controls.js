@@ -10,7 +10,7 @@ export const Controls = () => {
   const [id, setId] = useState(lastId)
 
   useEffect(() => {
-    document.title = `id ${id}`
+    document.title = `${panel} id ${id}`
     getData(id, panel)
 
     return () => document.title = ``

@@ -8,10 +8,12 @@ import Tabs  from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 
-import Todos from './Todos'
+import Client from './Client'
 import Home from './Home'
 import About from './About'
 import NoMatch from './NoMatch'
+
+import { panels } from '../conf'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,11 +27,9 @@ const TabContainer = props =>
     {props.children}
   </Typography>
 
-const Routes = props => {
+const Routes = () => {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
-
-  const {conf} = props
 
   return (
     <TabContainer>
@@ -38,14 +38,14 @@ const Routes = props => {
         <AppBar position='static'>
           <Tabs variant='fullWidth' value={value} onChange={useCallback((e, v) => setValue(v), [value])}>
             <Tab label='Home' component={Link} to='/' />
-            {conf.map(t => <Tab key={t} label={t} component={Link} to={'/' + t} />)}
+            {panels.map(t => <Tab key={t} label={t} component={Link} to={'/' + t} />)}
             <Tab label='About' component={Link} to='/about' />
           </Tabs>
         </AppBar>
         <TabContainer>
           <Switch>
             <Route exact path='/' component={Home} />
-            {conf.map(t => <Route key={t} path={'/' + t} component={() => <Todos panel={t} />} />)}
+            {panels.map(t => <Route key={t} path={'/' + t} component={() => <Client panel={t} />} />)}
             <Route path='/about' component={About} />
             <Route component={NoMatch} />
           </Switch>
