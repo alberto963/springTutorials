@@ -16,6 +16,7 @@ const styles = theme => ({
     maxWidth: 400,
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
+//    backgroundColor: theme.palette.background.paper,
   },
   margin: {
     margin: theme.spacing(1),
@@ -30,6 +31,7 @@ const Client = props =>
 const mapStateToProps = ({options, data}, {panel}) => (
   {
     lastId: options[panel] ? options[panel].id : 1,
+    loading: options[panel] ? options[panel].loading : false,
     card: data[panel] ? data[panel].card : ''
   }
 )

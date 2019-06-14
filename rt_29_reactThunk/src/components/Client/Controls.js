@@ -5,7 +5,7 @@ import Context from './Context'
 
 export const Controls = () => {
 
-  const {classes, lastId, getData, panel} = useContext(Context)
+  const {classes, lastId, getData, panel, loading} = useContext(Context)
   const {paper, margin} = classes
   const [id, setId] = useState(lastId)
 
@@ -20,10 +20,12 @@ export const Controls = () => {
     <Grid item xs={12}>
       <Grid className={paper} container>
         <Grid item>
-        <Button variant='outlined' size='medium' color='primary' className={margin} onClick={useCallback(() => setId(id - 1), [id])}>
+        <Button variant='outlined' size='medium' color='primary' className={margin} disabled={loading}
+                onClick={useCallback(() => setId(id - 1), [id])}>
           Previous
         </Button>
-        <Button variant='outlined' size='medium' color='primary' className={margin} onClick={useCallback(() => setId(id + 1), [id])}>
+        <Button variant='outlined' size='medium' color='primary' className={margin} disabled={loading}
+                onClick={useCallback(() => setId(id + 1), [id])}>
           Next
         </Button>
         </Grid>
