@@ -7,6 +7,7 @@ const _getData = (id, panel) => actionCreator(GET_DATA, {id, panel})
 const setData = (json, panel) => actionCreator(SET_DATA, {json, panel})
 export const getData = (id, panel) => dispatch => {
   dispatch(_getData(id, panel))
+  // setTimeout(() => dispatch(setData({}, panel)), 1000)
   return fetch(BASE_URL + panel + '/' + id ).then(r => r.json()).then(json => dispatch(setData(json, panel)))
 }
 
