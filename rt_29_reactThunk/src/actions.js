@@ -7,8 +7,11 @@ const _getData = (id, panel) => actionCreator(GET_DATA, {id, panel})
 const setData = (json, panel) => actionCreator(SET_DATA, {json, panel})
 export const getData = (id, panel) => dispatch => {
   dispatch(_getData(id, panel))
-  // setTimeout(() => dispatch(setData({}, panel)), 1000)
-  return fetch(BASE_URL + panel + '/' + id ).then(r => r.json()).then(json => dispatch(setData(json, panel)))
+  const tid = setTimeout(() => dispatch(setData({}, panel)), 1000)
+  return fetch(BASE_URL + panel + '/' + id ).then(r => r.json()).then(json => {
+    clearTimeout(tid)
+    dispatch(setData(json, panel))
+  })
 }
 
 // Only for reference
@@ -21,3 +24,30 @@ const asyncTimeout = (id, panel) => {
     }, 1000)
   }
 }
+
+const timeoutPromise = (ms, promise) => new Promise((resolve, reject) => {
+
+  const timeoutId = setTimeout(() => {
+    reject(new Error('Timeout'))
+  }, ms)
+  
+  promise.then(
+    res => {
+      clearTimeout(timeoutId)
+      resolve(res)
+    },
+    err => {
+      clearTimeout(timeoutId)
+      reject(err)
+    }
+  )
+})
+
+const getDataWithTimeout = url => dispatch => {
+  dispatch(_getData(url))
+  timeoutPromise(5000, fetch(url).then(response => response.json()).then(json => dispatch(getDataSuccess(json)))
+  .catch(error => dispatch(getDataFailed(error))))
+}
+
+const getDataSuccess = json => console.log(json)
+const getDataFailed = error => console.error(error)
