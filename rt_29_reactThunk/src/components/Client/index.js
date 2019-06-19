@@ -23,6 +23,12 @@ const styles = theme => ({
     padding: theme.spacing(2),
     backgroundColor: 'yellow'
   },
+  paperTimeout: {
+    maxWidth: 400,
+    margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2),
+    backgroundColor: 'red'
+  },
   margin: {
     margin: theme.spacing(1),
   },

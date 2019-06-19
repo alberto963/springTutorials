@@ -7,11 +7,11 @@ import Context from './Context'
 
 export const Card = () =>  {
 
-  const {classes, lastId, card, loading} = useContext(Context)
-  const {paper, paperLoading} = classes
+  const {classes, lastId, card, loading, timeout} = useContext(Context)
+  const {paper, paperLoading, paperTimeout} = classes
 
   return (
-    <Paper className={loading ? paperLoading : paper}>
+    <Paper className={loading ? timeout ? paperTimeout : paperLoading : paper}>
       <Grid container wrap='nowrap' spacing={2}>
         <Grid item>
           <Avatar>{lastId}</Avatar>
