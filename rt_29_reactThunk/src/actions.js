@@ -1,19 +1,14 @@
 const actionCreator = (type, payload) => ({ type, payload })
 export const GET_DATA = 'GET_DATA'
 export const SET_DATA = 'SET_DATA'
-export const DELAY = 'DELAY'
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com/'
 const _getData = (id, panel) => actionCreator(GET_DATA, {id, panel})
 const setData = (json, panel) => actionCreator(SET_DATA, {json, panel})
-const delay = panel => actionCreator(DELAY, {panel})
+
 export const getData = (id, panel) => dispatch => {
   dispatch(_getData(id, panel))
-  const tid = setTimeout(() => dispatch(delay(panel)), 10)
-  return fetch(BASE_URL + panel + '/' + id ).then(r => r.json()).then(json => {
-    clearTimeout(tid)
-    dispatch(setData(json, panel))
-  })
+  return fetch(BASE_URL + panel + '/' + id ).then(r => r.json()).then(json => dispatch(setData(json, panel)))
 }
 
 // Only for reference
@@ -45,6 +40,8 @@ const timeoutPromise = (ms, promise) => new Promise((resolve, reject) => {
   )
 })
 
+// Only for reference
+// eslint-disable-next-line 
 const getDataWithTimeout = url => dispatch => {
   dispatch(_getData(url))
   timeoutPromise(5000, fetch(url).then(response => response.json()).then(json => dispatch(getDataSuccess(json)))
