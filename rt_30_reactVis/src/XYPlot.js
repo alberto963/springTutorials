@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from './Button'
 
@@ -35,9 +35,13 @@ const MyXYPlot = props => {
 
   const [state, setState] = useState({
     data: generateData(),
-    loading: false,
+    loading: true,
     modeIndex: 0
   })
+
+  useEffect(() => {
+    setTimeout(() => setState({...state, loading: false}), 1000)
+  }, [state.loading])
 
   const updateModeIndex = useCallback(increment => () => {
     const newIndex = state.modeIndex + increment 
