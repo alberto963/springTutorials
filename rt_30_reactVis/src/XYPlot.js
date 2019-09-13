@@ -13,8 +13,10 @@ import {
   MarkSeries
 } from 'react-vis'
 
-const generateData = () => [...new Array(10)].map(r => ({
-    x: Math.random() * 5,
+const DELAY = 10
+
+const generateData = () => [...new Array(10)].map((r, x) => ({
+    x: Math.random() * 10,
     y: Math.random() * 10
   }))
  
@@ -36,22 +38,23 @@ const MyXYPlot = props => {
   const [state, setState] = useState({
     data: generateData(),
     loading: true,
-    modeIndex: 0
+    modeIndex: 2
   })
 
   useEffect(() => {
-    setTimeout(() => setState({...state, loading: false}), 1000)
+    setTimeout(() => setState({...state, loading: false}), DELAY)
   }, [state.loading])
 
   const updateModeIndex = useCallback(increment => () => {
     const newIndex = state.modeIndex + increment 
     const modeIndex = newIndex < 0 ? MODE.length - 1 : newIndex % MODE.length
     setState({ ...state, modeIndex })
-  }, [state])
+  }, [state.modeIndex])
 
   const updatedata = useCallback(() => {
-    setState({...state, loading: true})
-    setTimeout(() => setState({...state, loading: false, data: generateData()}), 1000)
+    // setState({...state, loading: true, data: generateData()})
+    // setTimeout(() => setState({...state, loading: false}), DELAY)
+    setState({...state, data: generateData()})
   }, [state])
 
   const {modeIndex, loading, data} = state
