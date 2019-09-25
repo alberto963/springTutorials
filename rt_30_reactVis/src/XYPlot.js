@@ -1,24 +1,18 @@
-import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from './Button'
-
 import Box from '@material-ui/core/Box'
+import { XYPlot, XAxis, YAxis, VerticalGridLines, HorizontalGridLines, MarkSeries } from 'react-vis'
 
-import {
-  XYPlot,
-  XAxis,
-  YAxis,
-  VerticalGridLines,
-  HorizontalGridLines,
-  MarkSeries
-} from 'react-vis'
+const DELAY = 1000
 
-const DELAY = 10
-
-const generateData = () => [...new Array(10)].map((r, x) => ({
+const generateData = () => {
+  console.info('generateData')
+ return  [...new Array(10)].map((r, x) => ({
     x: Math.random() * 10,
     y: Math.random() * 10
   }))
+}
  
 const MODE = ['noWobble', 'gentle', 'wobbly', 'stiff']
 
@@ -36,28 +30,38 @@ const useStyles = makeStyles(theme => ({
 const MyXYPlot = props => {
 
   const [state, setState] = useState({
-    data: generateData(),
+    data: [],
     loading: true,
     modeIndex: 2
   })
 
+  const {modeIndex, loading, data} = state
+
   useEffect(() => {
-    setTimeout(() => setState({...state, loading: false}), DELAY)
-  }, [state.loading])
+    if (loading) {
+      setTimeout(() => {
+        const newState = {...state, loading: false, data: generateData()}
+        console.info('setTimeout newState=', newState)
+        setState(newState)
+        console.info('setTimeout state=', state)
+      }, DELAY)
+    }
+  }, [loading])
 
   const updateModeIndex = useCallback(increment => () => {
-    const newIndex = state.modeIndex + increment 
-    const modeIndex = newIndex < 0 ? MODE.length - 1 : newIndex % MODE.length
-    setState({ ...state, modeIndex })
-  }, [state.modeIndex])
+    const newIndex = modeIndex + increment 
+    const newState = {...state,  modeIndex: newIndex < 0 ? MODE.length - 1 : newIndex % MODE.length}
+    console.info('updateModeIndex newState=', newState)
+    setState(newState)
+    console.info('updateModeIndex state=', state)
+  }, [modeIndex])
 
   const updatedata = useCallback(() => {
-    // setState({...state, loading: true, data: generateData()})
-    // setTimeout(() => setState({...state, loading: false}), DELAY)
-    setState({...state, data: generateData()})
-  }, [state])
-
-  const {modeIndex, loading, data} = state
+    const newState = {...state,  loading: true}
+    console.info('updatedata newState=', newState)
+    setState({...state, loading: true})
+    console.info('updatedata state=', state)
+  })
 
   const classes = useStyles()
 
