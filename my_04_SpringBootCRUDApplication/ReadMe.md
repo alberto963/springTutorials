@@ -9,3 +9,9 @@ cd my_04_SpringBootCRUDApplication/src/main/resources/static/test-admin
 yarn
 
 then copy produced .js and .css files into static/*/css|js/test_admin and change index.tfl accordingly
+
+Create user
+POST
+Payload: 
+
+{ "name": "My Name" }
