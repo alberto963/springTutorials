@@ -10,13 +10,13 @@ import org.springframework.http.HttpStatus;
 public class Example {
 
 	@RequestMapping(value="/home", method=RequestMethod.GET)
-	String homeG() {
+	String homeGet() {
 		return "Hello All World!";
 	}
 
 	@PostMapping("/home")
     @ResponseStatus(HttpStatus.CREATED)	
-	String homeP(@RequestBody String person) {
+	String homePost(@RequestBody String person) {
 		return "Hello " + person;
 	}
 	
