@@ -3,13 +3,21 @@ package com.ap.simple;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.hibernate.SessionFactory;
 
+@Repository
 public class Service {
-	private static SessionFactory factory;
+	
+	@Autowired
+	private SessionFactory factory;
+
+	public Service() {
+	}
 
 	/* Method to CREATE a pojo in the database */
-	public Integer addpojo(String fname, String lname, int salary) {
+	public Integer addpojo(String fname) {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		Integer pojoID = null;
