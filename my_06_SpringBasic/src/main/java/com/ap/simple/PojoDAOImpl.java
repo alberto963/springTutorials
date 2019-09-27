@@ -2,22 +2,19 @@ package com.ap.simple;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.hibernate.SessionFactory;
 
 @Repository
-public class Service {
-	
+public class PojoDAOImpl implements PojoDAO {
 	@Autowired
 	private SessionFactory factory;
 
-	public Service() {
-	}
-
-	/* Method to CREATE a pojo in the database */
-	public Integer addpojo(String fname) {
+	@Override
+	public Integer addFname(String fname) {
+		/* Method to CREATE a pojo in the database */
 		Session session = factory.openSession();
 		Transaction tx = null;
 		Integer pojoID = null;
@@ -36,6 +33,8 @@ public class Service {
 		} finally {
 			session.close();
 		}
+		
 		return pojoID;
 	}
+
 }

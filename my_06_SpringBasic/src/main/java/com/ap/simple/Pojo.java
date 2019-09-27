@@ -9,7 +9,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "POJO")
 public class Pojo {
+	@Id
+	@GeneratedValue
+	@Column(name = "ID")
 	private int id;
+
+	@Column(name = "FIRST_NAME")
 	private String firstName;
 
 	public Pojo(int id, String firstName) {
@@ -21,8 +26,6 @@ public class Pojo {
 	public Pojo() {
 	}
 
-	@Id @GeneratedValue
-	@Column(name = "ID")
 	public int getId() {
 		return id;
 	}
