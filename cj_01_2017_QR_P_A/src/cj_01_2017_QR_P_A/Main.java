@@ -143,7 +143,7 @@ public class Main {
 		return o;
 	}
 
-	/*
+	/*-
 	 * We can reduce complexity to O(N) by only flipping one pancake at a time, and
 	 * keeping a running count of the number of flips that we "owe" the current
 	 * pancake. For instance, suppose that N = 10 and K = 5, and the first pancake
@@ -155,6 +155,20 @@ public class Main {
 	 * the flip count is odd, we increase the flip count and make another memo.
 	 * These memos can be easily stored in another array of length N that is checked
 	 * before handling each pancake.
+	 * 
+	 * One way I can think about for this algo is the following:
+	 * memo is an array of integers of length N and initialized to [0]
+	 * if it is - and memo is even => increase counter and increase memo for next K-1 elems
+	 * if it is - and memo is odd => do nothing and go to next
+	 * if it is + and meno is even => do nothing and go to next
+	 * if it is + and memo is odd => increase counter and increase memo for next K-1 elems
+	 * 
+	 * but in this way it is again o[n^2]
+	 * 
+	 * Instead as suggested, 
+	 * memo is an array of boolean of length N and initialized to [false]
+	 * 
+
 	 */
 	private static Object resolveSmart(int n, String S, int K, int N) {
 
@@ -165,8 +179,11 @@ public class Main {
 		boolean memo[] = new boolean[N];
 
 		for (int k = 0; k < N - K + 1; k++) {
-			// TODO
-			fc++;
+			if (S.charAt(k) == '-') {
+				if (memo[k])
+					memo[k + K - 1] = true;
+				r++;
+			}
 		}
 
 		String finalResult = buildResult(N);
