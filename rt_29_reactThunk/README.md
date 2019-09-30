@@ -1,19 +1,16 @@
-rt_24: This project was bootstrapped by coping from rt_25 project
-
 ## Table of Contents
 
 - [Introduction](#Introduction)
 
-
 ## Introduction
 
-Exercise on react hook: trying to run simple examples locally
+Exercise on react hook: Implementation in React of a simple front-end client for jsonplaceholder
 
-ref: https://reactjs.org/docs/hooks-overview.html + saga
+	Ref: https://reactjs.org/docs/hooks-overview.html + redux + thunk
 
-	 https://jsonplaceholder.typicode.com/
+	Ref: https://jsonplaceholder.typicode.com/
 	 
-	 Adding router to address different pages
+	Note: Using react router to address different pages
 	 
 
 
