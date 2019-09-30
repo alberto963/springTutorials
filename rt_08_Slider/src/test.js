@@ -1,38 +1,51 @@
 {
-  const S = '----++---' // Status
-  const K = 3 // Number of elements to switch
+    const S = '------+' // Status
+    const K = 3 // Number of elements to switch
 
-  const N=S.length;
+    const N = S.length;
 
-  let ans=0;
+    let ans = 0;
 
-  for(let i=0; i+K-1<N; i++) {
+    let s = S.split('')
 
-    if(S[i]=='-')
-    {
-        for(let j=0; j<K; j++) {
+    for (let i = 0; i + K - 1 < N; i++) {
 
-          S[i+j] ^= '-' ^ '+';
-          // Explaination (my):
-          // S = S XOR '-' XOR '+'
-          // if S is '-' ==> S will be '+' (if A='-' B='+' then A XOR (A XOR B) is B i.e. '+')
-          // if S is '+' ==> S will be '-' (if A='-' B='+' then B XOR (A XOR B) is A i.e. '-')
-          // that is toggle S[i+j] from '-' to '+' and viceversa
+        console.info('i=', i, s)
+
+        if (s[i] === '-') {
+            for (let j = 0; j < K; j++) {
+
+                console.info('j=', j, s, ' ans=', ans)
+
+                // S[i+j] ^= '-' ^ '+';
+
+                // Explaination:
+                // S = S XOR '-' XOR '+'
+                // if S is '-' ==> S will be '+' (if A='-' B='+' then A XOR (A XOR B) is B i.e. '+')
+                // if S is '+' ==> S will be '-' (if A='-' B='+' then B XOR (A XOR B) is A i.e. '-')
+                // that is toggle S[i+j] from '-' to '+' and viceversa
+
+                if (s[i + j] === '-')
+                    s[i + j] = '+'
+                else
+                    s[i + j] = '-'
+
+                console.info('s[i+j]=', s[i + j])
+            }
+            ans++;
         }
-        ans++;
     }
- }
 
-  for(let i=0; i<N; i++) {
-   if(S[i]=='-') {
-      ans=-1;
-   }
-  }
+    for (let i = 0; i < N; i++) {
+        if (s[i] == '-') {
+            ans = -1;
+        }
+    }
 
-  if(ans==-1)
-    console.log("IMPOSSIBLE");
-  else
-    console.log(ans);
+    if (ans == -1)
+        console.log("IMPOSSIBLE");
+    else
+        console.log(ans);
 }
 
 /* =========================== ORIG
