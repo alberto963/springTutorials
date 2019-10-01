@@ -12,8 +12,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PojoDAOImpl implements PojoDAO {
 	
-	@Autowired
 	private SessionFactory factory;
+
+	 @Autowired
+	 public void setSessionFactory(SessionFactory sessionFactory) {
+	     this.factory = sessionFactory;
+	 }
 
 	@Override
 	public Integer addFname(String fname) {

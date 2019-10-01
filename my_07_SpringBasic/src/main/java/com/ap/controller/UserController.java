@@ -18,9 +18,9 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ResponseEntity userDetails() {
+	public ResponseEntity<List<?>> userDetails() {
 
-		List userDetails = userService.getUserDetails();
-		return new ResponseEntity(userDetails, HttpStatus.OK);
+		List<?> userDetails = userService.getUserDetails();
+		return new ResponseEntity<List<?>>(userDetails, HttpStatus.OK);
 	}
 }

@@ -17,9 +17,8 @@ public class UserDaoImpl implements UserDao {
 	@PersistenceContext
     private EntityManager entityManager;
 	
-	public List getUserDetails() {
+	public List<?> getUserDetails() {
 		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(UserDetails.class);
 		return criteria.list();
 	}
-
 }
