@@ -1,5 +1,5 @@
 <h1 align="center">
-    my_08_SpringBasic
+    my_08_spring-boot-hibernate-5-example
 </h1>
 
 ref: https://www.devglan.com/spring-boot/spring-boot-hibernate-5-example
