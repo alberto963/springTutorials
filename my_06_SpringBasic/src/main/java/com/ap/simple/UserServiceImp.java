@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PojoServiceImp implements PojoService {
+public class UserServiceImp implements UserService {
 
 	@Autowired(required = true)
-	private PojoDAO pojoDAO;
+	private UserDAO pojoDAO;
 
 	@Override
 	@Transactional

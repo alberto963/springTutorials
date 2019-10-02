@@ -17,8 +17,12 @@ public class UserDaoImpl implements UserDao {
 	@PersistenceContext
     private EntityManager entityManager;
 	
-	public List<?> getUserDetails() {
-		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(UserDetails.class);
+	@SuppressWarnings("unchecked")
+	public List<UserDetails> getUserDetails() {
+		Session session = entityManager.unwrap(Session.class);
+		
+		// Transaction transaction = session.beginTransaction();
+		Criteria criteria = session.createCriteria(UserDetails.class);
 		return criteria.list();
 	}
 }

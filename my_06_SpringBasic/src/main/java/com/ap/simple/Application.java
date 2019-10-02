@@ -10,10 +10,10 @@ import org.springframework.http.HttpStatus;
 @ComponentScan
 @RestController
 @EnableAutoConfiguration
-public class Example {
+public class Application {
 
 	@Autowired(required = true)
-	private PojoService pojoService;
+	private UserService pojoService;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	String homeGet() {
@@ -30,6 +30,6 @@ public class Example {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Example.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }

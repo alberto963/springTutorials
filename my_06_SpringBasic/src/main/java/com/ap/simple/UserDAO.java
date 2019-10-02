@@ -1,5 +1,5 @@
 package com.ap.simple;
 
-public interface PojoService {
+public interface UserDAO {
 	public Integer addFname(String fname);
 }

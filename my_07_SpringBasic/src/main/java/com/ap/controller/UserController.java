@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ap.model.UserDetails;
 import com.ap.service.UserService;
 
 @Controller
@@ -18,9 +19,9 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ResponseEntity<List<?>> userDetails() {
+	public ResponseEntity<List<UserDetails>> userDetails() {
 
-		List<?> userDetails = userService.getUserDetails();
-		return new ResponseEntity<List<?>>(userDetails, HttpStatus.OK);
+		List<UserDetails> userDetails = userService.getUserDetails();
+		return new ResponseEntity<List<UserDetails>>(userDetails, HttpStatus.OK);
 	}
 }

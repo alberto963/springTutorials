@@ -1,5 +1,8 @@
 package com.ap.simple;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,28 +13,26 @@ import org.springframework.stereotype.Repository;
 
 @Component
 @Repository
-public class PojoDAOImpl implements PojoDAO {
+@PersistenceContext
+public class UserDAOImpl implements UserDAO {
 	
+	@Autowired
 	private SessionFactory factory;
-
-	 @Autowired
-	 public void setSessionFactory(SessionFactory sessionFactory) {
-	     this.factory = sessionFactory;
-	 }
 
 	@Override
 	public Integer addFname(String fname) {
 		/* Method to CREATE a pojo in the database */
 		Session session = factory.openSession();
+
 		Transaction tx = null;
-		Integer pojoID = null;
+		Integer userId = null;
 
 		try {
 			tx = session.beginTransaction();
-			Pojo pojo = new Pojo();
-			pojo.setFirstName(fname);
+			User user = new User();
+			user.setFirstName(fname);
 
-			pojoID = (Integer) session.save(pojo);
+			userId = (Integer) session.save(user);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -40,8 +41,8 @@ public class PojoDAOImpl implements PojoDAO {
 		} finally {
 			session.close();
 		}
-		
-		return pojoID;
+
+		return userId;
 	}
 
 }

@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "POJO")
-public class Pojo {
+@Table(name = "USER")
+public class User {
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -17,13 +17,13 @@ public class Pojo {
 	@Column(name = "FIRST_NAME")
 	private String firstName;
 
-	public Pojo(int id, String firstName) {
+	public User(int id, String firstName) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 	}
 
-	public Pojo() {
+	public User() {
 	}
 
 	public int getId() {
