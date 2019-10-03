@@ -11,6 +11,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+/**
+ * 
+ * When a class is annotated with @RunWith or extends a class annotated
+ * with @RunWith, JUnit will invoke the class it references to run the tests in
+ * that class instead of the runner built into JUnit.
+ *
+ */
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class CustomerRepositoryTests {
