@@ -1,0 +1,16 @@
+---
+server:
+  port: 8091
+---
+logging:
+    level: DEBUG
+---
+logging:
+    level:
+      org:
+        springframework.web: DEBUG
+        hibernate: DEBUG
+---
+logging:
+    level:
+      com: DEBUG
