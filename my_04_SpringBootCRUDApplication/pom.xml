@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.websystique.springboot</groupId>
-	<artifactId>SpringBootCRUDApplicationExample</artifactId>
+	<artifactId>my_04_SpringBootCRUDApplication</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>SpringBootCRUDApplicationExample</name>
+	<name>my_04_SpringBootCRUDApplication</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
