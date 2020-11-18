@@ -1,6 +1,8 @@
-package spring.tutorial;
+package spring.tutorial.services;
 
 import org.springframework.stereotype.Service;
+
+import spring.tutorial.components.RiskAssessor;
 
 @Service
 public class DatabaseAccountService implements AccountService {

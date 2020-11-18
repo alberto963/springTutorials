@@ -1,4 +1,4 @@
-package spring.tutorial;
+package spring.tutorial.components;
 
 import org.springframework.stereotype.Component;
 
