@@ -7,3 +7,6 @@ spring:
     restart:
       exclude: "META-INF/resources/**,public/**"
       log-condition-evaluation-delta: true
+      trigger-file: "reloadtrigger"
+  mvc:
+      log-request-details: false

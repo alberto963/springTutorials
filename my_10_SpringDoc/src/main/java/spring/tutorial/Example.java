@@ -22,7 +22,7 @@ public class Example {
 
 	@RequestMapping("/")
 	String home() {
-		return "Hello World!? Account open " + das.open() + " at " + new Date();
+		return "Hello World! Account open " + das.open() + " at " + new Date();
 	}
 
 	public static void main(String[] args) {
