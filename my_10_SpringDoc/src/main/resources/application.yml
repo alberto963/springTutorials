@@ -1,0 +1,9 @@
+---
+server:
+  port: 8081
+---
+spring:
+  devtools:
+    restart:
+      exclude: "META-INF/resources/**,public/**"
+      log-condition-evaluation-delta: true
