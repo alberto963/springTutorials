@@ -3,8 +3,13 @@ package spring.tutorial;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
+import org.springframework.boot.ExitCodeGenerator;
+//import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,16 +21,33 @@ import spring.tutorial.services.DatabaseAccountService;
 // @EnableAutoConfiguration
 @SpringBootApplication
 public class Example {
-	
-	@Autowired
-	DatabaseAccountService das;
 
+	@Autowired
+	private DatabaseAccountService das;
+
+	private static ConfigurableApplicationContext myApp;
+	
 	@RequestMapping("/")
-	String home() {
-		return "Hello World! Account open " + das.open() + " at " + new Date();
+	public String home() {
+		return "Hello World!?   Account open " + das.open() + " at " + new Date();
+	}
+
+	@RequestMapping("/exit")
+	public String exit() {
+		int exitCode = SpringApplication.exit(myApp);
+		// System.exit(exitCode);
+		return new Integer(exitCode).toString();
+	}
+	
+	@Bean
+	public ExitCodeGenerator exitCodeGenerator() {
+		return () -> 42;
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Example.class, args);
+		SpringApplication app = new SpringApplication(Example.class);
+		app.setBannerMode(Banner.Mode.LOG);
+		myApp = app.run(args);
+		// SpringApplication.run(Example.class, args);
 	}
 }

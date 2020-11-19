@@ -1,12 +1,24 @@
 ---
 server:
-  port: 8081
+  port: 8081 # WORKING!
+---
+spring:
+  main:
+    lazy-initialization: true
 ---
 spring:
   devtools:
     restart:
-      exclude: "META-INF/resources/**,public/**"
-      log-condition-evaluation-delta: true
-      trigger-file: "reloadtrigger"
-  mvc:
-      log-request-details: false
+      exclude: "META-INF/resources/**,public/**" # WORKING!
+#      log-condition-evaluation-delta: true # NOT WORKING!
+#      trigger-file: "reloadtrigger" # NOT WORKING!
+---
+#  mvc:
+#    log-request-details: false # NOT WORKING!
+#  codec:
+#    log-request-details: false # NOT WORKING!
+---
+#spring:
+#  main:
+#    log-startup-info: false # NOT WORKING!
+
