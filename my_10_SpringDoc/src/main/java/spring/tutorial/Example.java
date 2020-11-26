@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,7 +38,7 @@ public class Example {
 //		return "index.html";
 //	}
 	
-	@RequestMapping(value = "/load", method = RequestMethod.GET)
+	@RequestMapping(value = "/load")
 	public ModelAndView showForm() {
 		return new ModelAndView();
 	}

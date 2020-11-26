@@ -30,6 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
 		// bean.setViewClass(JstlView.class);
 		bean.setPrefix("/dist/");
 		bean.setSuffix(".html");
+		bean.setOrder(2);
 
 		return bean;
 	}
