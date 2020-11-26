@@ -10,4 +10,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
 	Post findByTitle(String title);
 
+	Post findOne(Long id);
+
+	void delete(Long id);
+
 }
