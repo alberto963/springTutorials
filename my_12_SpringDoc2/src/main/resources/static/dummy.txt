@@ -1,9 +1,0 @@
-# This file is just to test what happens when it changes
-# This is done in conjunction with applications.yml file in resources
-
-# chg1
-# chg2
-# chg3
-# chg4
-# chg5
-# chg6

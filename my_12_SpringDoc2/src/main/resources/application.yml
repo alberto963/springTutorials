@@ -1,29 +1,6 @@
 ---
 server:
   port: 8081 # WORKING!
----
 spring:
-  profiles: prod 
-  main:
-    lazy-initialization: true
----
-spring:
-  profiles: debug,default
-  devtools:
-    restart:
-      exclude: "META-INF/resources/**,public/**" # WORKING!
-#      log-condition-evaluation-delta: true # NOT WORKING!
-#      trigger-file: "reloadtrigger" # NOT WORKING!
----
-spring:
-  mvc:
-    static-path-pattern: "/resources/**"
-#  mvc:
-#    log-request-details: false # NOT WORKING!
-#  codec:
-#    log-request-details: false # NOT WORKING!
----
-#spring:
-#  main:
-#    log-startup-info: false # NOT WORKING!
-
+  thymeleaf:
+    prefix: classpath:/dist/
