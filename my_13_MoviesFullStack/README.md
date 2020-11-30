@@ -2,7 +2,6 @@
     MoviesRestService
 </h1>
 
-
 A RESTful facade backend API with two services:
 - Movie service (*movie entity: id, title, description*)
 - Movie comments service (*comment entity: id, movieId, username, message*)
