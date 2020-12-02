@@ -16,7 +16,7 @@ import org.springframework.web.context.request.WebRequest;
  * org.springframework.web.bind.annotation.RequestMapping annotation.
  */
 @Controller
-// @RequestMapping("/com/ex")
+@RequestMapping("/com/ex")
 
 public class MvcController {
 
@@ -24,6 +24,6 @@ public class MvcController {
 	public String load(WebRequest request, Model model) {
 		model.addAttribute("status", "Changed default templates dir to dist");
 		model.addAttribute("code", "with success");
-		return "load";
+		return "index";
 	}
 }
