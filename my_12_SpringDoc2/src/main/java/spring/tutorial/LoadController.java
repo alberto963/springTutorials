@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
+@RequestMapping("/com/ex")
+
 public class LoadController {
 
 	@RequestMapping("/load")
