@@ -1,0 +1,54 @@
+package spring.tutorial;
+
+import java.io.Serializable;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@SuppressWarnings("serial")
+public class SimpleDTO implements Serializable {
+
+	@NotNull
+	private Long id;
+
+	@NotNull
+	@Size(min = 1)
+	private String title;
+
+	@NotNull
+	@Size(min = 1)
+	private String description;
+
+	public SimpleDTO() {
+	}
+
+	public SimpleDTO(Long id, String title, String description) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+}
