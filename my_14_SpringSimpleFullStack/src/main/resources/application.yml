@@ -1,10 +1,10 @@
 server:
   port: 8081 # WORKING!
 spring:
-  thymeleaf:
-    prefix: classpath:/build/
+#  thymeleaf:
+#    prefix: classpath:/build/
   devtools:
     restart:
       exclude: "resources/nodes_modules/**,resources/src/**,resources/public/**"
-  mvc:
-    static-path-pattern: "/resources/build**"
+ # mvc:
+ #   static-path-pattern: "/resources/**"

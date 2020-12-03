@@ -1,5 +1,7 @@
 package spring.tutorial;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +24,8 @@ public class MvcController {
 
 	@RequestMapping("/")
 	public String load(WebRequest request, Model model) {
-		model.addAttribute("status", "Changed default templates dir to dist");
-		model.addAttribute("code", "with success");
+		model.addAttribute("status", "Loaded index.html at " + new Date());
+		model.addAttribute("code", "with success!!");
 		return "index";
 	}
 }
