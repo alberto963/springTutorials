@@ -23,9 +23,14 @@ import org.springframework.web.context.request.WebRequest;
 public class MvcController {
 
 	@RequestMapping("/")
-	public String load(WebRequest request, Model model) {
+	public String index(WebRequest request, Model model) {
 		model.addAttribute("status", "Loaded index.html at " + new Date());
-		model.addAttribute("code", "with success!!");
+		model.addAttribute("code", "with success");
 		return "index";
+	}
+	
+	@RequestMapping("/react")
+	public String react() {
+		return "react";
 	}
 }
